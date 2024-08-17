@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{fa5b4cfc-f1c1-40c3-b53a-b9952a102a74}</ProjectGuid>
+    <RootNamespace>CPoundInterpreter</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ExternalIncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)include</ExternalIncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ExternalIncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)include</ExternalIncludePath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)include</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)include</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="include\ASTNodes\ReturnStatementNode.hpp" />
+    <ClCompile Include="src\AST.cpp" />
+    <ClCompile Include="src\ASTNodes\ASTNodeBase.cpp" />
+    <ClCompile Include="src\ASTNodes\BinaryExpressionNode.cpp" />
+    <ClCompile Include="src\ASTNodes\BlockNode.cpp" />
+    <ClCompile Include="src\ASTNodes\BooleanLiteralNode.cpp" />
+    <ClCompile Include="src\ASTNodes\BreakStatementNode.cpp" />
+    <ClCompile Include="src\ASTNodes\CallExpressionNode.cpp" />
+    <ClCompile Include="src\ASTNodes\ClassDeclarationNode.cpp" />
+    <ClCompile Include="src\ASTNodes\DebugStatementNode.cpp" />
+    <ClCompile Include="src\ASTNodes\EvaluateVariableDeclarationNode.cpp" />
+    <ClCompile Include="src\ASTNodes\FloatLiteralNode.cpp" />
+    <ClCompile Include="src\ASTNodes\FunctionDeclarationNode.cpp" />
+    <ClCompile Include="src\ASTNodes\IdentifierNode.cpp" />
+    <ClCompile Include="src\ASTNodes\IfStatementNode.cpp" />
+    <ClCompile Include="src\ASTNodes\IndexExpressionNode.cpp" />
+    <ClCompile Include="src\ASTNodes\IntegerLiteralNode.cpp" />
+    <ClCompile Include="src\ASTNodes\MemberFunctionCallExpressionNode.cpp" />
+    <ClCompile Include="src\ASTNodes\MemberVariableExpressionNode.cpp" />
+    <ClCompile Include="src\ASTNodes\NormalStatementNode.cpp" />
+    <ClCompile Include="src\ASTNodes\PrintStatementNode.cpp" />
+    <ClCompile Include="src\ASTNodes\ProgramNode.cpp" />
+    <ClCompile Include="src\ASTNodes\ReturnStatementNode.cpp" />
+    <ClCompile Include="src\ASTNodes\ReverseStatementNode.cpp" />
+    <ClCompile Include="src\ASTNodes\StatementNode.cpp" />
+    <ClCompile Include="src\ASTNodes\StringLiteralNode.cpp" />
+    <ClCompile Include="src\ASTNodes\UnaryExpressionNode.cpp" />
+    <ClCompile Include="src\ASTNodes\VariableDeclarationNode.cpp" />
+    <ClCompile Include="src\ASTCheckVisitor.cpp" />
+    <ClCompile Include="src\Error.cpp" />
+    <ClCompile Include="src\Interpreter.cpp" />
+    <ClCompile Include="src\Lexer.cpp" />
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\Parser.cpp" />
+    <ClCompile Include="src\Random.cpp" />
+    <ClCompile Include="src\Scope.cpp" />
+    <ClCompile Include="src\Tokens\BooleanLiteralToken.cpp" />
+    <ClCompile Include="src\Tokens\DelimiterToken.cpp" />
+    <ClCompile Include="src\Tokens\IdentifierToken.cpp" />
+    <ClCompile Include="src\Tokens\KeywordToken.cpp" />
+    <ClCompile Include="src\Tokens\LifetimeToken.cpp" />
+    <ClCompile Include="src\Tokens\NumericLiteralToken.cpp" />
+    <ClCompile Include="src\Tokens\OperatorToken.cpp" />
+    <ClCompile Include="src\Tokens\StringLiteralToken.cpp" />
+    <ClCompile Include="src\Tokens\TerminatorToken.cpp" />
+    <ClCompile Include="src\Tokens\TokenBase.cpp" />
+    <ClCompile Include="src\Tokens\WhiteSpace.cpp" />
+    <ClCompile Include="src\Types.cpp" />
+    <ClCompile Include="src\Types\Boolean.cpp" />
+    <ClCompile Include="src\Types\Float.cpp" />
+    <ClCompile Include="src\Types\Integer.cpp" />
+    <ClCompile Include="src\Types\String.cpp" />
+    <ClCompile Include="src\Utils\generateRegex.cpp" />
+    <ClCompile Include="src\Utils\getTokenPositionInfo.cpp" />
+    <ClCompile Include="src\Utils\lowerCaseString.cpp" />
+    <ClCompile Include="src\Utils\nameMangling.cpp" />
+    <ClCompile Include="src\Utils\toString.cpp" />
+    <ClCompile Include="src\Utils\typeCasting.cpp" />
+    <ClCompile Include="src\Value.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\AST.hpp" />
+    <ClInclude Include="include\ASTCheckVisitor.hpp" />
+    <ClInclude Include="include\ASTNodes.hpp" />
+    <ClInclude Include="include\ASTNodes\ASTNodeBase.hpp" />
+    <ClInclude Include="include\ASTNodes\BinaryExpressionNode.hpp" />
+    <ClInclude Include="include\ASTNodes\BlockNode.hpp" />
+    <ClInclude Include="include\ASTNodes\BooleanLiteralNode.hpp" />
+    <ClInclude Include="include\ASTNodes\BreakStatementNode.hpp" />
+    <ClInclude Include="include\ASTNodes\CallExpressionNode.hpp" />
+    <ClInclude Include="include\ASTNodes\ClassDeclarationNode.hpp" />
+    <ClInclude Include="include\ASTNodes\DebugStatementNode.hpp" />
+    <ClInclude Include="include\ASTNodes\EvaluateVariableDeclarationNode.hpp" />
+    <ClInclude Include="include\ASTNodes\StatementNode.hpp" />
+    <ClInclude Include="include\ASTNodes\FloatLiteralNode.hpp" />
+    <ClInclude Include="include\ASTNodes\FunctionDeclarationNode.hpp" />
+    <ClInclude Include="include\ASTNodes\IdentifierNode.hpp" />
+    <ClInclude Include="include\ASTNodes\IfStatementNode.hpp" />
+    <ClInclude Include="include\ASTNodes\IndexExpressionNode.hpp" />
+    <ClInclude Include="include\ASTNodes\IntegerLiteralNode.hpp" />
+    <ClInclude Include="include\ASTNodes\MemberFunctionCallExpressionNode.hpp" />
+    <ClInclude Include="include\ASTNodes\MemberVariableExpressionNode.hpp" />
+    <ClInclude Include="include\ASTNodes\NormalStatementNode.hpp" />
+    <ClInclude Include="include\ASTNodes\PrintStatementNode.hpp" />
+    <ClInclude Include="include\ASTNodes\ProgramNode.hpp" />
+    <ClInclude Include="include\ASTNodes\ReverseStatementNode.hpp" />
+    <ClInclude Include="include\ASTNodes\StringLiteralNode.hpp" />
+    <ClInclude Include="include\ASTNodes\UnaryExpressionNode.hpp" />
+    <ClInclude Include="include\ASTNodes\VariableDeclarationNode.hpp" />
+    <ClInclude Include="include\BuiltinTypes.hpp" />
+    <ClInclude Include="include\Container\BiUnorderedMap.hpp" />
+    <ClInclude Include="include\Error.hpp" />
+    <ClInclude Include="include\Interpreter.hpp" />
+    <ClInclude Include="include\Lexer.hpp" />
+    <ClInclude Include="include\Parser.hpp" />
+    <ClInclude Include="include\Random.hpp" />
+    <ClInclude Include="include\Scope.hpp" />
+    <ClInclude Include="include\Tokens.hpp" />
+    <ClInclude Include="include\Tokens\BooleanLiteralToken.hpp" />
+    <ClInclude Include="include\Tokens\DelimiterToken.hpp" />
+    <ClInclude Include="include\Tokens\IdentifierToken.hpp" />
+    <ClInclude Include="include\Tokens\KeywordToken.hpp" />
+    <ClInclude Include="include\Tokens\LifetimeToken.hpp" />
+    <ClInclude Include="include\Tokens\NumericLiteralToken.hpp" />
+    <ClInclude Include="include\Tokens\OperatorToken.hpp" />
+    <ClInclude Include="include\Tokens\StringLiteralToken.hpp" />
+    <ClInclude Include="include\Tokens\TerminatorToken.hpp" />
+    <ClInclude Include="include\Tokens\TokenBase.hpp" />
+    <ClInclude Include="include\Tokens\WhiteSpace.hpp" />
+    <ClInclude Include="include\Types.hpp" />
+    <ClInclude Include="include\Types\Boolean.hpp" />
+    <ClInclude Include="include\Types\Float.hpp" />
+    <ClInclude Include="include\Types\Integer.hpp" />
+    <ClInclude Include="include\Types\String.hpp" />
+    <ClInclude Include="include\Utils\generateRegex.hpp" />
+    <ClInclude Include="include\Utils\getTokenPositionInfo.hpp" />
+    <ClInclude Include="include\Utils\lowerCaseString.hpp" />
+    <ClInclude Include="include\Utils\nameMangling.hpp" />
+    <ClInclude Include="include\Utils\toString.hpp" />
+    <ClInclude Include="include\Utils\typeCasting.hpp" />
+    <ClInclude Include="include\Value.hpp" />
+    <ClInclude Include="include\Visitor.hpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

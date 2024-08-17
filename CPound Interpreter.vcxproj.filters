@@ -1,0 +1,408 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="來源檔案">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="標頭檔">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="資源檔">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="標頭檔\Tokens">
+      <UniqueIdentifier>{f6295594-00d8-4668-a14f-37fbe804fe39}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Container">
+      <UniqueIdentifier>{81ccfa38-c1e7-4dc7-9d54-bb86b0913522}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\Tokens">
+      <UniqueIdentifier>{5dc318d6-fac2-4e90-9231-06a416c0359f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Utils">
+      <UniqueIdentifier>{32467b15-f4ce-40e4-a1dd-4d750f75c598}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\Utils">
+      <UniqueIdentifier>{3692d7a5-2c9a-4885-b0a8-1b68b49bacd8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\ASTNodes">
+      <UniqueIdentifier>{e7f12d1f-2cad-4dd2-b1de-e57e5edc2d19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\ASTNodes">
+      <UniqueIdentifier>{40c13abe-4d1b-4dbe-91b8-346a3a9bff79}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Types">
+      <UniqueIdentifier>{09d7378e-b365-4b8d-85a7-1d8bf5e15942}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\Types">
+      <UniqueIdentifier>{e55184ee-b983-41c3-a4fd-c0353d292a79}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\main.cpp">
+      <Filter>來源檔案</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Tokens\TokenBase.cpp">
+      <Filter>來源檔案\Tokens</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Utils\generateRegex.cpp">
+      <Filter>來源檔案\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Tokens\OperatorToken.cpp">
+      <Filter>來源檔案\Tokens</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Utils\toString.cpp">
+      <Filter>來源檔案\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Tokens\BooleanLiteralToken.cpp">
+      <Filter>來源檔案\Tokens</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Tokens\KeywordToken.cpp">
+      <Filter>來源檔案\Tokens</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Tokens\DelimiterToken.cpp">
+      <Filter>來源檔案\Tokens</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Tokens\LifetimeToken.cpp">
+      <Filter>來源檔案\Tokens</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Tokens\NumericLiteralToken.cpp">
+      <Filter>來源檔案\Tokens</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Tokens\StringLiteralToken.cpp">
+      <Filter>來源檔案\Tokens</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Tokens\IdentifierToken.cpp">
+      <Filter>來源檔案\Tokens</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Tokens\TerminatorToken.cpp">
+      <Filter>來源檔案\Tokens</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Tokens\WhiteSpace.cpp">
+      <Filter>來源檔案\Tokens</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Lexer.cpp">
+      <Filter>來源檔案</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Parser.cpp">
+      <Filter>來源檔案</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Utils\lowerCaseString.cpp">
+      <Filter>來源檔案\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AST.cpp">
+      <Filter>來源檔案</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Types.cpp">
+      <Filter>來源檔案</Filter>
+    </ClCompile>
+    <ClCompile Include="include\ASTNodes\ReturnStatementNode.hpp">
+      <Filter>標頭檔\ASTNodes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Utils\getTokenPositionInfo.cpp">
+      <Filter>來源檔案\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Error.cpp">
+      <Filter>來源檔案</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ASTNodes\ASTNodeBase.cpp">
+      <Filter>來源檔案\ASTNodes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ASTNodes\BinaryExpressionNode.cpp">
+      <Filter>來源檔案\ASTNodes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ASTNodes\BlockNode.cpp">
+      <Filter>來源檔案\ASTNodes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ASTNodes\BooleanLiteralNode.cpp">
+      <Filter>來源檔案\ASTNodes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ASTNodes\BreakStatementNode.cpp">
+      <Filter>來源檔案\ASTNodes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ASTNodes\CallExpressionNode.cpp">
+      <Filter>來源檔案\ASTNodes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ASTNodes\ClassDeclarationNode.cpp">
+      <Filter>來源檔案\ASTNodes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ASTNodes\DebugStatementNode.cpp">
+      <Filter>來源檔案\ASTNodes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ASTNodes\EvaluateVariableDeclarationNode.cpp">
+      <Filter>來源檔案\ASTNodes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ASTNodes\FloatLiteralNode.cpp">
+      <Filter>來源檔案\ASTNodes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ASTNodes\FunctionDeclarationNode.cpp">
+      <Filter>來源檔案\ASTNodes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ASTNodes\IdentifierNode.cpp">
+      <Filter>來源檔案\ASTNodes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ASTNodes\IfStatementNode.cpp">
+      <Filter>來源檔案\ASTNodes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ASTNodes\IndexExpressionNode.cpp">
+      <Filter>來源檔案\ASTNodes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ASTNodes\IntegerLiteralNode.cpp">
+      <Filter>來源檔案\ASTNodes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ASTNodes\MemberFunctionCallExpressionNode.cpp">
+      <Filter>來源檔案\ASTNodes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ASTNodes\MemberVariableExpressionNode.cpp">
+      <Filter>來源檔案\ASTNodes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ASTNodes\NormalStatementNode.cpp">
+      <Filter>來源檔案\ASTNodes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ASTNodes\PrintStatementNode.cpp">
+      <Filter>來源檔案\ASTNodes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ASTNodes\ProgramNode.cpp">
+      <Filter>來源檔案\ASTNodes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ASTNodes\ReturnStatementNode.cpp">
+      <Filter>來源檔案\ASTNodes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ASTNodes\ReverseStatementNode.cpp">
+      <Filter>來源檔案\ASTNodes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ASTNodes\StatementNode.cpp">
+      <Filter>來源檔案\ASTNodes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ASTNodes\StringLiteralNode.cpp">
+      <Filter>來源檔案\ASTNodes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ASTNodes\UnaryExpressionNode.cpp">
+      <Filter>來源檔案\ASTNodes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ASTNodes\VariableDeclarationNode.cpp">
+      <Filter>來源檔案\ASTNodes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ASTCheckVisitor.cpp">
+      <Filter>來源檔案</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Scope.cpp">
+      <Filter>來源檔案</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Utils\nameMangling.cpp">
+      <Filter>來源檔案\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Types\Integer.cpp">
+      <Filter>來源檔案\Types</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Types\Float.cpp">
+      <Filter>來源檔案\Types</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Types\Boolean.cpp">
+      <Filter>來源檔案\Types</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Types\String.cpp">
+      <Filter>來源檔案\Types</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Value.cpp">
+      <Filter>來源檔案</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Utils\typeCasting.cpp">
+      <Filter>來源檔案\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Interpreter.cpp">
+      <Filter>來源檔案</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Random.cpp">
+      <Filter>來源檔案</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\Parser.hpp">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Tokens.hpp">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Tokens\TokenBase.hpp">
+      <Filter>標頭檔\Tokens</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Types.hpp">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Container\BiUnorderedMap.hpp">
+      <Filter>標頭檔\Container</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Tokens\OperatorToken.hpp">
+      <Filter>標頭檔\Tokens</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Utils\generateRegex.hpp">
+      <Filter>標頭檔\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Utils\toString.hpp">
+      <Filter>標頭檔\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Tokens\BooleanLiteralToken.hpp">
+      <Filter>標頭檔\Tokens</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Tokens\KeywordToken.hpp">
+      <Filter>標頭檔\Tokens</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Tokens\DelimiterToken.hpp">
+      <Filter>標頭檔\Tokens</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Tokens\LifetimeToken.hpp">
+      <Filter>標頭檔\Tokens</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Tokens\NumericLiteralToken.hpp">
+      <Filter>標頭檔\Tokens</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Tokens\StringLiteralToken.hpp">
+      <Filter>標頭檔\Tokens</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Tokens\IdentifierToken.hpp">
+      <Filter>標頭檔\Tokens</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Tokens\TerminatorToken.hpp">
+      <Filter>標頭檔\Tokens</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Tokens\WhiteSpace.hpp">
+      <Filter>標頭檔\Tokens</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Lexer.hpp">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Utils\lowerCaseString.hpp">
+      <Filter>標頭檔\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="include\AST.hpp">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ASTNodes.hpp">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ASTNodes\ASTNodeBase.hpp">
+      <Filter>標頭檔\ASTNodes</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ASTNodes\ProgramNode.hpp">
+      <Filter>標頭檔\ASTNodes</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ASTNodes\BlockNode.hpp">
+      <Filter>標頭檔\ASTNodes</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ASTNodes\VariableDeclarationNode.hpp">
+      <Filter>標頭檔\ASTNodes</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ASTNodes\EvaluateVariableDeclarationNode.hpp">
+      <Filter>標頭檔\ASTNodes</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ASTNodes\FunctionDeclarationNode.hpp">
+      <Filter>標頭檔\ASTNodes</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ASTNodes\ClassDeclarationNode.hpp">
+      <Filter>標頭檔\ASTNodes</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ASTNodes\NormalStatementNode.hpp">
+      <Filter>標頭檔\ASTNodes</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ASTNodes\DebugStatementNode.hpp">
+      <Filter>標頭檔\ASTNodes</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ASTNodes\IfStatementNode.hpp">
+      <Filter>標頭檔\ASTNodes</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ASTNodes\BreakStatementNode.hpp">
+      <Filter>標頭檔\ASTNodes</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ASTNodes\ReverseStatementNode.hpp">
+      <Filter>標頭檔\ASTNodes</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ASTNodes\PrintStatementNode.hpp">
+      <Filter>標頭檔\ASTNodes</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ASTNodes\BinaryExpressionNode.hpp">
+      <Filter>標頭檔\ASTNodes</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ASTNodes\UnaryExpressionNode.hpp">
+      <Filter>標頭檔\ASTNodes</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ASTNodes\StringLiteralNode.hpp">
+      <Filter>標頭檔\ASTNodes</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ASTNodes\IntegerLiteralNode.hpp">
+      <Filter>標頭檔\ASTNodes</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ASTNodes\FloatLiteralNode.hpp">
+      <Filter>標頭檔\ASTNodes</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ASTNodes\BooleanLiteralNode.hpp">
+      <Filter>標頭檔\ASTNodes</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ASTNodes\IdentifierNode.hpp">
+      <Filter>標頭檔\ASTNodes</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ASTNodes\CallExpressionNode.hpp">
+      <Filter>標頭檔\ASTNodes</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ASTNodes\MemberVariableExpressionNode.hpp">
+      <Filter>標頭檔\ASTNodes</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ASTNodes\MemberFunctionCallExpressionNode.hpp">
+      <Filter>標頭檔\ASTNodes</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ASTNodes\IndexExpressionNode.hpp">
+      <Filter>標頭檔\ASTNodes</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Visitor.hpp">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ASTCheckVisitor.hpp">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Error.hpp">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Utils\getTokenPositionInfo.hpp">
+      <Filter>標頭檔\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ASTNodes\StatementNode.hpp">
+      <Filter>標頭檔\ASTNodes</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Scope.hpp">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Value.hpp">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Utils\nameMangling.hpp">
+      <Filter>標頭檔\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Types\Integer.hpp">
+      <Filter>標頭檔\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BuiltinTypes.hpp">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Utils\typeCasting.hpp">
+      <Filter>標頭檔\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Types\Float.hpp">
+      <Filter>標頭檔\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Types\Boolean.hpp">
+      <Filter>標頭檔\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Types\String.hpp">
+      <Filter>標頭檔\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Interpreter.hpp">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Random.hpp">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,4 @@
+Error at line 30:14 -> Identifier not found
+...addBCstoreInA(a, 2, 2)
+                 ^
+
