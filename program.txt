@@ -1,4 +1,0 @@
-var int a!
-check this out "Enter number: "
-what is this: a
-check this out: a + 1

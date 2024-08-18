@@ -1,7 +1,7 @@
 // This program demonstrate loop using reverse
 
 var int end
-check this out "Enter a number: "
+chECk This OUT "Enter a number: "
 
 // Get user input
 what is end
