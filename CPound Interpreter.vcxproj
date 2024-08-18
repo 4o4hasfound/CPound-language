@@ -72,9 +72,11 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ExternalIncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)include</ExternalIncludePath>
+    <TargetName>cpound</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ExternalIncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)include</ExternalIncludePath>
+    <TargetName>cpound</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -155,6 +157,7 @@
     <ClCompile Include="src\ASTNodes\IdentifierNode.cpp" />
     <ClCompile Include="src\ASTNodes\IfStatementNode.cpp" />
     <ClCompile Include="src\ASTNodes\IndexExpressionNode.cpp" />
+    <ClCompile Include="src\ASTNodes\InputStatementNode.cpp" />
     <ClCompile Include="src\ASTNodes\IntegerLiteralNode.cpp" />
     <ClCompile Include="src\ASTNodes\MemberFunctionCallExpressionNode.cpp" />
     <ClCompile Include="src\ASTNodes\MemberVariableExpressionNode.cpp" />
@@ -212,6 +215,7 @@
     <ClInclude Include="include\ASTNodes\ClassDeclarationNode.hpp" />
     <ClInclude Include="include\ASTNodes\DebugStatementNode.hpp" />
     <ClInclude Include="include\ASTNodes\EvaluateVariableDeclarationNode.hpp" />
+    <ClInclude Include="include\ASTNodes\InputStatementNode.hpp" />
     <ClInclude Include="include\ASTNodes\StatementNode.hpp" />
     <ClInclude Include="include\ASTNodes\FloatLiteralNode.hpp" />
     <ClInclude Include="include\ASTNodes\FunctionDeclarationNode.hpp" />

@@ -1,0 +1,63 @@
+// Editable, Reassignable, Overridable
+var var var int a
+
+// Editable, Reassignable, non Overridable
+var var const int b
+
+// Editable, Reassignable, Overridable
+var const var int c
+
+// Editable, non Reassignable, non Overridable
+var const const int d
+
+// non Editable, Reassignable, Overridable
+const var var int e
+
+// non Editable, Reassignable, non Overridable
+const var const int f
+
+// non Editable, Reassignable, Overridable
+const const var int g
+
+// non Editable, non Reassignable, non Overridable
+const const const int h
+
+
+
+// --------- Overridable --------	
+
+var var var int overridableVariable = 10!
+
+// Has lower priority, fails to override, doesn't throw error
+var var var int overridable = 9   
+
+// Has higher priority, override 
+var var var int overridable = 11!!
+
+// --------- Non Overridable --------
+
+var var const int nonOverridable = 10!
+
+// Cannot override even with higher priority, doesn't throw error
+var var const int nonOverridable = 11!!
+
+
+// --------- Editable --------
+
+var const const int editable = 10
+editable++ // No problem
+
+// --------- Non Editable --------
+
+const const const int nonEditable = 10
+// nonEditable++ // Error
+
+// --------- Reassignable --------
+
+const var const int reassignable = 10
+reassignable = 11 // No problem
+
+// --------- Non Reassignable --------
+
+const const const int nonReassignable = 10
+nonReassignable = 11 // Error

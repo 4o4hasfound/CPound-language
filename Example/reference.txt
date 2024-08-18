@@ -1,0 +1,18 @@
+// This function receive a reference
+funcT addOne(reference var const const int a) {
+	a += 1
+}
+
+// This function receive a reference and returns the same reference
+funcT returnReference(reference var const const int a) reference var const int {
+	yoink a
+}
+
+var int a
+what is a
+
+addOne(a)
+check this out a, "\n"
+
+addOne(returnReference(a))
+check this out a, "\n"

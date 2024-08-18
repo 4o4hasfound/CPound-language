@@ -1,0 +1,31 @@
+// This program demonstrate the use of evaluate variables
+
+fUctIOn isPrime(const int target) var bool {
+	var int i = 1
+	var bool direction = 0
+
+	// Evaluate variable
+	evaluate int squared = i * i
+
+	if direction {
+		reverse
+		direction = 0
+	}
+
+	if ;direction {
+		if ;(target % i+++) {
+			yoink faLse
+		}
+	}
+
+	if squared < target {
+		direction = 1
+		reverse	
+	}
+
+	yoink true	
+}
+
+var int input
+what is input
+check this out isPrime(input)

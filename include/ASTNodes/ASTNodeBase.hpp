@@ -20,6 +20,7 @@ public:
 		BreakStatement,
 		ReverseStatement,
 		PrintStatement,
+		InputStatement,
 		BinaryExpression,
 		UnaryExpression,
 		StringLiteral,

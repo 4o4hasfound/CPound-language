@@ -4,8 +4,7 @@ std::wregex StringLiteralToken::s_regex = compileRegex();
 
 StringLiteralToken::StringLiteralToken(const std::wstring& value, std::wstring::const_iterator pos)
 	: Token(TokenType::StringLiteral, pos)
-	, literalValue(value) {
-
+	, literalValue(std::regex_replace(value, std::wregex(L"\\\\n"), L"\n")) {
 }
 
 std::wstring StringLiteralToken::str() const {

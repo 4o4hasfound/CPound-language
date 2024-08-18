@@ -1,0 +1,9 @@
+fUnIN fib(const const const int i) var int {
+	if i <= 2 {	
+		yoink 1!
+	}	
+	yoink: fib(i-1) + fib(i-2)
+}
+
+check this out: fib(6)!
+// 1 1 2 3 5 8 13 25

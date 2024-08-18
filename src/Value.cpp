@@ -2,6 +2,7 @@
 
 Value::Value(Value* ref)
 	: reference(true)
+	, array(ref->array)
 	, type(ref->type)
 	, editable(ref->editable)
 	, reassignable(ref->reassignable)
@@ -41,8 +42,8 @@ bool Value::setDeclType(VariableDeclarationType _type) {
 		_reassignable = _overridable = true;
 		break;
 	case VariableDeclarationType::ConstVarConst:
-		_editable = _reassignable = false;
-		_overridable = true;
+		_editable = _overridable = false;
+		_reassignable = true;
 		break;
 	case VariableDeclarationType::ConstConstVar:
 		_editable = _reassignable = false;
@@ -53,7 +54,7 @@ bool Value::setDeclType(VariableDeclarationType _type) {
 		break;
 	}
 
-	// For reference, declaration type can only be var -> cconst, not the other way around
+	// For reference, declaration type can only be var -> const, not the other way around
 	if (reference 
 		&& ((!editable && _editable)
 		|| (!reassignable && _reassignable)
@@ -66,22 +67,21 @@ bool Value::setDeclType(VariableDeclarationType _type) {
 	return true;
 }
 
-std::wstring Value::str() const {
-	if (type == L"int") {
-		return std::to_wstring(get<int64_t>());
-	}
-	else if (type == L"float") {
-		return std::to_wstring(get<double>());
-	}
-	else if (type == L"bool") {
-		return std::to_wstring(get<bool>());
-	}
-	else if (type == L"string") {
-		return get<std::wstring>();
-	}
-	return L"";
-}
-
 std::shared_ptr<Value> Value::copy() const {
 	return std::make_shared<Value>(*this);
+}
+
+void Value::setDefaultValue() {
+	if (type == L"int") {
+		value = static_cast<int64_t>(0);
+	}
+	else if (type == L"float") {
+		value = static_cast<double>(0);
+	}
+	else if (type == L"bool") {
+		value = static_cast<bool>(0);
+	}
+	else if (type == L"string") {
+		value = static_cast<std::wstring>(L"");
+	}
 }

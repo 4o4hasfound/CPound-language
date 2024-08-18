@@ -71,6 +71,10 @@ void ASTCheckVisitor::visitIndexExpressionNode(ASTNode* node) {
 
 }
 
+void ASTCheckVisitor::visitInputStatementNode(ASTNode* node) {
+
+}
+
 void ASTCheckVisitor::visitIntegerLiteralNode(ASTNode* node) {
 
 }

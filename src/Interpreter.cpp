@@ -14,13 +14,28 @@ void Interpreter::visitBinaryExpressionNode(ASTNode* node) {
 	auto expr = static_cast<BinaryExpressionNode*>(node);
 	std::shared_ptr<Value> lexpr = getExpressionValue(expr->LExpression.get());
 
-	if (!lexpr->editable && isAssignmentOperator[static_cast<OperatorType>(expr->operatorType)]) {
-		Error::Log(node->position, L"Cannot do operation on a non editable object", *m_string);
+	if (!lexpr->reassignable && expr->operatorType == BinaryOperatorType::Assignment) {
+		Error::Log(node->position, L"Cannot apply assignment operation on a non reassignable object", *m_string);
+	}
+	if (!lexpr->editable && isEditOperator[static_cast<OperatorType>(expr->operatorType)]) {
+		Error::Log(node->position, L"Cannot apply operation on a non editable object", *m_string);
 	}
 
-	int64_t lval = lexpr->get<int64_t>();
 	std::shared_ptr<Value> rexpr = getExpressionValue(expr->RExpression.get());
-	int64_t rval = rexpr->get<int64_t>();
+
+	//if (lexpr->array
+	//	&& lexpr->editable
+	//	&& isAssignmentOperator[static_cast<OperatorType>(expr->operatorType)]) {
+	//	if (std::floor(lexpr->index) != lexpr->index) {
+	//		auto value = lexpr->copy();
+	//		value->index = std::floor(lexpr->index) + 1;
+	//		value->setDefaultValue();
+	//		
+	//		//if ()
+	//		lexpr->array->insert(lexpr->array->begin() + lexpr->index, value);
+	//		lexpr = value;
+	//	}
+	//}
 
 	try {
 		doBinaryOperation(
@@ -121,11 +136,19 @@ void Interpreter::visitCallExpressionNode(ASTNode* node) {
 	}
 
 	m_dontMakeNewScope = 1;
-	func->block->accept(*this);
 	m_return = 0;
+	func->block->accept(*this);
 
-	if (!func->declaration.returnType.empty()) {
-		if (canConvert(m_tmpValue, func->declaration.returnType)) {
+	if (!func->declaration.returnType.empty() && m_return) {
+		if (func->declaration.returnReference) {
+			if (m_tmpValue->type != func->declaration.returnType) {
+				Error::Log(node->position, L"Cannot reference an identifier with different type", *m_string);
+			}
+			if (!m_tmpValue->setDeclType(func->declaration.returnDeclType)) {
+				Error::Log(node->position, L"Cannot convert declaration type", * m_string);
+			}
+		}
+		else if (canConvert(m_tmpValue, func->declaration.returnType)) {
 			updateValue(convertValue(m_tmpValue, func->declaration.returnType));
 			auto val = m_scope.getVariable(L"a");
 			if (val) {
@@ -138,6 +161,7 @@ void Interpreter::visitCallExpressionNode(ASTNode* node) {
 	else {
 		updateValue();
 	}
+	m_return = 0;
 }
 
 void Interpreter::visitClassDeclarationNode(ASTNode* node) {
@@ -206,7 +230,42 @@ void Interpreter::visitIfStatementNode(ASTNode* node) {
 }
 
 void Interpreter::visitIndexExpressionNode(ASTNode* node) {
+	auto expr = dynamic_cast<IndexExpressionNode*>(node);
 
+	double index = 0;
+
+	if (expr->expression) {
+		auto value = getExpressionValue(expr->expression.get());
+		if (!canConvert(value, L"float")) {
+			Error::Log(node->position, L"Index can only be int or float", *m_string);
+		}
+		index = cast<double>(value);
+	}
+	
+	auto arr = m_scope.getVariable(expr->symbol);
+	if (!arr) {
+		Error::Log(node->position, L"Identifier not found", *m_string);
+	}
+
+	if (!arr->array) {
+		Error::Log(node->position, L"Identifier is not an array", *m_string);
+	}
+
+	auto ret = std::make_shared<Value>((*arr->array)[std::floor(index)].get());
+	ret->index = index;
+
+	m_tmpValue = ret;
+}
+
+void Interpreter::visitInputStatementNode(ASTNode* node) {
+	auto inputStatement = dynamic_cast<InputStatementNode*>(node);
+	for (int i = 0; i < inputStatement->expressions.size(); ++i) {
+		std::shared_ptr<Value> value = getExpressionValue(inputStatement->expressions[i].get());
+		if (!value) {
+			Error::Log(node->position, L"Identifier not found", *m_string);
+		}
+		getInput(value);
+	}
 }
 
 void Interpreter::visitIntegerLiteralNode(ASTNode* node) {
@@ -223,19 +282,17 @@ void Interpreter::visitMemberVariableExpressionNode(ASTNode* node) {
 }
 
 void Interpreter::visitNormalStatementNode(ASTNode* node) {
-	dynamic_cast<NormalStatementNode*>(node)->statement->accept(*this);
+	auto statement = dynamic_cast<NormalStatementNode*>(node);
+	statement->statement->accept(*this);
 }
 
 void Interpreter::visitPrintStatementNode(ASTNode* node) {
 	auto printStatement = dynamic_cast<PrintStatementNode*>(node);
 	for (int i = 0; i < printStatement->expressions.size(); ++i) {
 		std::shared_ptr<Value> value = getExpressionValue(printStatement->expressions[i].get());
-		std::wcout << value->str();
+		std::wcout << cast<std::wstring>(value);
 		
-		if (i == printStatement->expressions.size() - 1) {
-			std::wcout << L"\n";
-		}
-		else {
+		if (i != printStatement->expressions.size() - 1) {
 			std::wcout << L" ";
 		}
 	}
@@ -257,7 +314,6 @@ void Interpreter::visitReturnStatementNode(ASTNode* node) {
 		return;
 	}
 	updateValue(getExpressionValue(ret->expression.get()));
-	int sdadas = 0;
 }
 
 void Interpreter::visitReverseStatementNode(ASTNode* node) {
@@ -273,8 +329,8 @@ void Interpreter::visitUnaryExpressionNode(ASTNode* node) {
 	auto uOp = dynamic_cast<UnaryExpressionNode*>(node);
 	std::shared_ptr<Value> value = getExpressionValue(uOp->expression.get());
 
-	if (!value->editable && isAssignmentOperator[static_cast<OperatorType>(uOp->operatorType)]) {
-		Error::Log(node->position, L"Cannot do operation on a non editable object", *m_string);
+	if (!value->editable && isEditOperator[static_cast<OperatorType>(uOp->operatorType)]) {
+		Error::Log(node->position, L"Cannot apply operation on a non editable object", *m_string);
 	}
 
 	doUnaryOperation(value, static_cast<OperatorType>(uOp->operatorType));
@@ -290,8 +346,23 @@ void Interpreter::visitVariableDeclarationNode(ASTNode* node) {
 			
 			std::shared_ptr<Value> value;
 			if (variable.defaultValue) {
-				value = getExpressionValue(variable.defaultValue.get());
-				value->setDeclType(variable.declType);
+				if (variable.reference) {
+					auto expr = getExpressionValue(variable.defaultValue.get());
+					if (variable.type != expr->type) {
+						Error::Log(node->position, L"Cannot reference a variable with different type", *m_string);
+					}
+					value = std::make_shared<Value>(expr.get());
+					if (!value->setDeclType(variable.declType)) {
+						Error::Log(node->position, L"Cannot convert declaration type", *m_string);
+					}
+				}
+				else {
+					value = getExpressionValue(variable.defaultValue.get())->copy();
+					if (!(value = convertValue(value, variable.type))) {
+						Error::Log(node->position, L"Cannot convert type", *m_string);
+					}
+					value->setDeclType(variable.declType);
+				}
 				value->lifetime = variable.lifetime;
 				value->priority = variable.priority;
 				m_scope.addVariable(variable.symbol, value);
@@ -320,14 +391,14 @@ void Interpreter::visitVariableDeclarationNode(ASTNode* node) {
 
 std::shared_ptr<Value> Interpreter::getExpressionValue(ASTNode* node) {
 	updateValue();
-	node->accept(*this);
-	//try {
-	//}
-	//catch (const std::exception& e) {
-	//	std::wstringstream errorMessage;
-	//	errorMessage << e.what();
-	//	Error::Log(node->position, errorMessage.str(), *m_string);
-	//}
+	try {
+		node->accept(*this);
+	}
+	catch (const std::exception& e) {
+		std::wstringstream errorMessage;
+		errorMessage << e.what();
+		Error::Log(node->position, errorMessage.str(), *m_string);
+	}
 	if (!m_tmpValue) {
 		Error::Log(node->position, L"Expect value", *m_string);
 	}
@@ -372,6 +443,62 @@ void Interpreter::doUnaryOperation(const std::shared_ptr<Value>& l, OperatorType
 
 void Interpreter::updateValue(const std::shared_ptr<Value>& value) {
 	m_tmpValue = value;
+}
+
+int Interpreter::getArrayLength(const VariableDeclarationInfo& info) {
+	if (!info.array) {
+		return 0;
+	}
+
+	if (info.arrayLength) {
+		auto length = getExpressionValue(info.arrayLength.get());
+		if (!length || !canConvert(length, L"float")) {
+			return 0;
+		}
+		return cast<double>(length);
+	}
+	return 0;
+}
+
+std::shared_ptr<Value> Interpreter::getArrayObject(std::shared_ptr<Value> value, double index) {
+	return std::shared_ptr<Value>();
+}
+
+std::shared_ptr<Value> Interpreter::createArray(const VariableDeclarationInfo& info) {
+	//int length = getArrayLength(info);
+	//auto value = std::make_shared<Value>();
+	//std::vector<std::shared_ptr<Value>>& vec = value->get<Value::ArrayType>();
+	//vec.resize(length);
+	//for (auto& object : vec) {
+	//	object->array = &vec;
+	//}
+	//value->setDeclType(info.declType);
+	//return value;
+	return nullptr;
+}
+
+void Interpreter::getInput(const std::shared_ptr<Value>& value) {
+	if (value->type == L"int") {
+		int64_t input;
+		std::wcin >> input;
+		value->set<int64_t>(input);
+	}
+	else if (value->type == L"float") {
+		double input;
+		std::wcin >> input;
+		value->set<double>(input);
+	}
+	else if (value->type == L"bool") {
+		bool input;
+		std::wcin >> input;
+		value->set<bool>(input);
+
+	}
+	else if (value->type == L"string") {
+		std::wstring input;
+		std::wcin >> input;
+		value->set<std::wstring>(input);
+	}
 }
 
 int Interpreter::advanceIndex(int index) const {

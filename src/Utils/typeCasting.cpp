@@ -1,5 +1,66 @@
 #include "Utils/typeCasting.hpp"
 
+template<>
+int64_t cast(const std::shared_ptr<Value>& value) {
+	if (value->type == L"int") {
+		return cast<int64_t, int64_t>(value->get<int64_t>());
+	}
+	else if (value->type == L"float") {
+		return cast<int64_t, double>(value->get<double>());
+	}
+	else if (value->type == L"bool") {
+		return cast<int64_t, bool>(value->get<bool>());
+	}
+	else if (value->type == L"string") {
+		return cast<int64_t, std::wstring>(value->get<std::wstring>());
+	}
+}
+template<>
+double cast(const std::shared_ptr<Value>& value) {
+	if (value->type == L"int") {
+		return cast<double, int64_t>(value->get<int64_t>());
+	}
+	else if (value->type == L"float") {
+		return cast<double, double>(value->get<double>());
+	}
+	else if (value->type == L"bool") {
+		return cast<double, bool>(value->get<bool>());
+	}
+	else if (value->type == L"string") {
+		return cast<double, std::wstring>(value->get<std::wstring>());
+	}
+}
+template<>
+bool cast(const std::shared_ptr<Value>& value) {
+	if (value->type == L"int") {
+		return cast<bool, int64_t>(value->get<int64_t>());
+	}
+	else if (value->type == L"float") {
+		return cast<bool, double>(value->get<double>());
+	}
+	else if (value->type == L"bool") {
+		return cast<bool, bool>(value->get<bool>());
+	}
+	else if (value->type == L"string") {
+		return cast<bool, std::wstring>(value->get<std::wstring>());
+	}
+}
+template<>
+std::wstring cast(const std::shared_ptr<Value>& value) {
+	if (value->type == L"int") {
+		return cast<std::wstring, int64_t>(value->get<int64_t>());
+	}
+	else if (value->type == L"float") {
+		return cast<std::wstring, double>(value->get<double>());
+	}
+	else if (value->type == L"bool") {
+		return cast<std::wstring, bool>(value->get<bool>());
+	}
+	else if (value->type == L"string") {
+		return cast<std::wstring, std::wstring>(value->get<std::wstring>());
+	}
+}
+
 // ------------------- Interger --------------------
 
 template<>
@@ -58,6 +119,10 @@ bool cast<bool, std::wstring>(const std::wstring& value) {
 	return !value.empty();
 }
 
+template<>
+bool cast<bool>(const std::vector<std::shared_ptr<Value>>& value) {
+	return !value.empty();
+}
 // ------------------- String --------------------
 
 template<>
@@ -75,6 +140,18 @@ std::wstring cast<std::wstring, bool>(const bool& value) {
 template<>
 std::wstring cast<std::wstring, std::wstring>(const std::wstring& value) {
 	return value;
+}
+
+template<>
+std::wstring cast<std::wstring>(const std::vector<std::shared_ptr<Value>>& value) {
+	std::wstringstream ret;
+	for (int i = 0; i < value.size(); ++i) {
+		ret << cast<std::wstring>(value[i]);
+		if (i != value.size() - 1) {
+			ret << ", ";
+		}
+	}
+	return ret.str();
 }
 
 std::shared_ptr<Value> convertValue(const std::shared_ptr<Value>& value, const std::wstring& type) {
@@ -134,6 +211,7 @@ std::shared_ptr<Value> convertValue(const std::shared_ptr<Value>& value, const s
 			return makeValue<std::wstring>(cast<std::wstring, int64_t>(value->get<int64_t>()));
 		}
 	}
+	return nullptr;
 }
 
 bool canConvert(const std::shared_ptr<Value>& value, const std::wstring& type) {
@@ -154,65 +232,4 @@ bool canConvert(const std::shared_ptr<Value>& value, const std::wstring& type) {
 		return false;
 	}
 	return true;
-}
-
-template<>
-int64_t cast<int64_t>(const std::shared_ptr<Value>& value) {
-	if (value->type == L"int") {
-		return cast<int64_t, int64_t>(value->get<int64_t>());
-	}
-	else if (value->type == L"float") {
-		return cast<int64_t, double>(value->get<double>());
-	}
-	else if (value->type == L"bool") {
-		return cast<int64_t, bool>(value->get<bool>());
-	}
-	else if (value->type == L"string") {
-		return cast<int64_t, std::wstring>(value->get<std::wstring>());
-	}
-}
-template<>
-double cast<double>(const std::shared_ptr<Value>& value) {
-	if (value->type == L"int") {
-		return cast<double, int64_t>(value->get<int64_t>());
-	}
-	else if (value->type == L"float") {
-		return cast<double, double>(value->get<double>());
-	}
-	else if (value->type == L"bool") {
-		return cast<double, bool>(value->get<bool>());
-	}
-	else if (value->type == L"string") {
-		return cast<double, std::wstring>(value->get<std::wstring>());
-	}
-}
-template<>
-bool cast<bool>(const std::shared_ptr<Value>& value) {
-	if (value->type == L"int") {
-		return cast<bool, int64_t>(value->get<int64_t>());
-	}
-	else if (value->type == L"float") {
-		return cast<bool, double>(value->get<double>());
-	}
-	else if (value->type == L"bool") {
-		return cast<bool, bool>(value->get<bool>());
-	}
-	else if (value->type == L"string") {
-		return cast<bool, std::wstring>(value->get<std::wstring>());
-	}
-}
-template<>
-std::wstring cast<std::wstring>(const std::shared_ptr<Value>& value) {
-	if (value->type == L"int") {
-		return cast<std::wstring, int64_t>(value->get<int64_t>());
-	}
-	else if (value->type == L"float") {
-		return cast<std::wstring, double>(value->get<double>());
-	}
-	else if (value->type == L"bool") {
-		return cast<std::wstring, bool>(value->get<bool>());
-	}
-	else if (value->type == L"string") {
-		return cast<std::wstring, std::wstring>(value->get<std::wstring>());
-	}
 }

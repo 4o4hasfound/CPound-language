@@ -36,6 +36,7 @@ private:
 	virtual void visitIdentifierNode(ASTNode* node) override;
 	virtual void visitIfStatementNode(ASTNode* node) override;
 	virtual void visitIndexExpressionNode(ASTNode* node) override;
+	virtual void visitInputStatementNode(ASTNode* node) override;
 	virtual void visitIntegerLiteralNode(ASTNode* node) override;
 	virtual void visitMemberFunctionCallExpressionNode(ASTNode* node) override;
 	virtual void visitMemberVariableExpressionNode(ASTNode* node) override;
@@ -53,6 +54,12 @@ private:
 	void doUnaryOperation(const std::shared_ptr<Value>& l, OperatorType type);
 
 	void updateValue(const std::shared_ptr<Value>& value = nullptr);
+
+	int getArrayLength(const VariableDeclarationInfo& info);
+	std::shared_ptr<Value> getArrayObject(std::shared_ptr<Value> value, double index);
+	std::shared_ptr<Value> createArray(const VariableDeclarationInfo& info);
+	
+	void getInput(const std::shared_ptr<Value>& value);
 
 	int advanceIndex(int index) const;
 	int getInitialIndex(int size) const;

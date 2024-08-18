@@ -1,32 +1,4 @@
-FtIon isPrime(var int target) var bool {
-	var int i = 1
-	var bool flag = 0
-	evaluate int square = i * i
-
-	if flag {
-		reverse
-		flag = 0
-	}
-
-	if ;flag {
-		flag = 1
-		if ;(target % i+++) {
-			ima dip fAlSE
-		}
-	}
-
-	if square < target {
-		reverse
-	}
-
-	ima dip tRUe
-}
-
-fTion addBCstoreInA(reference var int a, var int b = 0, var int c = 0) {
-	a = b + c
-}
-
-var int testVar = 0
-check this out: testVar
-addBCstoreInA(testVar, 2, 2)
-check this out: testVar
+var int a!
+check this out "Enter number: "
+what is this: a
+check this out: a + 1

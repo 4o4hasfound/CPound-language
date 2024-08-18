@@ -19,6 +19,7 @@ public:
 	virtual void visitIdentifierNode(ASTNode* node) = 0;
 	virtual void visitIfStatementNode(ASTNode* node) = 0;
 	virtual void visitIndexExpressionNode(ASTNode* node) = 0;
+	virtual void visitInputStatementNode(ASTNode* node) = 0;
 	virtual void visitIntegerLiteralNode(ASTNode* node) = 0;
 	virtual void visitMemberFunctionCallExpressionNode(ASTNode* node) = 0;
 	virtual void visitMemberVariableExpressionNode(ASTNode* node) = 0;

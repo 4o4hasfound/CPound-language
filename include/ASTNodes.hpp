@@ -14,6 +14,7 @@
 #include "ASTNodes/IdentifierNode.hpp"
 #include "ASTNodes/IfStatementNode.hpp"
 #include "ASTNodes/IndexExpressionNode.hpp"
+#include "ASTNodes/InputStatementNode.hpp"
 #include "ASTNodes/IntegerLiteralNode.hpp"
 #include "ASTNodes/MemberFunctionCallExpressionNode.hpp"
 #include "ASTNodes/MemberVariableExpressionNode.hpp"

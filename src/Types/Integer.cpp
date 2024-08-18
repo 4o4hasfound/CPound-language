@@ -422,10 +422,10 @@ std::shared_ptr<Value> Integer::BitwiseAnd(std::shared_ptr<Value> lOperand, std:
 		return makeValue<int64_t>(lOperand->get<int64_t>() & rOperand->get<int64_t>());
 	}
 	else if (rOperand->type == L"float") {
-		throw std::runtime_error("Cannot do bitwise and operation between type int and type float");
+		throw std::runtime_error("Cannot apply bitwise and operation between type int and type float");
 	}
 	else if (rOperand->type == L"bool") {
-		throw std::runtime_error("Cannot do bitwise and operation between type int and type bool");
+		throw std::runtime_error("Cannot apply bitwise and operation between type int and type bool");
 	}
 	else if (rOperand->type == L"string") {
 		auto rvalue = cast<double, std::wstring>(rOperand->get<std::wstring>());
@@ -434,7 +434,7 @@ std::shared_ptr<Value> Integer::BitwiseAnd(std::shared_ptr<Value> lOperand, std:
 			return makeValue<int64_t>(lOperand->get<int64_t>() & static_cast<int64_t>(rvalue));
 		}
 		// value is float
-		throw std::runtime_error("Cannot do bitwise and operation between type int and type float");
+		throw std::runtime_error("Cannot apply bitwise and operation between type int and type float");
 	}
 	
 	throw std::runtime_error("Invalid type");
@@ -445,10 +445,10 @@ std::shared_ptr<Value> Integer::BitwiseOr(std::shared_ptr<Value> lOperand, std::
 		return makeValue<int64_t>(lOperand->get<int64_t>() | rOperand->get<int64_t>());
 	}
 	else if (rOperand->type == L"float") {
-		throw std::runtime_error("Cannot do bitwise or operation between type int and type float");
+		throw std::runtime_error("Cannot apply bitwise or operation between type int and type float");
 	}
 	else if (rOperand->type == L"bool") {
-		throw std::runtime_error("Cannot do bitwise or operation between type int and type bool");
+		throw std::runtime_error("Cannot apply bitwise or operation between type int and type bool");
 	}
 	else if (rOperand->type == L"string") {
 		auto rvalue = cast<double, std::wstring>(rOperand->get<std::wstring>());
@@ -457,7 +457,7 @@ std::shared_ptr<Value> Integer::BitwiseOr(std::shared_ptr<Value> lOperand, std::
 			return makeValue<int64_t>(lOperand->get<int64_t>() | static_cast<int64_t>(rvalue));
 		}
 		// value is float
-		throw std::runtime_error("Cannot do bitwise or operation between type int and type float");
+		throw std::runtime_error("Cannot apply bitwise or operation between type int and type float");
 	}
 
 	throw std::runtime_error("Invalid type");
@@ -468,10 +468,10 @@ std::shared_ptr<Value> Integer::BitwiseXor(std::shared_ptr<Value> lOperand, std:
 		return makeValue<int64_t>(lOperand->get<int64_t>() ^ rOperand->get<int64_t>());
 	}
 	else if (rOperand->type == L"float") {
-		throw std::runtime_error("Cannot do bitwise xor operation between type int and type float");
+		throw std::runtime_error("Cannot apply bitwise xor operation between type int and type float");
 	}
 	else if (rOperand->type == L"bool") {
-		throw std::runtime_error("Cannot do bitwise xor operation between type int and type bool");
+		throw std::runtime_error("Cannot apply bitwise xor operation between type int and type bool");
 	}
 	else if (rOperand->type == L"string") {
 		auto rvalue = cast<double, std::wstring>(rOperand->get<std::wstring>());
@@ -480,7 +480,7 @@ std::shared_ptr<Value> Integer::BitwiseXor(std::shared_ptr<Value> lOperand, std:
 			return makeValue<int64_t>(lOperand->get<int64_t>() ^ static_cast<int64_t>(rvalue));
 		}
 		// value is float
-		throw std::runtime_error("Cannot do bitwise xor operation between type int and type float");
+		throw std::runtime_error("Cannot apply bitwise xor operation between type int and type float");
 	}
 		
 	throw std::runtime_error("Invalid type");
@@ -491,10 +491,10 @@ std::shared_ptr<Value> Integer::LeftShift(std::shared_ptr<Value> lOperand, std::
 		return makeValue<int64_t>(lOperand->get<int64_t>() << rOperand->get<int64_t>());
 	}
 	else if (rOperand->type == L"float") {
-		throw std::runtime_error("Cannot do leftshift operation between type int and type float");
+		throw std::runtime_error("Cannot apply leftshift operation between type int and type float");
 	}
 	else if (rOperand->type == L"bool") {
-		throw std::runtime_error("Cannot do leftshift operation between type int and type bool");
+		throw std::runtime_error("Cannot apply leftshift operation between type int and type bool");
 	}
 	else if (rOperand->type == L"string") {
 		auto rvalue = cast<double, std::wstring>(rOperand->get<std::wstring>());
@@ -503,7 +503,7 @@ std::shared_ptr<Value> Integer::LeftShift(std::shared_ptr<Value> lOperand, std::
 			return makeValue<int64_t>(lOperand->get<int64_t>() << static_cast<int64_t>(rvalue));
 		}
 		// value is float
-		throw std::runtime_error("Cannot do leftshift operation between type int and type float");
+		throw std::runtime_error("Cannot apply leftshift operation between type int and type float");
 	}
 		
 	throw std::runtime_error("Invalid type");
@@ -514,10 +514,10 @@ std::shared_ptr<Value> Integer::RightShift(std::shared_ptr<Value> lOperand, std:
 		return makeValue<int64_t>(lOperand->get<int64_t>() >> rOperand->get<int64_t>());
 	}
 	else if (rOperand->type == L"float") {
-		throw std::runtime_error("Cannot do rightshfit operation between type int and type float");
+		throw std::runtime_error("Cannot apply rightshfit operation between type int and type float");
 	}
 	else if (rOperand->type == L"bool") {
-		throw std::runtime_error("Cannot do rightshift operation between type int and type bool");
+		throw std::runtime_error("Cannot apply rightshift operation between type int and type bool");
 	}
 	else if (rOperand->type == L"string") {
 		auto rvalue = cast<double, std::wstring>(rOperand->get<std::wstring>());
@@ -526,7 +526,7 @@ std::shared_ptr<Value> Integer::RightShift(std::shared_ptr<Value> lOperand, std:
 			return makeValue<int64_t>(lOperand->get<int64_t>() >> static_cast<int64_t>(rvalue));
 		}
 		// value is float
-		throw std::runtime_error("Cannot do rightshift operation between type int and type float");
+		throw std::runtime_error("Cannot apply rightshift operation between type int and type float");
 	}
 		
 	throw std::runtime_error("Invalid type");
@@ -537,10 +537,10 @@ std::shared_ptr<Value> Integer::LeftShiftAssignment(std::shared_ptr<Value> lOper
 		return changeValue<int64_t>(lOperand, lOperand->get<int64_t>() << rOperand->get<int64_t>());
 	}
 	else if (rOperand->type == L"float") {
-		throw std::runtime_error("Cannot do leftshift operation between type int and type float");
+		throw std::runtime_error("Cannot apply leftshift operation between type int and type float");
 	}
 	else if (rOperand->type == L"bool") {
-		throw std::runtime_error("Cannot do leftshift operation between type int and type bool");
+		throw std::runtime_error("Cannot apply leftshift operation between type int and type bool");
 	}
 	else if (rOperand->type == L"string") {
 		auto rvalue = cast<double, std::wstring>(rOperand->get<std::wstring>());
@@ -550,7 +550,7 @@ std::shared_ptr<Value> Integer::LeftShiftAssignment(std::shared_ptr<Value> lOper
 		}
 			
 		// value is float
-		throw std::runtime_error("Cannot do bitwise xor operation between type int and type float");
+		throw std::runtime_error("Cannot apply bitwise xor operation between type int and type float");
 	}
 		
 	throw std::runtime_error("Invalid type");
@@ -561,10 +561,10 @@ std::shared_ptr<Value> Integer::RightShiftAssignment(std::shared_ptr<Value> lOpe
 		return changeValue<int64_t>(lOperand, lOperand->get<int64_t>() >> rOperand->get<int64_t>());
 	}
 	else if (rOperand->type == L"float") {
-		throw std::runtime_error("Cannot do rightshift operation between type int and type float");
+		throw std::runtime_error("Cannot apply rightshift operation between type int and type float");
 	}
 	else if (rOperand->type == L"bool") {
-		throw std::runtime_error("Cannot do rightshift operation between type int and type bool");
+		throw std::runtime_error("Cannot apply rightshift operation between type int and type bool");
 	}
 	else if (rOperand->type == L"string") {
 		auto rvalue = cast<double, std::wstring>(rOperand->get<std::wstring>());
@@ -573,7 +573,7 @@ std::shared_ptr<Value> Integer::RightShiftAssignment(std::shared_ptr<Value> lOpe
 			return changeValue<int64_t>(lOperand, lOperand->get<int64_t>() >> static_cast<int64_t>(rvalue));
 		}
 		// value is float
-		throw std::runtime_error("Cannot do bitwise xor operation between type int and type float");
+		throw std::runtime_error("Cannot apply bitwise xor operation between type int and type float");
 	}
 		
 	throw std::runtime_error("Invalid type");
@@ -756,10 +756,10 @@ std::shared_ptr<Value> Integer::BitwiseAndAssignment(std::shared_ptr<Value> lOpe
 		return changeValue<int64_t>(lOperand, lOperand->get<int64_t>() & rvalue);
 	}
 	else if (rOperand->type == L"float") {
-		throw std::runtime_error("Cannot do bitwise and operation between type int and type float");
+		throw std::runtime_error("Cannot apply bitwise and operation between type int and type float");
 	}
 	else if (rOperand->type == L"bool") {
-		throw std::runtime_error("Cannot do bitwise and operation between type int and type bool");
+		throw std::runtime_error("Cannot apply bitwise and operation between type int and type bool");
 	}
 	else if (rOperand->type == L"string") {
 		auto rvalue = cast<double, std::wstring>(rOperand->get<std::wstring>());
@@ -767,7 +767,7 @@ std::shared_ptr<Value> Integer::BitwiseAndAssignment(std::shared_ptr<Value> lOpe
 			// value is integer
 			return changeValue<int64_t>(lOperand, lOperand->get<int64_t>() & static_cast<int64_t>(rvalue));
 		}
-		throw std::runtime_error("Cannot do bitwise and operation between type int and type float");
+		throw std::runtime_error("Cannot apply bitwise and operation between type int and type float");
 	}
 
 	throw std::runtime_error("Invalid type");
@@ -779,10 +779,10 @@ std::shared_ptr<Value> Integer::BitwiseOrAssignment(std::shared_ptr<Value> lOper
 		return changeValue<int64_t>(lOperand, lOperand->get<int64_t>() | rvalue);
 	}
 	else if (rOperand->type == L"float") {
-		throw std::runtime_error("Cannot do bitwise or operation between type int and type float");
+		throw std::runtime_error("Cannot apply bitwise or operation between type int and type float");
 	}
 	else if (rOperand->type == L"bool") {
-		throw std::runtime_error("Cannot do bitwise or operation between type int and type bool");
+		throw std::runtime_error("Cannot apply bitwise or operation between type int and type bool");
 	}
 	else if (rOperand->type == L"string") {
 		auto rvalue = cast<double, std::wstring>(rOperand->get<std::wstring>());
@@ -790,7 +790,7 @@ std::shared_ptr<Value> Integer::BitwiseOrAssignment(std::shared_ptr<Value> lOper
 			// value is integer
 			return changeValue<int64_t>(lOperand, lOperand->get<int64_t>() | static_cast<int64_t>(rvalue));
 		}
-		throw std::runtime_error("Cannot do bitwise or operation between type int and type float");
+		throw std::runtime_error("Cannot apply bitwise or operation between type int and type float");
 	}
 
 	throw std::runtime_error("Invalid type");
@@ -802,10 +802,10 @@ std::shared_ptr<Value> Integer::BitwiseXorAssignment(std::shared_ptr<Value> lOpe
 		return changeValue<int64_t>(lOperand, lOperand->get<int64_t>() ^ rvalue);
 	}
 	else if (rOperand->type == L"float") {
-		throw std::runtime_error("Cannot do bitwise xor operation between type int and type float");
+		throw std::runtime_error("Cannot apply bitwise xor operation between type int and type float");
 	}
 	else if (rOperand->type == L"bool") {
-		throw std::runtime_error("Cannot do bitwise xor operation between type int and type bool");
+		throw std::runtime_error("Cannot apply bitwise xor operation between type int and type bool");
 	}
 	else if (rOperand->type == L"string") {
 		auto rvalue = cast<double, std::wstring>(rOperand->get<std::wstring>());
@@ -813,7 +813,7 @@ std::shared_ptr<Value> Integer::BitwiseXorAssignment(std::shared_ptr<Value> lOpe
 			// value is integer
 			return changeValue<int64_t>(lOperand, lOperand->get<int64_t>() ^ static_cast<int64_t>(rvalue));
 		}
-		throw std::runtime_error("Cannot do bitwise xor operation between type int and type float");
+		throw std::runtime_error("Cannot apply bitwise xor operation between type int and type float");
 	}
 
 	throw std::runtime_error("Invalid type");

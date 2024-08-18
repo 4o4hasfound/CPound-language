@@ -54,6 +54,7 @@ private:
 	std::unique_ptr<StatementNode>	parseReverseStatement();
 	std::unique_ptr<StatementNode>	parseReturnStatement();
 	std::unique_ptr<StatementNode>	parsePrintStatement();
+	std::unique_ptr<StatementNode>	parseInputStatement();
 	std::unique_ptr<StatementNode>	parseKeyword();
 	std::unique_ptr<StatementNode>	parseStatementType();
 	bool skipTerminatorType();

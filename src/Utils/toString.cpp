@@ -83,11 +83,12 @@ BiUnorderedMap<std::wstring, KeywordType, lowerCaseCompare> KeywordTypeStringMap
 	{L"reference"		,	KeywordType::Reference},
 	{L"if"				,	KeywordType::If},
 	{L"else"			,	KeywordType::Else},
-	{L"ima dip"			,	KeywordType::Return},
+	{L"yoink"			,	KeywordType::Return},
 	{L"function"		,	KeywordType::Function},
 	{L"reverse"			,	KeywordType::Reverse},
 	{L"noop"			,	KeywordType::Noop},
-	{L"check this out"	,	KeywordType::Print}
+	{L"check this out"	,	KeywordType::Print},
+	{L"what is"	,	KeywordType::Input}
 } };
 BiUnorderedMap<std::wstring, DelimiterType, lowerCaseCompare> delimiterTypeStringMap{ {
 	{L"(", DelimiterType::LParen},

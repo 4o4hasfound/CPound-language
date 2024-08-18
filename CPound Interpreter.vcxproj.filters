@@ -219,6 +219,9 @@
     <ClCompile Include="src\Random.cpp">
       <Filter>來源檔案</Filter>
     </ClCompile>
+    <ClCompile Include="src\ASTNodes\InputStatementNode.cpp">
+      <Filter>來源檔案\ASTNodes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Parser.hpp">
@@ -403,6 +406,9 @@
     </ClInclude>
     <ClInclude Include="include\Random.hpp">
       <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ASTNodes\InputStatementNode.hpp">
+      <Filter>標頭檔\ASTNodes</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

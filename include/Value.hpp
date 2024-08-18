@@ -11,6 +11,8 @@ public:
 	Value(Value* ref);
 	Value(const std::wstring& _type, const std::any& _value);
 
+	using ArrayType = std::vector<std::shared_ptr<Value>>;
+
 	bool setDeclType(VariableDeclarationType _type);
 
 	std::any value;
@@ -20,6 +22,9 @@ public:
 	bool editable = true;
 	bool reassignable = true;
 	bool reference = false;
+
+	std::vector<std::shared_ptr<Value>>* array = nullptr;
+	double index = 0;
 
 	LifetimeInfo lifetime;
 
@@ -42,9 +47,8 @@ public:
 		}
 	}
 
-	std::wstring str() const;
-
 	std::shared_ptr<Value> copy() const;
+	void setDefaultValue();
 };
 
 template<typename T>

@@ -1,0 +1,29 @@
+// This program demonstrate loop using reverse
+
+var int end
+check this out "Enter a number: "
+
+// Get user input
+what is end
+
+// Loop
+
+var int i = 0
+
+// direction: 0->down, 1->up
+var bool direction = 0
+
+if direction {
+	reverse
+	direction = 0
+}
+
+if ;direction {	
+	i += 1
+	check this out: i, "\n"
+}
+
+if i < end {
+	direction = 1
+	reverse
+}

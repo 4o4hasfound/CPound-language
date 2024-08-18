@@ -10,7 +10,19 @@ template<typename MainT, typename T>
 MainT cast(const T& value);
 
 template<typename T>
+T cast(const std::vector<Value>& value);
+
+template<typename T>
 T cast(const std::shared_ptr<Value>& value);
+
+template<>
+int64_t cast<int64_t>(const std::shared_ptr<Value>& value);
+template<>
+double cast<double>(const std::shared_ptr<Value>& value);
+template<>
+bool cast<bool>(const std::shared_ptr<Value>& value);
+template<>
+std::wstring cast<std::wstring>(const std::shared_ptr<Value>& value);
 
 template<>
 int64_t cast<int64_t>(const std::shared_ptr<Value>& value);
@@ -55,6 +67,9 @@ bool cast<bool, bool>(const bool& value);
 template<>
 bool cast<bool, std::wstring>(const std::wstring& value);
 
+template<typename U>
+bool cast(const std::vector<U>& value);
+
 
 // ------------------- String --------------------
 
@@ -66,6 +81,8 @@ template<>
 std::wstring cast<std::wstring, bool>(const bool& value);
 template<>
 std::wstring cast<std::wstring, std::wstring>(const std::wstring& value);
+template<typename U>
+std::wstring cast(const std::vector<U>& value);
 
 
 std::shared_ptr<Value> convertValue(const std::shared_ptr<Value>& value, const std::wstring& type);

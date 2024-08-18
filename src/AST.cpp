@@ -249,26 +249,29 @@ bool AST::isEnd() const {
 }
 
 std::unique_ptr<ProgramNode> AST::parseProgram() {
-	auto program = std::make_unique<ProgramNode>(peek()->position);
-	while (m_index < m_tokens.size()) {
-		std::unique_ptr<ASTNode> node;
-		if ((node = parseKeyword())
-			|| (node = parseVariableDeclaration())
-			|| (node = parseEvaluationVariableDeclaration())
-			|| (node = parseFunctionDeclaration())
-			|| (node = parseIfStatement())
-			|| (node = parseExpressionStatement())
-			|| (node = parseBlock())) {
-			program->nodes.push_back(std::move(node));
+	if (peek()) {
+		auto program = std::make_unique<ProgramNode>(peek()->position);
+		while (m_index < m_tokens.size()) {
+			std::unique_ptr<ASTNode> node;
+			if ((node = parseKeyword())
+				|| (node = parseVariableDeclaration())
+				|| (node = parseEvaluationVariableDeclaration())
+				|| (node = parseFunctionDeclaration())
+				|| (node = parseIfStatement())
+				|| (node = parseExpressionStatement())
+				|| (node = parseBlock())) {
+				program->nodes.push_back(std::move(node));
+			}
+			else {
+				break;
+			}
 		}
-		else {
-			break;
+		if (m_index < m_tokens.size() - 1) {
+			Error::Log(peek(), L"Unrecognized token", *m_string);
 		}
+		return program;
 	}
-	if (m_index < m_tokens.size() - 1) {
-		Error::Log(peek(), L"Unrecognize token", *m_string);
-	}
-	return program;
+	return nullptr;
 }
 
 std::unique_ptr<ASTNode> AST::parseBlock(bool checkForStatementType) {
@@ -436,6 +439,12 @@ std::unique_ptr<StatementNode> AST::parseFunctionDeclaration() {
 	if (!tokenIsType(advance(), DelimiterType::RParen)) {
 		Error::Log(peek(), L"Parameter list doesn't close with a right parenthesis", *m_string);
 	}
+	bool reference = false;
+
+	if (match(KeywordType::Reference)) {
+		advance();
+		reference = true;
+	}
 
 	VariableDeclarationType retDeclType = parseDeclType();
 	if (retDeclType != VariableDeclarationType::Void) {
@@ -445,6 +454,7 @@ std::unique_ptr<StatementNode> AST::parseFunctionDeclaration() {
 		}
 		func->declaration.returnType = retType->str();
 	}
+	func->declaration.returnReference = reference;
 	func->declaration.returnDeclType = retDeclType;
 	func->declaration.generateMangledSymbol();
 
@@ -461,6 +471,12 @@ std::unique_ptr<StatementNode> AST::parseVariableDeclaration() {
 	// declType type id<lifetime> (=exp), ...
 
 	loadIndex();
+
+	bool reference = false;
+	if (match(KeywordType::Reference)) {
+		reference = true;
+		advance();
+	}
 
 	VariableDeclarationType declType = parseDeclType();
 	if (declType == VariableDeclarationType::Void) {
@@ -481,6 +497,7 @@ std::unique_ptr<StatementNode> AST::parseVariableDeclaration() {
 
 	while (true) {
 		// Get all the declarations in the single line
+		VariableDeclarationInfo info;
 
 		Token* identifier = parseIdentifier();
 		if (!identifier) {
@@ -488,6 +505,17 @@ std::unique_ptr<StatementNode> AST::parseVariableDeclaration() {
 		}
 
 		LifetimeInfo varLifeTime = parseLifeTime();
+
+		if (match(DelimiterType::LBracket)) {
+			std::unique_ptr<ASTNode> arrayLength = parseExpression();
+
+			info.array = true;
+			info.arrayLength = std::move(arrayLength);
+			if (!tokenIsType(advance(), DelimiterType::RBracket)) {
+				Error::Log(peek(), L"Expect closing bracket after array length", *m_string);
+			}
+		}
+
 		op = peek();
 
 		std::unique_ptr<ASTNode> expression = nullptr;
@@ -500,7 +528,7 @@ std::unique_ptr<StatementNode> AST::parseVariableDeclaration() {
 			}
 		}
 
-		VariableDeclarationInfo info;
+		info.reference = reference;
 		info.declType = declType;
 		info.type = type->str();
 		info.symbol = identifier->str();
@@ -523,7 +551,11 @@ std::unique_ptr<StatementNode> AST::parseVariableDeclaration() {
 	else if (tokenIsType(peek(), TerminatorType::ExclamationMark)) {
 		priority = static_cast<TerminatorToken*>(peek())->count;
 		advance();
-		if (tokenIsType(peek(), TerminatorType::QuestionMark)) {
+		if (!peek()) {
+			priority = 0;
+			statement = std::make_unique<NormalStatementNode>(peek(-1)->position);
+		}
+		else if (tokenIsType(peek(), TerminatorType::QuestionMark)) {
 			statement = std::make_unique<DebugStatementNode>(advance()->position);
 		}
 		else {
@@ -808,11 +840,39 @@ std::unique_ptr<StatementNode> AST::parsePrintStatement() {
 	return statement;
 }
 
+std::unique_ptr<StatementNode> AST::parseInputStatement() {
+	loadIndex();
+
+	if (!tokenIsType(peek(), KeywordType::Input)) {
+		fallback();
+		return nullptr;
+	}
+
+	auto print = std::make_unique<InputStatementNode>(advance()->position);
+	std::unique_ptr<ASTNode> expr;
+	while (true) {
+		expr = parseExpression();
+		if (!expr) {
+			break;
+		}
+		print->expressions.push_back(std::move(expr));
+		if (!match(DelimiterType::Comma)) {
+			break;
+		}
+		advance();
+	}
+	auto statement = parseStatementType();
+	statement->statement = std::move(print);
+
+	return statement;
+}
+
 std::unique_ptr<StatementNode> AST::parseKeyword() {
 	std::unique_ptr<StatementNode> node;
 	if ((node = parseIfStatement())
 		|| (node = parseReturnStatement())
 		|| (node = parseReverseStatement())
+		|| (node = parseInputStatement())
 		|| (node = parsePrintStatement())) {
 		return node;
 	}
@@ -828,7 +888,10 @@ std::unique_ptr<StatementNode> AST::parseStatementType() {
 	}
 	else if (tokenIsType(peek(), TerminatorType::ExclamationMark)) {
 		advance();
-		if (tokenIsType(peek(), TerminatorType::QuestionMark)) {
+		if (!peek()) {
+			statement = std::make_unique<NormalStatementNode>(peek(-1)->position);
+		}
+		else if (tokenIsType(peek(), TerminatorType::QuestionMark)) {
 			statement = std::make_unique<DebugStatementNode>(advance()->position);
 		}
 		else {

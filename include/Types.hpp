@@ -83,6 +83,7 @@ enum class KeywordType {
 	Return,
 	Function,
 	Print,
+	Input,
 	Reverse,
 	Noop
 };
@@ -194,6 +195,8 @@ struct VariableDeclarationInfo {
 	std::unique_ptr<ASTNode> amount;
 	int priority;
 	bool reference = false;
+	bool array = false;
+	std::unique_ptr<ASTNode> arrayLength;
 };
 
 struct FunctionDeclarationInfo {
@@ -203,6 +206,7 @@ struct FunctionDeclarationInfo {
 
 	std::wstring returnType;
 	VariableDeclarationType returnDeclType;
+	bool returnReference;
 
 	std::wstring symbol;
 	std::wstring mangledSymbol;
@@ -268,4 +272,4 @@ struct ClassDeclarationInfo {
 	std::vector<TypecaseFunctionDeclarationInfo> privateCastingDecl;
 };
 
-extern std::unordered_map<OperatorType, bool> isAssignmentOperator;
+extern std::unordered_map<OperatorType, bool> isEditOperator;

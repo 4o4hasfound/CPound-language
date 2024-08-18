@@ -21,6 +21,7 @@ public:
 	virtual void visitIdentifierNode(ASTNode* node) override;
 	virtual void visitIfStatementNode(ASTNode* node) override;
 	virtual void visitIndexExpressionNode(ASTNode* node) override;
+	virtual void visitInputStatementNode(ASTNode* node) override;
 	virtual void visitIntegerLiteralNode(ASTNode* node) override;
 	virtual void visitMemberFunctionCallExpressionNode(ASTNode* node) override;
 	virtual void visitMemberVariableExpressionNode(ASTNode* node) override;

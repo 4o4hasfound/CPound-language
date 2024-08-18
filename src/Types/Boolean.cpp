@@ -189,16 +189,16 @@ std::shared_ptr<Value> Boolean::Division(std::shared_ptr<Value> lOperand, std::s
 
 std::shared_ptr<Value> Boolean::Modulus(std::shared_ptr<Value> lOperand, std::shared_ptr<Value> rOperand) {
 	if (rOperand->type == L"int") {
-		throw std::runtime_error("Cannot do modulo operation between type bool and type int");
+		throw std::runtime_error("Cannot apply modulo operation between type bool and type int");
 	}
 	else if (rOperand->type == L"float") {
-		throw std::runtime_error("Cannot do modulo operation between type bool and type float");
+		throw std::runtime_error("Cannot apply modulo operation between type bool and type float");
 	}
 	else if (rOperand->type == L"bool") {
-		throw std::runtime_error("Cannot do modulo operation between type bool and type bool");
+		throw std::runtime_error("Cannot apply modulo operation between type bool and type bool");
 	}
 	else if (rOperand->type == L"string") {
-		throw std::runtime_error("Cannot do modulo operation between type bool and type string");
+		throw std::runtime_error("Cannot apply modulo operation between type bool and type string");
 	}
 
 	throw std::runtime_error("Invalid type");
@@ -368,16 +368,16 @@ std::shared_ptr<Value> Boolean::LogicalOr(std::shared_ptr<Value> lOperand, std::
 
 std::shared_ptr<Value> Boolean::BitwiseAnd(std::shared_ptr<Value> lOperand, std::shared_ptr<Value> rOperand) {
 	if (rOperand->type == L"int") {
-		throw std::runtime_error("Cannot do bitwise and operation between type bool and type int");
+		throw std::runtime_error("Cannot apply bitwise and operation between type bool and type int");
 	}
 	else if (rOperand->type == L"float") {
-		throw std::runtime_error("Cannot do bitwise and operation between type bool and type float");
+		throw std::runtime_error("Cannot apply bitwise and operation between type bool and type float");
 	}
 	else if (rOperand->type == L"bool") {
-		throw std::runtime_error("Cannot do bitwise and operation between type bool and type bool");
+		throw std::runtime_error("Cannot apply bitwise and operation between type bool and type bool");
 	}
 	else if (rOperand->type == L"string") {
-		throw std::runtime_error("Cannot do bitwise and operation between type bool and type string");
+		throw std::runtime_error("Cannot apply bitwise and operation between type bool and type string");
 	}
 
 	throw std::runtime_error("Invalid type");
@@ -385,16 +385,16 @@ std::shared_ptr<Value> Boolean::BitwiseAnd(std::shared_ptr<Value> lOperand, std:
 
 std::shared_ptr<Value> Boolean::BitwiseOr(std::shared_ptr<Value> lOperand, std::shared_ptr<Value> rOperand) {
 	if (rOperand->type == L"int") {
-		throw std::runtime_error("Cannot do bitwise or operation between type bool and type int");
+		throw std::runtime_error("Cannot apply bitwise or operation between type bool and type int");
 	}
 	else if (rOperand->type == L"float") {
-		throw std::runtime_error("Cannot do bitwise or operation between type bool and type float");
+		throw std::runtime_error("Cannot apply bitwise or operation between type bool and type float");
 	}
 	else if (rOperand->type == L"bool") {
-		throw std::runtime_error("Cannot do bitwise or operation between type bool and type bool");
+		throw std::runtime_error("Cannot apply bitwise or operation between type bool and type bool");
 	}
 	else if (rOperand->type == L"string") {
-		throw std::runtime_error("Cannot do bitwise or operation between type bool and type string");
+		throw std::runtime_error("Cannot apply bitwise or operation between type bool and type string");
 	}
 
 	throw std::runtime_error("Invalid type");
@@ -402,16 +402,16 @@ std::shared_ptr<Value> Boolean::BitwiseOr(std::shared_ptr<Value> lOperand, std::
 
 std::shared_ptr<Value> Boolean::BitwiseXor(std::shared_ptr<Value> lOperand, std::shared_ptr<Value> rOperand) {
 	if (rOperand->type == L"int") {
-		throw std::runtime_error("Cannot do bitwise xor operation between type bool and type int");
+		throw std::runtime_error("Cannot apply bitwise xor operation between type bool and type int");
 	}
 	else if (rOperand->type == L"float") {
-		throw std::runtime_error("Cannot do bitwise xor operation between type bool and type float");
+		throw std::runtime_error("Cannot apply bitwise xor operation between type bool and type float");
 	}
 	else if (rOperand->type == L"bool") {
-		throw std::runtime_error("Cannot do bitwise xor operation between type bool and type bool");
+		throw std::runtime_error("Cannot apply bitwise xor operation between type bool and type bool");
 	}
 	else if (rOperand->type == L"string") {
-		throw std::runtime_error("Cannot do bitwise xor operation between type bool and type string");
+		throw std::runtime_error("Cannot apply bitwise xor operation between type bool and type string");
 	}
 
 	throw std::runtime_error("Invalid type");
@@ -419,16 +419,16 @@ std::shared_ptr<Value> Boolean::BitwiseXor(std::shared_ptr<Value> lOperand, std:
 
 std::shared_ptr<Value> Boolean::LeftShift(std::shared_ptr<Value> lOperand, std::shared_ptr<Value> rOperand) {
 	if (rOperand->type == L"int") {
-		throw std::runtime_error("Cannot do leftshift operation between type bool and type int");
+		throw std::runtime_error("Cannot apply leftshift operation between type bool and type int");
 	}
 	else if (rOperand->type == L"float") {
-		throw std::runtime_error("Cannot do leftshift operation between type bool and type float");
+		throw std::runtime_error("Cannot apply leftshift operation between type bool and type float");
 	}
 	else if (rOperand->type == L"bool") {
-		throw std::runtime_error("Cannot do leftshift operation between type bool and type bool");
+		throw std::runtime_error("Cannot apply leftshift operation between type bool and type bool");
 	}
 	else if (rOperand->type == L"string") {
-		throw std::runtime_error("Cannot do leftshift operation between type bool and type string");
+		throw std::runtime_error("Cannot apply leftshift operation between type bool and type string");
 	}
 
 	throw std::runtime_error("Invalid type");
@@ -436,16 +436,16 @@ std::shared_ptr<Value> Boolean::LeftShift(std::shared_ptr<Value> lOperand, std::
 
 std::shared_ptr<Value> Boolean::RightShift(std::shared_ptr<Value> lOperand, std::shared_ptr<Value> rOperand) {
 	if (rOperand->type == L"int") {
-		throw std::runtime_error("Cannot do rightshift operation between type bool and type int");
+		throw std::runtime_error("Cannot apply rightshift operation between type bool and type int");
 	}
 	else if (rOperand->type == L"float") {
-		throw std::runtime_error("Cannot do rightshift operation between type bool and type float");
+		throw std::runtime_error("Cannot apply rightshift operation between type bool and type float");
 	}
 	else if (rOperand->type == L"bool") {
-		throw std::runtime_error("Cannot do rightshift operation between type bool and type bool");
+		throw std::runtime_error("Cannot apply rightshift operation between type bool and type bool");
 	}
 	else if (rOperand->type == L"string") {
-		throw std::runtime_error("Cannot do rightshift operation between type bool and type string");
+		throw std::runtime_error("Cannot apply rightshift operation between type bool and type string");
 	}
 
 	throw std::runtime_error("Invalid type");
@@ -453,16 +453,16 @@ std::shared_ptr<Value> Boolean::RightShift(std::shared_ptr<Value> lOperand, std:
 
 std::shared_ptr<Value> Boolean::LeftShiftAssignment(std::shared_ptr<Value> lOperand, std::shared_ptr<Value> rOperand) {
 	if (rOperand->type == L"int") {
-		throw std::runtime_error("Cannot do leftshift operation between type bool and type int");
+		throw std::runtime_error("Cannot apply leftshift operation between type bool and type int");
 	}
 	else if (rOperand->type == L"float") {
-		throw std::runtime_error("Cannot do leftshift operation between type bool and type float");
+		throw std::runtime_error("Cannot apply leftshift operation between type bool and type float");
 	}
 	else if (rOperand->type == L"bool") {
-		throw std::runtime_error("Cannot do leftshift operation between type bool and type bool");
+		throw std::runtime_error("Cannot apply leftshift operation between type bool and type bool");
 	}
 	else if (rOperand->type == L"string") {
-		throw std::runtime_error("Cannot do leftshift operation between type bool and type string");
+		throw std::runtime_error("Cannot apply leftshift operation between type bool and type string");
 	}
 
 	throw std::runtime_error("Invalid type");
@@ -470,16 +470,16 @@ std::shared_ptr<Value> Boolean::LeftShiftAssignment(std::shared_ptr<Value> lOper
 
 std::shared_ptr<Value> Boolean::RightShiftAssignment(std::shared_ptr<Value> lOperand, std::shared_ptr<Value> rOperand) {
 	if (rOperand->type == L"int") {
-		throw std::runtime_error("Cannot do rightshift operation between type bool and type int");
+		throw std::runtime_error("Cannot apply rightshift operation between type bool and type int");
 	}
 	else if (rOperand->type == L"float") {
-		throw std::runtime_error("Cannot do rightshift operation between type bool and type float");
+		throw std::runtime_error("Cannot apply rightshift operation between type bool and type float");
 	}
 	else if (rOperand->type == L"bool") {
-		throw std::runtime_error("Cannot do rightshift operation between type bool and type bool");
+		throw std::runtime_error("Cannot apply rightshift operation between type bool and type bool");
 	}
 	else if (rOperand->type == L"string") {
-		throw std::runtime_error("Cannot do rightshift operation between type bool and type string");
+		throw std::runtime_error("Cannot apply rightshift operation between type bool and type string");
 	}
 
 	throw std::runtime_error("Invalid type");
@@ -592,16 +592,16 @@ std::shared_ptr<Value> Boolean::DivisionAssignment(std::shared_ptr<Value> lOpera
 
 std::shared_ptr<Value> Boolean::ModulusAssignment(std::shared_ptr<Value> lOperand, std::shared_ptr<Value> rOperand) {
 	if (rOperand->type == L"int") {
-		throw std::runtime_error("Cannot do modulo operation between type bool and type int");
+		throw std::runtime_error("Cannot apply modulo operation between type bool and type int");
 	}
 	else if (rOperand->type == L"float") {
-		throw std::runtime_error("Cannot do modulo operation between type bool and type float");
+		throw std::runtime_error("Cannot apply modulo operation between type bool and type float");
 	}
 	else if (rOperand->type == L"bool") {
-		throw std::runtime_error("Cannot do modulo operation between type bool and type bool");
+		throw std::runtime_error("Cannot apply modulo operation between type bool and type bool");
 	}
 	else if (rOperand->type == L"string") {
-		throw std::runtime_error("Cannot do modulo operation between type bool and type string");
+		throw std::runtime_error("Cannot apply modulo operation between type bool and type string");
 	}
 
 	throw std::runtime_error("Invalid type");
@@ -642,16 +642,16 @@ std::shared_ptr<Value> Boolean::ExponentiationAssignment(std::shared_ptr<Value> 
 
 std::shared_ptr<Value> Boolean::BitwiseAndAssignment(std::shared_ptr<Value> lOperand, std::shared_ptr<Value> rOperand) {
 	if (rOperand->type == L"int") {
-		throw std::runtime_error("Cannot do bitwise and operation between type bool and type int");
+		throw std::runtime_error("Cannot apply bitwise and operation between type bool and type int");
 	}
 	else if (rOperand->type == L"float") {
-		throw std::runtime_error("Cannot do bitwise and operation between type bool and type float");
+		throw std::runtime_error("Cannot apply bitwise and operation between type bool and type float");
 	}
 	else if (rOperand->type == L"bool") {
-		throw std::runtime_error("Cannot do bitwise and operation between type bool and type bool");
+		throw std::runtime_error("Cannot apply bitwise and operation between type bool and type bool");
 	}
 	else if (rOperand->type == L"string") {
-		throw std::runtime_error("Cannot do bitwise and operation between type bool and type string");
+		throw std::runtime_error("Cannot apply bitwise and operation between type bool and type string");
 	}
 
 	throw std::runtime_error("Invalid type");
@@ -659,16 +659,16 @@ std::shared_ptr<Value> Boolean::BitwiseAndAssignment(std::shared_ptr<Value> lOpe
 
 std::shared_ptr<Value> Boolean::BitwiseOrAssignment(std::shared_ptr<Value> lOperand, std::shared_ptr<Value> rOperand) {
 	if (rOperand->type == L"int") {
-		throw std::runtime_error("Cannot do bitwise or operation between type bool and type int");
+		throw std::runtime_error("Cannot apply bitwise or operation between type bool and type int");
 	}
 	else if (rOperand->type == L"float") {
-		throw std::runtime_error("Cannot do bitwise or operation between type bool and type float");
+		throw std::runtime_error("Cannot apply bitwise or operation between type bool and type float");
 	}
 	else if (rOperand->type == L"bool") {
-		throw std::runtime_error("Cannot do bitwise or operation between type bool and type bool");
+		throw std::runtime_error("Cannot apply bitwise or operation between type bool and type bool");
 	}
 	else if (rOperand->type == L"string") {
-		throw std::runtime_error("Cannot do bitwise or operation between type bool and type string");
+		throw std::runtime_error("Cannot apply bitwise or operation between type bool and type string");
 	}
 
 	throw std::runtime_error("Invalid type");
@@ -676,16 +676,16 @@ std::shared_ptr<Value> Boolean::BitwiseOrAssignment(std::shared_ptr<Value> lOper
 
 std::shared_ptr<Value> Boolean::BitwiseXorAssignment(std::shared_ptr<Value> lOperand, std::shared_ptr<Value> rOperand) {
 	if (rOperand->type == L"int") {
-		throw std::runtime_error("Cannot do bitwise xor operation between type bool and type int");
+		throw std::runtime_error("Cannot apply bitwise xor operation between type bool and type int");
 	}
 	else if (rOperand->type == L"float") {
-		throw std::runtime_error("Cannot do bitwise xor operation between type bool and type float");
+		throw std::runtime_error("Cannot apply bitwise xor operation between type bool and type float");
 	}
 	else if (rOperand->type == L"bool") {
-		throw std::runtime_error("Cannot do bitwise xor operation between type bool and type bool");
+		throw std::runtime_error("Cannot apply bitwise xor operation between type bool and type bool");
 	}
 	else if (rOperand->type == L"string") {
-		throw std::runtime_error("Cannot do bitwise xor operation between type bool and type string");
+		throw std::runtime_error("Cannot apply bitwise xor operation between type bool and type string");
 	}
 
 	throw std::runtime_error("Invalid type");
@@ -750,7 +750,7 @@ std::shared_ptr<Value> Boolean::LogicalNot(std::shared_ptr<Value> lOperand) {
 }
 
 std::shared_ptr<Value> Boolean::BitwiseNot(std::shared_ptr<Value> lOperand) {
-	throw std::runtime_error("Cannot do bitwise not operation on type float");
+	throw std::runtime_error("Cannot apply bitwise not operation on type float");
 }
 
 std::shared_ptr<Value> Boolean::FrontIncrement(std::shared_ptr<Value> lOperand) {

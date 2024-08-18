@@ -12,8 +12,9 @@ std::vector<std::wstring> KeywordToken::s_keywordRegexes{
 	L"typecast",
 	L"inherit",
 	L"reference",
-	L"ima dip",
+	L"yoink",
 	L"check this out",
+	L"what is",
 	L"reverse",
 	L"noop"
 };
