@@ -2,8 +2,7 @@
 
 CPound is an interpreted language heavily inspired by [[Dreamberd]](https://github.com/TodePond/DreamBerd/tree/main?tab=readme-ov-file), possibly a successor of the popular language [[C hashtag]](https://en.wikipedia.org/wiki/C_Sharp_(programming_language)).
 
-![[CPound Logo]](res/CPound%20logo.png)
-
+<img src=res/CPound%20logo.png width="200">
 
 ## Interpreter usage
 
