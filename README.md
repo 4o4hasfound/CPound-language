@@ -1,13 +1,13 @@
 # CPound
 
-CPound is an interpreted language heavily inspired by [Dreamberd](https://github.com/TodePond/DreamBerd/tree/main?tab=readme-ov-file), possibly a successor of the popular language [C hashtag](https://en.wikipedia.org/wiki/C_Sharp_(programming_language)).
+CPound is an interpreted language heavily inspired by [Dreamberd](https://github.com/TodePond/DreamBerd/tree/main?tab=readme-ov-file), possibly a successor of the popular language [C hashtag](https://en.wikipedia.org/wiki/C_Sharp_(programming_language))
 
 <img src=res/CPound%20logo.png width="200">
 
 ## Interpreter usage
 
-Usage: cpound [filename] ([log file])
-You should end your files with .cp, but CPound will interpret it as long as it's a text file.
+Usage: cpound [filename] ([log file])  
+You should end your files with .cp, but CPound will interpret it as long as it's a text file
 
 ## Types
 
@@ -32,13 +32,13 @@ CPound's builtin keywords aren't case sensitive, so you can finaly capitalize an
 
 ## Statement Terminator
 
-In CPound, statement terminator includes exclamation marks and question marks
-They servers crucial purposes in certain position, be most of the time can be omitted
+In CPound, statement terminator includes exclamation marks and question marks  
+They servers crucial purposes in certain position, be most of the time can be omitted  
 
 #### Exclamation mark
 
-The amount of exclamation mark at the end of a varaible declaration determines its priority
-Declarations with higher priority can override ones with lowerpriority
+The amount of exclamation mark at the end of a varaible declaration determines its priority  
+Declarations with higher priority can override ones with lowerpriority  
 
 ```java
 var var var int a = 1!
@@ -48,7 +48,7 @@ var var var int a = 3!! // Didn't override!
 
 #### Question mark
 
-Adding one at the end of a statement will print debug info
+Adding one at the end of a statement will print debug info  
 (Not yet implemented)
 
 ## Logical not
@@ -134,14 +134,14 @@ cti add(var int a, var int b) var int {
 
 ## Overloading
 
-In CPound, functions can have same name with different parameter
-The interpreter will automaticly chooses the right one to call
+In CPound, functions can have same name with different parameter  
+The interpreter will automaticly chooses the right one to call  
 
 ## Reference
 
-Adding the keyword **reference** or **ref** at the begining of a variable declaration to make it a reference
-Any operation apply to a reference variable will affect its original value, including override
-You can also put this in a function parameter list or function return type
+Adding the keyword **reference** or **ref** at the begining of a variable declaration to make it a reference  
+Any operation apply to a reference variable will affect its original value, including override  
+You can also put this in a function parameter list or function return type  
 
 ```java
 func addOne(reference var int a) {
@@ -165,7 +165,7 @@ reference const const const int c = a // OK
 
 ## Input/Output Keyword
 
-Instead of using cout/cin or print/input like C++ and Python, CPound uses a more readable keyword, **check this out** and **what is**.
+Instead of using cout/cin or print/input like C++ and Python, CPound uses a more readable keyword, **check this out** and **what is**
 
 ```java
 var int a
@@ -184,8 +184,8 @@ what is a, b
 
 ## Spaces
 
-In CPound, newline is omitted
-Builtin keywords are seperate by spaces, but you can use ":" to replace spaces if you feel like it
+In CPound, newline is omitted  
+Builtin keywords are seperate by spaces, but you can use ":" to replace spaces if you feel like it  
 
 ```java
 var int a, b!
@@ -197,9 +197,9 @@ check this out:a, b // OK
 
 ## Loops
 
-CPound aims to provide the purest form of programming, so ugly for/while loops were removed
-Instead, CPound introduce the keyword **reverse**.
-Using this, you can write high quality code without having to deal with loops
+CPound aims to provide the purest form of programming, so ugly for/while loops were removed  
+Instead, CPound introduce the keyword **reverse**  
+Using this, you can write high quality code without having to deal with loops  
 
 ```java
 // Example of a program that counts from 1 to 10
@@ -227,13 +227,13 @@ if i < 10 {
 
 ## Reverse
 
-The reverse keyword reverse the running direction of the program
-The effect is global, so reverse inside a function also reverse the whole program
+The reverse keyword reverse the running direction of the program  
+The effect is global, so reverse inside a function also reverse the whole program  
 
 ## Evaluate Variable
 
-To avoid the hassle of single line functionse, CPound introduce the keyword **evaluate**
-An evaluate variable will reevaluate its value everytime its used
+To avoid the hassle of single line functionse, CPound introduce the keyword **evaluate**  
+An evaluate variable will reevaluate its value everytime its used  
 
 ```java
 var int a = 1, b = 1
