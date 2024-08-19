@@ -15,7 +15,7 @@ public:
 
 	bool setDeclType(VariableDeclarationType _type);
 
-	std::any value;
+	std::shared_ptr<std::vector<std::any>> value;
 	std::wstring type;
 
 	bool overridable = true;
@@ -23,29 +23,46 @@ public:
 	bool reassignable = true;
 	bool reference = false;
 
-	std::vector<std::shared_ptr<Value>>* array = nullptr;
-	double index = 0;
-
 	LifetimeInfo lifetime;
 
 	int priority = 0;
+	int index = -1;
 
 	template<typename T>
 	T get() const {
-		if (reference) {
-			return std::any_cast<Value*>(value)->get<T>();
+		if (isVoid()) {
+			throw std::runtime_error("Variable is void");
 		}
-		return std::any_cast<T>(value);
+		if (reference) {
+			return std::any_cast<Value*>((*value)[index])->get<T>();
+		}
+		return std::any_cast<T>((*value)[index]);
 	}
 	template<typename T>
 	void set(const T& t) {
 		if (reference) {
-			std::any_cast<Value*>(value)->set<T>(t);
+			if (isVoid()) {
+				throw std::runtime_error("Variable is void");
+			}
+			std::any_cast<Value*>((*value)[index])->set<T>(t);
 		}
 		else {
-			value = t;
+			++index;
+			if (value->empty()) {
+				value->push_back(t);
+			}
+			else {
+				value->insert(value->begin() + index, t);
+			}
 		}
 	}
+	bool isVoid() const;
+
+	void previous();
+	void future();
+	
+	std::any getCurrent() const;
+	Value* getReferenceObject() const;
 
 	std::shared_ptr<Value> copy() const;
 	void setDefaultValue();

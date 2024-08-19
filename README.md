@@ -232,7 +232,7 @@ The effect is global, so reverse inside a function also reverse the whole progra
 
 ## Evaluate Variable
 
-To avoid the hassle of single line functionse, CPound introduce the keyword **evaluate**  
+To avoid the hassle of single line functions, CPound introduce the keyword **evaluate**  
 An evaluate variable will reevaluate its value everytime its used  
 
 ```java

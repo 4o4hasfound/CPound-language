@@ -155,63 +155,65 @@ std::wstring cast<std::wstring>(const std::vector<std::shared_ptr<Value>>& value
 }
 
 std::shared_ptr<Value> convertValue(const std::shared_ptr<Value>& value, const std::wstring& type) {
+	std::shared_ptr<Value> ret = value->copy();
+	ret->type = type;
 	if (value->type == L"int") {
 		if (type == L"int") {
-			return makeValue<int64_t>(cast<int64_t, int64_t>(value->get<int64_t>()));
+
 		}
 		else if (type == L"float") {
-			return makeValue<double>(cast<double, int64_t>(value->get<int64_t>()));
+			ret->set<double>(cast<double, int64_t>(value->get<int64_t>()));
 		}
 		else if (type == L"bool") {
-			return makeValue<bool>(cast<bool, int64_t>(value->get<int64_t>()));
+			ret->set<bool>(cast<bool, int64_t>(value->get<int64_t>()));
 		}
 		else if (type == L"string") {
-			return makeValue<std::wstring>(cast<std::wstring, int64_t>(value->get<int64_t>()));
+			ret->set<std::wstring>(cast<std::wstring, int64_t>(value->get<int64_t>()));
 		}
 	}
 	else if (value->type == L"float") {
 		if (type == L"int") {
-			return makeValue<int64_t>(cast<int64_t, double>(value->get<double>()));
+			ret->set<int64_t>(cast<int64_t, double>(value->get<double>()));
 		}
 		else if (type == L"float") {
-			return makeValue<double>(cast<double, double>(value->get<double>()));
+
 		}
 		else if (type == L"bool") {
-			return makeValue<bool>(cast<bool, double>(value->get<double>()));
+			ret->set<bool>(cast<bool, double>(value->get<double>()));
 		}
 		else if (type == L"string") {
-			return makeValue<std::wstring>(cast<std::wstring, double>(value->get<double>()));
+			ret->set<std::wstring>(cast<std::wstring, double>(value->get<double>()));
 		}
 	}
 	else if (value->type == L"bool") {
 		if (type == L"int") {
-			return makeValue<int64_t>(cast<int64_t, bool>(value->get<bool>()));
+			ret->set<int64_t>(cast<int64_t, bool>(value->get<bool>()));
 		}
 		else if (type == L"float") {
-			return makeValue<double>(cast<double, bool>(value->get<bool>()));
+			ret->set<double>(cast<double, bool>(value->get<bool>()));
 		}
 		else if (type == L"bool") {
-			return makeValue<bool>(cast<bool, bool>(value->get<bool>()));
+
 		}
 		else if (type == L"string") {
-			return makeValue<std::wstring>(cast<std::wstring, bool>(value->get<bool>()));
+			ret->set<std::wstring>(cast<std::wstring, bool>(value->get<bool>()));
 		}
 	}
 	else if (value->type == L"string") {
 		if (type == L"int") {
-			return makeValue<int64_t>(cast<int64_t, std::wstring>(value->get<std::wstring>()));
+			ret->set<int64_t>(cast<int64_t, std::wstring>(value->get<std::wstring>()));
 		}
 		else if (type == L"float") {
-			return makeValue<double>(cast<double, std::wstring>(value->get<std::wstring>()));
+			ret->set<double>(cast<double, std::wstring>(value->get<std::wstring>()));
 		}
 		else if (type == L"bool") {
-			return makeValue<bool>(cast<bool, std::wstring>(value->get<std::wstring>()));
+			ret->set<bool>(cast<bool, std::wstring>(value->get<std::wstring>()));
 		}
 		else if (type == L"string") {
-			return makeValue<std::wstring>(cast<std::wstring, int64_t>(value->get<int64_t>()));
+
 		}
 	}
-	return nullptr;
+	return ret;
 }
 
 bool canConvert(const std::shared_ptr<Value>& value, const std::wstring& type) {

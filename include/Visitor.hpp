@@ -16,14 +16,17 @@ public:
 	virtual void visitEvaluateVariableDeclarationNode(ASTNode* node) = 0;
 	virtual void visitFloatLiteralNode(ASTNode* node) = 0;
 	virtual void visitFunctionDeclarationNode(ASTNode* node) = 0;
+	virtual void visitFutureNode(ASTNode* node) = 0;
 	virtual void visitIdentifierNode(ASTNode* node) = 0;
 	virtual void visitIfStatementNode(ASTNode* node) = 0;
 	virtual void visitIndexExpressionNode(ASTNode* node) = 0;
 	virtual void visitInputStatementNode(ASTNode* node) = 0;
 	virtual void visitIntegerLiteralNode(ASTNode* node) = 0;
+	virtual void visitLengthNode(ASTNode* node) = 0;
 	virtual void visitMemberFunctionCallExpressionNode(ASTNode* node) = 0;
 	virtual void visitMemberVariableExpressionNode(ASTNode* node) = 0;
 	virtual void visitNormalStatementNode(ASTNode* node) = 0;
+	virtual void visitPreviousNode(ASTNode* node) = 0;
 	virtual void visitPrintStatementNode(ASTNode* node) = 0;
 	virtual void visitProgramNode(ASTNode* node) = 0;
 	virtual void visitReturnStatementNode(ASTNode* node) = 0;

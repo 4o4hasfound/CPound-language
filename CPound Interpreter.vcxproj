@@ -154,14 +154,17 @@
     <ClCompile Include="src\ASTNodes\EvaluateVariableDeclarationNode.cpp" />
     <ClCompile Include="src\ASTNodes\FloatLiteralNode.cpp" />
     <ClCompile Include="src\ASTNodes\FunctionDeclarationNode.cpp" />
+    <ClCompile Include="src\ASTNodes\FutureNode.cpp" />
     <ClCompile Include="src\ASTNodes\IdentifierNode.cpp" />
     <ClCompile Include="src\ASTNodes\IfStatementNode.cpp" />
     <ClCompile Include="src\ASTNodes\IndexExpressionNode.cpp" />
     <ClCompile Include="src\ASTNodes\InputStatementNode.cpp" />
     <ClCompile Include="src\ASTNodes\IntegerLiteralNode.cpp" />
+    <ClCompile Include="src\ASTNodes\LengthNode.cpp" />
     <ClCompile Include="src\ASTNodes\MemberFunctionCallExpressionNode.cpp" />
     <ClCompile Include="src\ASTNodes\MemberVariableExpressionNode.cpp" />
     <ClCompile Include="src\ASTNodes\NormalStatementNode.cpp" />
+    <ClCompile Include="src\ASTNodes\PreviousNode.cpp" />
     <ClCompile Include="src\ASTNodes\PrintStatementNode.cpp" />
     <ClCompile Include="src\ASTNodes\ProgramNode.cpp" />
     <ClCompile Include="src\ASTNodes\ReturnStatementNode.cpp" />
@@ -170,7 +173,6 @@
     <ClCompile Include="src\ASTNodes\StringLiteralNode.cpp" />
     <ClCompile Include="src\ASTNodes\UnaryExpressionNode.cpp" />
     <ClCompile Include="src\ASTNodes\VariableDeclarationNode.cpp" />
-    <ClCompile Include="src\ASTCheckVisitor.cpp" />
     <ClCompile Include="src\Error.cpp" />
     <ClCompile Include="src\Interpreter.cpp" />
     <ClCompile Include="src\Lexer.cpp" />
@@ -204,7 +206,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\AST.hpp" />
-    <ClInclude Include="include\ASTCheckVisitor.hpp" />
     <ClInclude Include="include\ASTNodes.hpp" />
     <ClInclude Include="include\ASTNodes\ASTNodeBase.hpp" />
     <ClInclude Include="include\ASTNodes\BinaryExpressionNode.hpp" />
@@ -215,7 +216,10 @@
     <ClInclude Include="include\ASTNodes\ClassDeclarationNode.hpp" />
     <ClInclude Include="include\ASTNodes\DebugStatementNode.hpp" />
     <ClInclude Include="include\ASTNodes\EvaluateVariableDeclarationNode.hpp" />
+    <ClInclude Include="include\ASTNodes\FutureNode.hpp" />
     <ClInclude Include="include\ASTNodes\InputStatementNode.hpp" />
+    <ClInclude Include="include\ASTNodes\LengthNode.hpp" />
+    <ClInclude Include="include\ASTNodes\PreviousNode.hpp" />
     <ClInclude Include="include\ASTNodes\StatementNode.hpp" />
     <ClInclude Include="include\ASTNodes\FloatLiteralNode.hpp" />
     <ClInclude Include="include\ASTNodes\FunctionDeclarationNode.hpp" />

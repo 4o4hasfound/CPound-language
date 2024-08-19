@@ -6,7 +6,6 @@
 #include "AST.hpp"
 #include "Lexer.hpp"
 #include "Tokens.hpp"
-#include "ASTCheckVisitor.hpp"
 #include "Interpreter.hpp"
 
 class Parser {

@@ -4,6 +4,7 @@ std::unordered_map<OperatorType, bool> isEditOperator{
 	{ OperatorType::LeftShiftAssignment		, 1 },
 	{ OperatorType::RightShiftAssignment	, 1 },
 	{ OperatorType::Assignment				, 0 },
+	{ OperatorType::ReferenceAssignment		, 0 },
 	{ OperatorType::AdditionAssignment		, 1 },
 	{ OperatorType::SubtractionAssignment	, 1 },
 	{ OperatorType::MultiplicationAssignment, 1 },

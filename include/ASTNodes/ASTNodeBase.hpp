@@ -31,7 +31,10 @@ public:
 		CallExpression,
 		MemberVariableExpression,
 		MemberFunctionCallExpression,
-		IndexExpression
+		IndexExpression,
+		Previous,
+		Future,
+		Length
 	};
 
 	ASTNode(ASTNodeType nodeType, std::wstring::const_iterator pos);

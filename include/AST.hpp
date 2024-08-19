@@ -67,6 +67,7 @@ private:
 	int getPrecendence(Token* token) const;
 	bool isAssignmentOperator(Token* token) const;
 	bool isUnaryOperator(Token* token) const;
+	bool isUnaryKeyword(Token* token) const;
 	bool isPrefixUnaryOperator(Token* token) const;
 	bool isPostfixUnaryOperator(Token* token) const;
 

@@ -7,11 +7,7 @@ BiUnorderedMap<std::wstring, OperatorType, lowerCaseCompare> operatorTypeStringM
 	{L"negative"		,	OperatorType::UnaryNegation},
 	{L"[[absolute]]"	,	OperatorType::UnaryAbs},
 	{L"absolute"		,	OperatorType::UnaryAbs},
-	{L"[[previous]]"	,	OperatorType::Previous},
-	{L"previous"		,	OperatorType::Previous},
-	{L"[[current]]"		,	OperatorType::Current},
-	{L"current"			,	OperatorType::Current},
-	{L"**="	,	OperatorType::ExponentiationAssignment},
+	{L"==="	,	OperatorType::ReferenceAssignment},
 	{L"**="	,	OperatorType::ExponentiationAssignment},
 	{L"+++"	,	OperatorType::FrontIncrement},
 	{L"++"	,	OperatorType::EndIncrement},
@@ -88,7 +84,9 @@ BiUnorderedMap<std::wstring, KeywordType, lowerCaseCompare> KeywordTypeStringMap
 	{L"reverse"			,	KeywordType::Reverse},
 	{L"noop"			,	KeywordType::Noop},
 	{L"check this out"	,	KeywordType::Print},
-	{L"what is"	,	KeywordType::Input}
+	{L"previous"		,	KeywordType::Previous},
+	{L"future"			,	KeywordType::Future},
+	{L"length"			,	KeywordType::Length}
 } };
 BiUnorderedMap<std::wstring, DelimiterType, lowerCaseCompare> delimiterTypeStringMap{ {
 	{L"(", DelimiterType::LParen},

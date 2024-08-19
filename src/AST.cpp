@@ -32,6 +32,7 @@ const std::unordered_map<OperatorType, int> AST::s_presedence{ {
 	{OperatorType::BitwiseOr, 6},
 	{OperatorType::LogicalAnd, 5},
 	{OperatorType::LogicalOr, 4},
+	{OperatorType::ReferenceAssignment, 3},
 	{OperatorType::Assignment, 2},
 	{OperatorType::AdditionAssignment, 2},
 	{OperatorType::SubtractionAssignment, 2},
@@ -632,6 +633,22 @@ std::unique_ptr<ASTNode> AST::parseUnary() {
 		expr->expression = parseUnary();
 		return expr;
 	}
+	else if (tokenIsType(token, Token::Keyword)) {
+		switch (token->valueType) {
+		case static_cast<int>(KeywordType::Previous): {
+			auto expr = std::make_unique<PreviousNode>(token->position, parseUnary());
+			return expr;
+		}
+		case static_cast<int>(KeywordType::Future): {
+			auto expr = std::make_unique<FutureNode>(token->position, parseUnary());
+			return expr;
+		}
+		case static_cast<int>(KeywordType::Length): {
+			auto expr = std::make_unique<LengthNode>(token->position, parseUnary());
+			return expr;
+		}
+		}
+	}
 	fallback();
 	return parsePrimary();
 }
@@ -962,15 +979,19 @@ bool AST::isAssignmentOperator(Token* token) const {
 bool AST::isUnaryOperator(Token* token) const {
 	return isPrefixUnaryOperator(token) || isPostfixUnaryOperator(token);
 }
+bool AST::isUnaryKeyword(Token* token) const {
+	return token && token->type == Token::Keyword
+		&& token->valueType == static_cast<int>(KeywordType::Previous)
+		&& token->valueType == static_cast<int>(KeywordType::Future)
+		&& token->valueType == static_cast<int>(KeywordType::Length);
+}
 bool AST::isPrefixUnaryOperator(Token* token) const {
 	return token && token->isType(Token::Operator) &&
 		(token->valueType == static_cast<int>(OperatorType::LogicalNot)
 			|| token->valueType == static_cast<int>(OperatorType::BitwiseNot)
 			|| token->valueType == static_cast<int>(OperatorType::UnaryPlus)
 			|| token->valueType == static_cast<int>(OperatorType::UnaryNegation)
-			|| token->valueType == static_cast<int>(OperatorType::UnaryAbs)
-			|| token->valueType == static_cast<int>(OperatorType::Previous)
-			|| token->valueType == static_cast<int>(OperatorType::Current));
+			|| token->valueType == static_cast<int>(OperatorType::UnaryAbs));
 }
 bool AST::isPostfixUnaryOperator(Token* token) const {
 	return token && token->isType(Token::Operator) &&

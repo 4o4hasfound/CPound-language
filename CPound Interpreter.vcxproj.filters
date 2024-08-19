@@ -186,9 +186,6 @@
     <ClCompile Include="src\ASTNodes\VariableDeclarationNode.cpp">
       <Filter>來源檔案\ASTNodes</Filter>
     </ClCompile>
-    <ClCompile Include="src\ASTCheckVisitor.cpp">
-      <Filter>來源檔案</Filter>
-    </ClCompile>
     <ClCompile Include="src\Scope.cpp">
       <Filter>來源檔案</Filter>
     </ClCompile>
@@ -220,6 +217,15 @@
       <Filter>來源檔案</Filter>
     </ClCompile>
     <ClCompile Include="src\ASTNodes\InputStatementNode.cpp">
+      <Filter>來源檔案\ASTNodes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ASTNodes\FutureNode.cpp">
+      <Filter>來源檔案\ASTNodes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ASTNodes\LengthNode.cpp">
+      <Filter>來源檔案\ASTNodes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ASTNodes\PreviousNode.cpp">
       <Filter>來源檔案\ASTNodes</Filter>
     </ClCompile>
   </ItemGroup>
@@ -362,9 +368,6 @@
     <ClInclude Include="include\Visitor.hpp">
       <Filter>標頭檔</Filter>
     </ClInclude>
-    <ClInclude Include="include\ASTCheckVisitor.hpp">
-      <Filter>標頭檔</Filter>
-    </ClInclude>
     <ClInclude Include="include\Error.hpp">
       <Filter>標頭檔</Filter>
     </ClInclude>
@@ -408,6 +411,15 @@
       <Filter>標頭檔</Filter>
     </ClInclude>
     <ClInclude Include="include\ASTNodes\InputStatementNode.hpp">
+      <Filter>標頭檔\ASTNodes</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ASTNodes\PreviousNode.hpp">
+      <Filter>標頭檔\ASTNodes</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ASTNodes\FutureNode.hpp">
+      <Filter>標頭檔\ASTNodes</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ASTNodes\LengthNode.hpp">
       <Filter>標頭檔\ASTNodes</Filter>
     </ClInclude>
   </ItemGroup>

@@ -54,7 +54,8 @@ enum class OperatorType {
 	EndDecrement = 43,
 	Previous = 44,
 	Current = 45,
-	Delete = 46,
+	Delete = 46, 
+	ReferenceAssignment = 47
 };
 enum class BooleanType {
 	True,
@@ -85,6 +86,9 @@ enum class KeywordType {
 	Print,
 	Input,
 	Reverse,
+	Previous,
+	Future,
+	Length,
 	Noop
 };
 enum class DelimiterType {
@@ -144,6 +148,7 @@ enum class BinaryOperatorType {
 	BitwiseXorAssignment = 35,
 	LogicalAndAssignment = 37,
 	LogicalOrAssignment = 38,
+	ReferenceAssignment = 47
 };
 enum class UnaryOperatorType {
 	UnaryNegation = 6,

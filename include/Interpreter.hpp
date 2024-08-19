@@ -33,14 +33,17 @@ private:
 	virtual void visitEvaluateVariableDeclarationNode(ASTNode* node) override;
 	virtual void visitFloatLiteralNode(ASTNode* node) override;
 	virtual void visitFunctionDeclarationNode(ASTNode* node) override;
+	virtual void visitFutureNode(ASTNode* node) override;
 	virtual void visitIdentifierNode(ASTNode* node) override;
 	virtual void visitIfStatementNode(ASTNode* node) override;
 	virtual void visitIndexExpressionNode(ASTNode* node) override;
 	virtual void visitInputStatementNode(ASTNode* node) override;
 	virtual void visitIntegerLiteralNode(ASTNode* node) override;
+	virtual void visitLengthNode(ASTNode* node) override;
 	virtual void visitMemberFunctionCallExpressionNode(ASTNode* node) override;
 	virtual void visitMemberVariableExpressionNode(ASTNode* node) override;
 	virtual void visitNormalStatementNode(ASTNode* node) override;
+	virtual void visitPreviousNode(ASTNode* node) override;
 	virtual void visitPrintStatementNode(ASTNode* node) override;
 	virtual void visitProgramNode(ASTNode* node) override;
 	virtual void visitReturnStatementNode(ASTNode* node) override;
@@ -55,10 +58,6 @@ private:
 
 	void updateValue(const std::shared_ptr<Value>& value = nullptr);
 
-	int getArrayLength(const VariableDeclarationInfo& info);
-	std::shared_ptr<Value> getArrayObject(std::shared_ptr<Value> value, double index);
-	std::shared_ptr<Value> createArray(const VariableDeclarationInfo& info);
-	
 	void getInput(const std::shared_ptr<Value>& value);
 
 	int advanceIndex(int index) const;
