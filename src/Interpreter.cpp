@@ -322,7 +322,11 @@ void Interpreter::visitReturnStatementNode(ASTNode* node) {
 		updateValue();
 		return;
 	}
-	updateValue(getExpressionValue(ret->expression.get()));
+	auto value = getExpressionValue(ret->expression.get());
+	if (value->reference) {
+		value = value->getReferenceObject()->copy();
+	}
+	updateValue(value);
 }
 
 void Interpreter::visitReverseStatementNode(ASTNode* node) {

@@ -16,13 +16,11 @@ funt setList(var int start, var int end) var int {
 
 	if i < end {
 		reverse
-	}
-	
-	yoink list
-}
-fnc printList(reference var int list) {
-	var int i = 0
-	var bool direction = 0
+	}	
+
+	i = 0
+	direction = 0
+	reference var int l = list
 	
 	if direction {
 		reverse
@@ -31,14 +29,17 @@ fnc printList(reference var int list) {
 
 	if ;direction {
 		i+++
-		list === previous list
+		l === previous l
 		direction = 1
 	}
 
 	if i < length list - 1 {
 		reverse
 	}
-
+	
+	yoink l
+}
+fnc printList(reference var int list) {
 	var int i = 0!
 	var bool direction = 0!
 	
