@@ -84,6 +84,7 @@ BiUnorderedMap<std::wstring, KeywordType, lowerCaseCompare> KeywordTypeStringMap
 	{L"reverse"			,	KeywordType::Reverse},
 	{L"noop"			,	KeywordType::Noop},
 	{L"check this out"	,	KeywordType::Print},
+	{L"what is"			,	KeywordType::Input},
 	{L"previous"		,	KeywordType::Previous},
 	{L"future"			,	KeywordType::Future},
 	{L"length"			,	KeywordType::Length}
