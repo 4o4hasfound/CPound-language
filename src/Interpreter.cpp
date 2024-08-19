@@ -145,12 +145,6 @@ void Interpreter::visitCallExpressionNode(ASTNode* node) {
 		}
 		else if (canConvert(m_tmpValue, func->declaration.returnType)) {
 			updateValue(convertValue(m_tmpValue, func->declaration.returnType));
-			auto val = m_scope.getVariable(L"a");
-			if (val) {
-				int64_t arg = val->get<int64_t>();
-				int64_t bruh = m_tmpValue->get<int64_t>();
-				int asd = 2;
-			}
 		}
 	}
 	else {
@@ -317,7 +311,6 @@ void Interpreter::visitProgramNode(ASTNode* node) {
 
 void Interpreter::visitReturnStatementNode(ASTNode* node) {
 	auto ret = dynamic_cast<ReturnStatementNode*>(node);
-	m_return = 1;
 	if (!ret->expression) {
 		updateValue();
 		return;
@@ -327,6 +320,7 @@ void Interpreter::visitReturnStatementNode(ASTNode* node) {
 		value = value->getReferenceObject()->copy();
 	}
 	updateValue(value);
+	m_return = 1;
 }
 
 void Interpreter::visitReverseStatementNode(ASTNode* node) {
@@ -404,9 +398,8 @@ void Interpreter::visitVariableDeclarationNode(ASTNode* node) {
 
 std::shared_ptr<Value> Interpreter::getExpressionValue(ASTNode* node) {
 	updateValue();
-	node->accept(*this);
 	try {
-		//node->accept(*this);
+		node->accept(*this);
 	}
 	catch (const std::exception& e) {
 		std::wstringstream errorMessage;

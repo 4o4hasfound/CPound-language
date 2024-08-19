@@ -1,9 +1,30 @@
 fUnIN fib(const const const int i) var int {
 	if i <= 2 {	
-		yoink 1!
+		yoink 1
 	}	
 	yoink: fib(i-1) + fib(i-2)
 }
 
-check this out: fib(6)!
-// 1 1 2 3 5 8 13 25
+func loopPrintFib(var int target) {
+	var int i = 0
+	var bool direction = 0
+	
+	if direction {
+		reverse
+		direction = 0
+	}
+
+	if ;direction {
+		check this out i+++, ":", fib(i), "\n"
+		direction = 1
+	}
+
+	if i < target {
+		reverse
+	}
+}
+
+check this out: "Enter a number: "
+var int a
+what is a
+loopPrintFib(a)
