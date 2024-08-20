@@ -11,7 +11,7 @@ const std::unordered_map<OperatorType, int> AST::s_presedence{ {
 	{OperatorType::FrontDecrement, 15},
 	{OperatorType::EndIncrement, 15},
 	{OperatorType::EndDecrement, 15},
-	{OperatorType::Previous, 15},
+	{OperatorType::Past, 15},
 	{OperatorType::Current, 15},
 	{OperatorType::Exponentiation, 14},
 	{OperatorType::Multiplication, 13},
@@ -27,6 +27,8 @@ const std::unordered_map<OperatorType, int> AST::s_presedence{ {
 	{OperatorType::GreaterEqual, 10},
 	{OperatorType::EqualTo, 9},
 	{OperatorType::NotEqualTo, 9},
+	{OperatorType::ReferenceEqualTo, 9},
+	{OperatorType::ReferenceNotEqual, 9},
 	{OperatorType::BitwiseAnd, 8},
 	{OperatorType::BitwiseXor, 7},
 	{OperatorType::BitwiseOr, 6},
@@ -233,7 +235,7 @@ Token* AST::advance(int delta) {
 	return ret;
 }
 
-Token* AST::previous() const {
+Token* AST::past() const {
 	if (m_index - 1 >= 0) {
 		return m_tokens[m_index].get();
 	}
@@ -381,7 +383,8 @@ std::unique_ptr<StatementNode> AST::parseFunctionDeclaration() {
 
 	bool hasDefaultValue = false;
 	std::unique_ptr<ASTNode> expression = nullptr;
-	while (true) {
+
+	while (!match(DelimiterType::RParen)) {
 		bool reference = false;
 		if (match(KeywordType::Reference)) {
 			reference = true;
@@ -635,8 +638,8 @@ std::unique_ptr<ASTNode> AST::parseUnary() {
 	}
 	else if (tokenIsType(token, Token::Keyword)) {
 		switch (token->valueType) {
-		case static_cast<int>(KeywordType::Previous): {
-			auto expr = std::make_unique<PreviousNode>(token->position, parseUnary());
+		case static_cast<int>(KeywordType::Past): {
+			auto expr = std::make_unique<PastNode>(token->position, parseUnary());
 			return expr;
 		}
 		case static_cast<int>(KeywordType::Future): {
@@ -644,7 +647,27 @@ std::unique_ptr<ASTNode> AST::parseUnary() {
 			return expr;
 		}
 		case static_cast<int>(KeywordType::Length): {
-			auto expr = std::make_unique<LengthNode>(token->position, parseUnary());
+			auto expr = std::make_unique<TimelineLengthNode>(token->position, parseUnary());
+			return expr;
+		}
+		case static_cast<int>(KeywordType::Index): {
+			auto expr = std::make_unique<TimelineIndexNode>(token->position, parseUnary());
+			return expr;
+		}
+		case static_cast<int>(KeywordType::Insert): {
+			auto expr = std::make_unique<TimelineInsertNode>(token->position, parseUnary());
+			return expr;
+		}
+		case static_cast<int>(KeywordType::Prune): {
+			auto expr = std::make_unique<TimelinePruneNode>(token->position, parseUnary());
+			return expr;
+		}
+		case static_cast<int>(KeywordType::Begin): {
+			auto expr = std::make_unique<TimelineBeginNode>(token->position, parseUnary());
+			return expr;
+		}
+		case static_cast<int>(KeywordType::End): {
+			auto expr = std::make_unique<TimelineEndNode>(token->position, parseUnary());
 			return expr;
 		}
 		}
@@ -706,6 +729,7 @@ std::unique_ptr<ASTNode> AST::parsePrimary() {
 		return expr;
 	}
 
+	fallback();
 	return nullptr;
 }
 
@@ -737,6 +761,10 @@ std::unique_ptr<ASTNode> AST::parseCallExpression() {
 	while (m_index < m_tokens.size()) {
 		auto expr = parseExpression();
 		if (!expr) {
+			if (!match(DelimiterType::RParen)) {
+				Error::Log(peek()->position, L"Expect closing right parenthesis", *m_string);
+			}
+			advance();
 			break;
 		}
 		callExpr->arguments.push_back(std::move(expr));
@@ -981,7 +1009,7 @@ bool AST::isUnaryOperator(Token* token) const {
 }
 bool AST::isUnaryKeyword(Token* token) const {
 	return token && token->type == Token::Keyword
-		&& token->valueType == static_cast<int>(KeywordType::Previous)
+		&& token->valueType == static_cast<int>(KeywordType::Past)
 		&& token->valueType == static_cast<int>(KeywordType::Future)
 		&& token->valueType == static_cast<int>(KeywordType::Length);
 }

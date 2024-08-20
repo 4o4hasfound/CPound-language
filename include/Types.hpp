@@ -52,10 +52,12 @@ enum class OperatorType {
 	EndIncrement = 41,
 	FrontDecrement = 42,
 	EndDecrement = 43,
-	Previous = 44,
+	Past = 44,
 	Current = 45,
 	Delete = 46, 
-	ReferenceAssignment = 47
+	ReferenceAssignment = 47,
+	ReferenceNotEqual = 48,
+	ReferenceEqualTo = 49
 };
 enum class BooleanType {
 	True,
@@ -86,9 +88,14 @@ enum class KeywordType {
 	Print,
 	Input,
 	Reverse,
-	Previous,
+	Past,
 	Future,
 	Length,
+	Index,
+	Prune,
+	Insert,
+	Begin,
+	End,
 	Noop
 };
 enum class DelimiterType {
@@ -148,7 +155,9 @@ enum class BinaryOperatorType {
 	BitwiseXorAssignment = 35,
 	LogicalAndAssignment = 37,
 	LogicalOrAssignment = 38,
-	ReferenceAssignment = 47
+	ReferenceAssignment = 47,
+	ReferenceNotEqual = 48,
+	ReferenceEqualTo = 49
 };
 enum class UnaryOperatorType {
 	UnaryNegation = 6,
@@ -160,7 +169,7 @@ enum class UnaryOperatorType {
 	EndIncrement = 41,
 	FrontDecrement = 42,
 	EndDecrement = 43,
-	Previous = 44,
+	Past = 44,
 	Current = 45
 };
 

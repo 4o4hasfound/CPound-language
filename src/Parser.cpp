@@ -18,6 +18,10 @@ void Parser::parseFile(const std::wstring& filename) {
 	wss << file.rdbuf();
 	m_input = wss.str();
 	m_lexer.tokenize(m_input);
+	
+	if (m_tokens.empty()) {
+		return;
+	}
 
 	m_ast.build(&m_input);
 	m_interpreter.run(m_ast.program.get());

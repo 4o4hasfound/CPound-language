@@ -7,7 +7,7 @@ CPound is an interpreted language heavily inspired by [Dreamberd](https://github
 ## Interpreter usage
 
 Usage: cpound [filename] ([log file])  
-You should end your files with .cp, but CPound will interpret it as long as it's a text file
+You should end your files with .cp, but CPound will interpret it as long as it's a text file  
 
 ## Types
 
@@ -33,12 +33,12 @@ CPound's builtin keywords aren't case sensitive, so you can finaly capitalize an
 ## Statement Terminator
 
 In CPound, statement terminator includes exclamation marks and question marks  
-They servers crucial purposes in certain position, be most of the time can be omitted  
+They servers crucial purposes in certain position, be most of the time can be omitted
 
 #### Exclamation mark
 
 The amount of exclamation mark at the end of a varaible declaration determines its priority  
-Declarations with higher priority can override ones with lowerpriority  
+Declarations with higher priority can override ones with lowerpriority
 
 ```java
 var var var int a = 1!
@@ -135,13 +135,14 @@ cti add(var int a, var int b) var int {
 ## Overloading
 
 In CPound, functions can have same name with different parameter  
-The interpreter will automaticly chooses the right one to call  
+The interpreter will automaticly chooses the right one to call
 
 ## Reference
 
 Adding the keyword **reference** or **ref** at the begining of a variable declaration to make it a reference  
-Any operation apply to a reference variable will affect its original value, including override  
+Any operation apply to a reference variable will affect its original value  
 You can also put this in a function parameter list or function return type  
+In CPound, there are no reference to a reference variable, so assigning a reference to a reference will lead to two object referencing at the same object
 
 ```java
 func addOne(reference var int a) {
@@ -161,6 +162,19 @@ Any reference can only cast var to const, not the other way around
 var const const int a
 reference var var var int b = a // Error
 reference const const const int c = a // OK
+```
+
+To reassign a reference variable to point to another variable, use the **===** ReferenceAssignment operator  
+To compare if two reference variable points to different variable, use the **;==** ReferenceNotEqual operator   
+To compare if two reference variable points to same variable, use the **====** ReferenceEqualTo operator  
+```java
+var int a
+reference var int b = a
+reference var int c = a
+reference var int d = c // Reference to a reference is not allowed, so d points to what c points to
+
+check this out: b ==== c // 1
+check this out: b ;== d  // 0
 ```
 
 ## Input/Output Keyword
@@ -185,7 +199,7 @@ what is a, b
 ## Spaces
 
 In CPound, newline is omitted  
-Builtin keywords are seperate by spaces, but you can use ":" to replace spaces if you feel like it  
+Builtin keywords are seperate by spaces, but you can use ":" to replace spaces if you feel like it
 
 ```java
 var int a, b!
@@ -199,7 +213,7 @@ check this out:a, b // OK
 
 CPound aims to provide the purest form of programming, so ugly for/while loops were removed  
 Instead, CPound introduce the keyword **reverse**  
-Using this, you can write high quality code without having to deal with loops  
+Using this, you can write high quality code without having to deal with loops
 
 ```java
 // Example of a program that counts from 1 to 10
@@ -228,12 +242,12 @@ if i < 10 {
 ## Reverse
 
 The reverse keyword reverse the running direction of the program  
-The effect is global, so reverse inside a function also reverse the whole program  
+The effect is global, so reverse inside a function also reverse the whole program
 
 ## Evaluate Variable
 
 To avoid the hassle of single line functions, CPound introduce the keyword **evaluate**  
-An evaluate variable will reevaluate its value everytime its used  
+An evaluate variable will reevaluate its value everytime its used
 
 ```java
 var int a = 1, b = 1
@@ -243,3 +257,71 @@ a = 2
 check this out c // 3
 ```
 
+## Variable History
+
+In CPound, every variable has its own timeline, which is a list of value it had hold  
+Every assignment will insert a value after the current position in the timeline  
+You can access this using these keywords
+
++ past
++ future
++ timeline begin
++ timeline end
+
+**past** / **future** will move the variable backward/forward on the timeline  
+**timeline begin** / **timeline end** will it to the begin/end of the timeline  
+
+To alter the timeline, use these keywords
+  + timeline insert  
+  + timeline prune  
+
+**timeline insert** will insert a default variable at the current position in the timeline  
+**timeline prune** will prune the current position in the timeline  
+  
+The above keyword will return a reference to the original variable, so you can chain operations!  
+
+To get the length of the timeline, simply use the keyword **timeline length**
+
+```java
+var int a = 0
+a = 1
+timeline begin a
+check this out: a, future a, "\n" // 0 1
+
+// This will insert a 2 after the first 0
+timeline begin a = 2 
+timeline begin a // Reset position back to begin
+check this out a, future a, future a, "\n" // 0 2 1
+
+// Remove the first 0
+timeline begin a
+timeline prune a
+// or simply timeline prune timeline begin a
+check this out a, future a, "\n" // 2 1
+
+// Print the whole timeline
+fnc printTimeline(reference var int list) {
+    timeline begin list
+
+    var int i = 0
+    var bool direction = 0
+	
+    if direction {
+    	reverse
+	    direction = 0
+    }
+
+    if ;direction {
+		i+++
+		check this out: list, " "
+		future list
+		direction = 1
+	}
+
+	if i < timeline length list {
+		reverse
+	}
+}
+
+printList(a) // 2 1
+```

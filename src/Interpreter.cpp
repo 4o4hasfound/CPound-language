@@ -31,6 +31,20 @@ void Interpreter::visitBinaryExpressionNode(ASTNode* node) {
 		updateValue(lexpr);
 		return;
 	}
+	if (expr->operatorType == BinaryOperatorType::ReferenceNotEqual) {
+		if (!lexpr->reference || !rexpr->reference) {
+			Error::Log(node->position, L"Cannot apply reference not equal operator on non reference variable", *m_string);
+		}
+		updateValue(makeValue(lexpr->getReferenceObject() != rexpr->getReferenceObject()));
+		return;
+	}
+	if (expr->operatorType == BinaryOperatorType::ReferenceEqualTo) {
+		if (!lexpr->reference || !rexpr->reference) {
+			Error::Log(node->position, L"Cannot apply reference equal to operator on non reference variable", *m_string);
+		}
+		updateValue(makeValue(lexpr->getReferenceObject() == rexpr->getReferenceObject()));
+		return;
+	}
 
 	try {
 		doBinaryOperation(
@@ -101,12 +115,14 @@ void Interpreter::visitCallExpressionNode(ASTNode* node) {
 		if (i < arguments.size()) {
 			if (parameter.type == arguments[i]->type) {
 				std::shared_ptr<Value> value;
-				if (parameter.reference && !arguments[i]->reference) {
-					value = std::make_shared<Value>(arguments[i].get());
+
+				if (parameter.reference) {
+					value = std::make_shared<Value>(arguments[i]->getReferenceObject());
 				}
 				else {
-					value = std::make_shared<Value>(arguments[i]->type, arguments[i]->getCurrent());
+					value = arguments[i]->copy();
 				}
+
 				if (!value->setDeclType(parameter.declType)) {
 					Error::Log(node->position, L"Cannot convert declaration type", *m_string);
 				}
@@ -187,7 +203,7 @@ void Interpreter::visitFutureNode(ASTNode* node) {
 		Error::Log(node->position, L"Expect expression after future keyword", *m_string);
 	}
 	std::shared_ptr<Value> value = getExpressionValue(prev->expression.get());
-	auto newValue = std::make_shared<Value>(*value);
+	auto newValue = std::make_shared<Value>(value.get());
 	newValue->future();
 	updateValue(newValue);
 }
@@ -248,11 +264,11 @@ void Interpreter::visitIntegerLiteralNode(ASTNode* node) {
 	m_tmpValue = makeValue<int64_t>(integer->value);
 }
 
-void Interpreter::visitLengthNode(ASTNode* node) {
-	auto prev = dynamic_cast<LengthNode*>(node);
+void Interpreter::visitTimelineLengthNode(ASTNode* node) {
+	auto prev = dynamic_cast<TimelineLengthNode*>(node);
 
 	if (!prev->expression) {
-		Error::Log(node->position, L"Expect expression after length keyword", *m_string);
+		Error::Log(node->position, L"Expect expression after timeline length keyword", *m_string);
 	}
 	std::shared_ptr<Value> value = getExpressionValue(prev->expression.get());
 	if (value->reference) {
@@ -277,15 +293,15 @@ void Interpreter::visitNormalStatementNode(ASTNode* node) {
 	statement->statement->accept(*this);
 }
 
-void Interpreter::visitPreviousNode(ASTNode* node) {
-	auto prev = dynamic_cast<PreviousNode*>(node);
+void Interpreter::visitPastNode(ASTNode* node) {
+	auto prev = dynamic_cast<PastNode*>(node);
 
 	if (!prev->expression) {
-		Error::Log(node->position, L"Expect expression after previous keyword", *m_string);
+		Error::Log(node->position, L"Expect expression after past keyword", *m_string);
 	}
 	std::shared_ptr<Value> value = getExpressionValue(prev->expression.get());
-	auto newValue = std::make_shared<Value>(*value);
-	newValue->previous();
+	auto newValue = std::make_shared<Value>(value.get());
+	newValue->past();
 	updateValue(newValue);
 }
 
@@ -293,8 +309,14 @@ void Interpreter::visitPrintStatementNode(ASTNode* node) {
 	auto printStatement = dynamic_cast<PrintStatementNode*>(node);
 	for (int i = 0; i < printStatement->expressions.size(); ++i) {
 		std::shared_ptr<Value> value = getExpressionValue(printStatement->expressions[i].get());
-		std::wcout << cast<std::wstring>(value);
-		
+		try {
+			std::wcout<<cast<std::wstring>(value);
+		}
+		catch (const std::exception& e) {
+			std::wstringstream errorMessage;
+			errorMessage << e.what();
+			Error::Log(node->position, errorMessage.str(), *m_string);
+		}
 		if (i != printStatement->expressions.size() - 1) {
 			std::wcout << L" ";
 		}
@@ -332,6 +354,65 @@ void Interpreter::visitStringLiteralNode(ASTNode* node) {
 	m_tmpValue = makeValue<std::wstring>(string->value);
 }
 
+void Interpreter::visitTimelineBeginNode(ASTNode* node) {
+	auto beg = dynamic_cast<TimelineBeginNode*>(node);
+
+	if (!beg->expression) {
+		Error::Log(node->position, L"Expect expression after timeline begin keyword", *m_string);
+	}
+	std::shared_ptr<Value> value = getExpressionValue(beg->expression.get());
+	auto newValue = std::make_shared<Value>(value.get());
+	newValue->begin();
+	auto sfada = newValue->getReferenceObject();
+	updateValue(newValue);
+}
+
+void Interpreter::visitTimelineEndNode(ASTNode* node) {
+	auto end = dynamic_cast<TimelineEndNode*>(node);
+
+	if (!end->expression) {
+		Error::Log(node->position, L"Expect expression after timeline end keyword", *m_string);
+	}
+	std::shared_ptr<Value> value = getExpressionValue(end->expression.get());
+	auto newValue = std::make_shared<Value>(value.get());
+	newValue->end();
+	updateValue(newValue);
+}
+
+void Interpreter::visitTimelinePruneNode(ASTNode* node) {
+	auto prune = dynamic_cast<TimelinePruneNode*>(node);
+
+	if (!prune->expression) {
+		Error::Log(node->position, L"Expect expression after timeline prune keyword", *m_string);
+	}
+	std::shared_ptr<Value> value = getExpressionValue(prune->expression.get());
+	auto newValue = std::make_shared<Value>(value.get());
+	newValue->timelinePrune();
+	updateValue(newValue);
+}
+
+void Interpreter::visitTimelineIndexNode(ASTNode* node) {
+	auto index = dynamic_cast<TimelineIndexNode*>(node);
+
+	if (!index->expression) {
+		Error::Log(node->position, L"Expect expression after timeline index keyword", *m_string);
+	}
+	std::shared_ptr<Value> value = getExpressionValue(index->expression.get());
+	updateValue(makeValue<int64_t>(value->getIndex()));
+}
+
+void Interpreter::visitTimelineInsertNode(ASTNode* node) {
+	auto insert = dynamic_cast<TimelineInsertNode*>(node);
+
+	if (!insert->expression) {
+		Error::Log(node->position, L"Expect expression after timeline insert keyword", *m_string);
+	}
+	std::shared_ptr<Value> value = getExpressionValue(insert->expression.get());
+	auto newValue = std::make_shared<Value>(*value);
+	newValue->timelineInsert();
+	updateValue(newValue);
+}
+
 void Interpreter::visitUnaryExpressionNode(ASTNode* node) {
 	auto uOp = dynamic_cast<UnaryExpressionNode*>(node);
 	std::shared_ptr<Value> value = getExpressionValue(uOp->expression.get());
@@ -347,7 +428,7 @@ void Interpreter::visitVariableDeclarationNode(ASTNode* node) {
 	auto decl = dynamic_cast<VariableDeclarationNode*>(node);
 	for (const auto& variable : decl->declarations) {
 		auto var = m_scope.getVariable(variable.symbol, 0);
-		if (!var || (!variable.reference && var->priority <= variable.priority && var->overridable)) {
+		if (!var || (var->priority <= variable.priority && var->overridable)) {
 			// Variable didn't exist in this scope
 			// or declaration has higher priority
 			
@@ -364,6 +445,7 @@ void Interpreter::visitVariableDeclarationNode(ASTNode* node) {
 					}
 				}
 				else {
+					auto bruh = getExpressionValue(variable.defaultValue.get());
 					value = getExpressionValue(variable.defaultValue.get())->copy();
 					if (!(value = convertValue(value, variable.type))) {
 						Error::Log(node->position, L"Cannot convert type", *m_string);

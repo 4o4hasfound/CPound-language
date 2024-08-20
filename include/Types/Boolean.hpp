@@ -59,7 +59,7 @@ public:
 	static std::shared_ptr<Value> EndIncrement(std::shared_ptr<Value> lOperand);
 	static std::shared_ptr<Value> FrontDecrement(std::shared_ptr<Value> lOperand);
 	static std::shared_ptr<Value> EndDecrement(std::shared_ptr<Value> lOperand);
-	//static std::shared_ptr<Value> Previous(std::shared_ptr<Value> lOperand);
+	//static std::shared_ptr<Value> Past(std::shared_ptr<Value> lOperand);
 	//static std::shared_ptr<Value> Current(std::shared_ptr<Value> lOperand);
 private:
 	Boolean() = delete;

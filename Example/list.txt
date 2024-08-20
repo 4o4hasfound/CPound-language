@@ -1,4 +1,26 @@
-// This program create a list that stores 1 - 10 and then print it out
+// This program create a list that stores 1 - 10 and then print it out, then modifies it
+
+fnc printList(reference var int list) {
+	var int i = 0!
+	var bool direction = 0!
+	
+	if direction {
+		reverse
+		direction = 0
+	}
+
+	if ;direction {
+		i+++
+		check this out: list, " "
+		future list
+		direction = 1
+	}
+
+	if i < timeline length list {
+		reverse
+	}
+
+}
 funt setList(var int start, var int end) var int {
 	var int i = start
 	var int list = i
@@ -11,6 +33,7 @@ funt setList(var int start, var int end) var int {
 
 	if ;direction {
 		list = i+++
+
 		direction = 1
 	}
 
@@ -18,47 +41,14 @@ funt setList(var int start, var int end) var int {
 		reverse
 	}	
 
-	i = 0
-	direction = 0
-	reference var int l = list
+	timeline begin list
 	
-	if direction {
-		reverse
-		direction = 0
-	}
-
-	if ;direction {
-		i+++
-		l === previous l
-		direction = 1
-	}
-
-	if i < length list - 1 {
-		reverse
-	}
-	
-	yoink l
+	yoink list
 }
-fnc printList(reference var int list) {
-	var int i = 0!
-	var bool direction = 0!
-	
-	if direction {
-		reverse
-		direction = 0
-	}
 
-	if ;direction {
-		i+++
-		check this out: list, "\n"
-		list === future list
-		direction = 1
-	}
+var int list = setList(1, 5)
 
-	if i < length list {
-		reverse
-	}
+// Push back a value
+timeline begin list = 2
 
-}
-var int list = setList(1, 10)
 printList(list)

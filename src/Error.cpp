@@ -4,14 +4,14 @@ std::wstring Error::logFile = L"";
 int Error::outputLineWidth = 50;
 
 void Error::Log(const std::wstring& errorMessage) {
-	std::wcerr << errorMessage << "\n";
+	std::wcerr << "\n" << errorMessage << "\n";
 	LogToFile(errorMessage);
 	exit(1);
 }
 void Error::Log(std::wstring::const_iterator itr, const std::wstring& errorMessage, const std::wstring& string) {
 	std::wstringstream output;
 	PositionInfo info = getTokenPositionInfo(itr, string);
-	output << "Error at line " << info.lineIndex <<":"<<info.tokenIndexInLine<<" -> ";
+	output << "\nError at line " << info.lineIndex <<":"<<info.tokenIndexInLine<<" -> ";
 	output << errorMessage << "\n";
 	output << getOutputLine(itr, info.lineStartItr, info.lineEndItr) << "\n";
 

@@ -39,16 +39,21 @@ private:
 	virtual void visitIndexExpressionNode(ASTNode* node) override;
 	virtual void visitInputStatementNode(ASTNode* node) override;
 	virtual void visitIntegerLiteralNode(ASTNode* node) override;
-	virtual void visitLengthNode(ASTNode* node) override;
 	virtual void visitMemberFunctionCallExpressionNode(ASTNode* node) override;
 	virtual void visitMemberVariableExpressionNode(ASTNode* node) override;
 	virtual void visitNormalStatementNode(ASTNode* node) override;
-	virtual void visitPreviousNode(ASTNode* node) override;
+	virtual void visitPastNode(ASTNode* node) override;
 	virtual void visitPrintStatementNode(ASTNode* node) override;
 	virtual void visitProgramNode(ASTNode* node) override;
 	virtual void visitReturnStatementNode(ASTNode* node) override;
 	virtual void visitReverseStatementNode(ASTNode* node) override;
 	virtual void visitStringLiteralNode(ASTNode* node) override;
+	virtual void visitTimelineBeginNode(ASTNode* node) override;
+	virtual void visitTimelineEndNode(ASTNode* node) override;
+	virtual void visitTimelineLengthNode(ASTNode* node) override;
+	virtual void visitTimelinePruneNode(ASTNode* node) override;
+	virtual void visitTimelineIndexNode(ASTNode*) override;
+	virtual void visitTimelineInsertNode(ASTNode* node) override;
 	virtual void visitUnaryExpressionNode(ASTNode* node) override;
 	virtual void visitVariableDeclarationNode(ASTNode* node) override;
 

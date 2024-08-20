@@ -7,7 +7,9 @@ BiUnorderedMap<std::wstring, OperatorType, lowerCaseCompare> operatorTypeStringM
 	{L"negative"		,	OperatorType::UnaryNegation},
 	{L"[[absolute]]"	,	OperatorType::UnaryAbs},
 	{L"absolute"		,	OperatorType::UnaryAbs},
+	{L"===="			,	OperatorType::ReferenceEqualTo},
 	{L"==="	,	OperatorType::ReferenceAssignment},
+	{L";=="	,	OperatorType::ReferenceNotEqual},
 	{L"**="	,	OperatorType::ExponentiationAssignment},
 	{L"+++"	,	OperatorType::FrontIncrement},
 	{L"++"	,	OperatorType::EndIncrement},
@@ -85,9 +87,14 @@ BiUnorderedMap<std::wstring, KeywordType, lowerCaseCompare> KeywordTypeStringMap
 	{L"noop"			,	KeywordType::Noop},
 	{L"check this out"	,	KeywordType::Print},
 	{L"what is"			,	KeywordType::Input},
-	{L"previous"		,	KeywordType::Previous},
+	{L"past"			,	KeywordType::Past},
 	{L"future"			,	KeywordType::Future},
-	{L"length"			,	KeywordType::Length}
+	{L"timeline length"	,	KeywordType::Length},
+	{L"timeline index"	,	KeywordType::Index},
+	{L"timeline prune"	,	KeywordType::Prune},
+	{L"timeline insert"	,	KeywordType::Insert},
+	{L"timeline begin"	,	KeywordType::Begin},
+	{L"timeline end"	,	KeywordType::End}
 } };
 BiUnorderedMap<std::wstring, DelimiterType, lowerCaseCompare> delimiterTypeStringMap{ {
 	{L"(", DelimiterType::LParen},

@@ -222,10 +222,25 @@
     <ClCompile Include="src\ASTNodes\FutureNode.cpp">
       <Filter>來源檔案\ASTNodes</Filter>
     </ClCompile>
-    <ClCompile Include="src\ASTNodes\LengthNode.cpp">
+    <ClCompile Include="src\ASTNodes\TimelineLengthNode.cpp">
       <Filter>來源檔案\ASTNodes</Filter>
     </ClCompile>
-    <ClCompile Include="src\ASTNodes\PreviousNode.cpp">
+    <ClCompile Include="src\ASTNodes\PastNode.cpp">
+      <Filter>來源檔案\ASTNodes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ASTNodes\TimelineInsertNode.cpp">
+      <Filter>來源檔案\ASTNodes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ASTNodes\TimelinePruneNode.cpp">
+      <Filter>來源檔案\ASTNodes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ASTNodes\TimelineIndexNode.cpp">
+      <Filter>來源檔案\ASTNodes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ASTNodes\TimelineBeginNode.cpp">
+      <Filter>來源檔案\ASTNodes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ASTNodes\TimelineEndNode.cpp">
       <Filter>來源檔案\ASTNodes</Filter>
     </ClCompile>
   </ItemGroup>
@@ -413,13 +428,28 @@
     <ClInclude Include="include\ASTNodes\InputStatementNode.hpp">
       <Filter>標頭檔\ASTNodes</Filter>
     </ClInclude>
-    <ClInclude Include="include\ASTNodes\PreviousNode.hpp">
-      <Filter>標頭檔\ASTNodes</Filter>
-    </ClInclude>
     <ClInclude Include="include\ASTNodes\FutureNode.hpp">
       <Filter>標頭檔\ASTNodes</Filter>
     </ClInclude>
-    <ClInclude Include="include\ASTNodes\LengthNode.hpp">
+    <ClInclude Include="include\ASTNodes\TimelineLengthNode.hpp">
+      <Filter>標頭檔\ASTNodes</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ASTNodes\PastNode.hpp">
+      <Filter>標頭檔\ASTNodes</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ASTNodes\TimelinePruneNode.hpp">
+      <Filter>標頭檔\ASTNodes</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ASTNodes\TimelineInsertNode.hpp">
+      <Filter>標頭檔\ASTNodes</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ASTNodes\TimelineIndexNode.hpp">
+      <Filter>標頭檔\ASTNodes</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ASTNodes\TimelineBeginNode.hpp">
+      <Filter>標頭檔\ASTNodes</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ASTNodes\TimelineEndNode.hpp">
       <Filter>標頭檔\ASTNodes</Filter>
     </ClInclude>
   </ItemGroup>

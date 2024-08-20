@@ -29,43 +29,26 @@ public:
 	int index = -1;
 
 	template<typename T>
-	T get() const {
-		if (isVoid()) {
-			throw std::runtime_error("Variable is void");
-		}
-		if (reference) {
-			return std::any_cast<Value*>((*value)[index])->get<T>();
-		}
-		return std::any_cast<T>((*value)[index]);
-	}
+	T get() const;
 	template<typename T>
-	void set(const T& t) {
-		if (reference) {
-			if (isVoid()) {
-				throw std::runtime_error("Variable is void");
-			}
-			std::any_cast<Value*>((*value)[index])->set<T>(t);
-		}
-		else {
-			++index;
-			if (value->empty()) {
-				value->push_back(t);
-			}
-			else {
-				value->insert(value->begin() + index, t);
-			}
-		}
-	}
+	void set(const T& t);
 	bool isVoid() const;
 
-	void previous();
+	void past();
 	void future();
+	void begin();
+	void end();
+	void timelineInsert();
+	void timelinePrune();
+	int64_t getIndex() const;
 	
 	std::any getCurrent() const;
-	Value* getReferenceObject() const;
+	Value* getReferenceObject();
 
 	std::shared_ptr<Value> copy() const;
+	std::shared_ptr<Value> shallowCopy() const;
 	void setDefaultValue();
+	std::any getDefaultValue();
 };
 
 template<typename T>
@@ -93,4 +76,34 @@ inline std::shared_ptr<Value> makeValue<bool>(const bool& value) {
 template<>
 inline std::shared_ptr<Value> makeValue<std::wstring>(const std::wstring& value) {
 	return std::make_shared<Value>(L"string", value);
+}
+
+template<typename T>
+T Value::get() const {
+	if (isVoid()) {
+		throw std::runtime_error("Variable is void, timeline index " + std::to_string(index) + " isn't available");
+	}
+	if (reference) {
+		return std::any_cast<Value*>((*value)[index])->get<T>();
+	}
+	return std::any_cast<T>((*value)[index]);
+}
+
+template<typename T>
+void Value::set(const T& t) {
+	if (reference) {
+		if (isVoid()) {
+			throw std::runtime_error("Variable is void, timeline index " + std::to_string(index) + " isn't available");
+		}
+		std::any_cast<Value*>((*value)[index])->set<T>(t);
+	}
+	else {
+		++index;
+		if (value->empty()) {
+			value->push_back(t);
+		}
+		else {
+			value->insert(value->begin() + index, t);
+		}
+	}
 }

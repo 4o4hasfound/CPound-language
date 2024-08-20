@@ -16,9 +16,14 @@ std::vector<std::wstring> KeywordToken::s_keywordRegexes{
 	L"check this out",
 	L"what is",
 	L"reverse",
-	L"previous",
+	L"past",
 	L"future",
-	L"length",
+	L"timeline length",
+	L"timeline index",
+	L"timeline prune",
+	L"timeline insert",
+	L"timeline begin",
+	L"timeline end",
 	L"noop"
 };
 std::wregex KeywordToken::s_regex = KeywordToken::compileRegex();

@@ -32,9 +32,14 @@ public:
 		MemberVariableExpression,
 		MemberFunctionCallExpression,
 		IndexExpression,
-		Previous,
+		Past,
 		Future,
-		Length
+		TimelineBegin,
+		TimelineEnd,
+		TimelineLength,
+		TimelinePrune,
+		TimelineInsert,
+		TimelineIndex
 	};
 
 	ASTNode(ASTNodeType nodeType, std::wstring::const_iterator pos);

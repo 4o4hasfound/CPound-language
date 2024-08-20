@@ -91,8 +91,8 @@ std::shared_ptr<Value> Float::UnaryOperation(OperatorType operatorType, std::sha
 		return FrontDecrement(operand);
 	case OperatorType::EndDecrement:
 		return EndDecrement(operand);
-	//case OperatorType::Previous:
-	//	return Previous(operand);
+	//case OperatorType::Past:
+	//	return Past(operand);
 	//case OperatorType::Current:
 	//	return Current(operand);
 	}

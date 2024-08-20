@@ -46,7 +46,7 @@ std::unordered_map<OperatorType, bool> isEditOperator{
 	{ OperatorType::BitwiseNot				, 0 },
 	{ OperatorType::LeftShift				, 0 },
 	{ OperatorType::RightShift				, 0 },
-	{ OperatorType::Previous				, 0 },
+	{ OperatorType::Past				, 0 },
 	{ OperatorType::Current					, 0 },
 	{ OperatorType::Delete					, 0  },
 };

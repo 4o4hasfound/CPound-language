@@ -10,7 +10,7 @@ Value::Value(Value* ref)
 	, priority(ref->priority)
 	, index(0) {
 	if (ref->reference) {
-		value = std::make_shared<std::vector<std::any>>(1, ref->getCurrent());
+		value = std::make_shared<std::vector<std::any>>(1, ref->getReferenceObject());
 	}
 	else {
 		value = std::make_shared<std::vector<std::any>>(1, ref);
@@ -73,26 +73,20 @@ bool Value::setDeclType(VariableDeclarationType _type) {
 }
 
 bool Value::isVoid() const {
-	if ((*value).size() && index >= 0 && index < (*value).size() && (*value)[index].type() != typeid(std::nullptr_t)) {
+	if ((*value).size() && index >= 0 && index < (*value).size()) {
 		return false;
 	}
 	return true;
 }
-void Value::previous() {
-	if (isVoid()) {
-		throw std::runtime_error("Variable is void");
-	}
+void Value::past() {
 	if (reference) {
-		std::any_cast<Value*>((*value)[index])->previous();
+		std::any_cast<Value*>((*value)[index])->past();
 	}
 	else {
 		--index;
 	}
 }
 void Value::future() {
-	if (isVoid()) {
-		throw std::runtime_error("Variable is void");
-	}
 	if (reference) {
 		std::any_cast<Value*>((*value)[index])->future();
 	}
@@ -100,29 +94,80 @@ void Value::future() {
 		++index;
 	}
 }
+
+void Value::begin() {
+	if (reference) {
+		std::any_cast<Value*>((*value)[index])->begin();
+	}
+	else {
+		index = 0;
+	}
+}
+
+void Value::end() {
+	if (reference) {
+		std::any_cast<Value*>((*value)[index])->end();
+	}
+	else {
+		index = value->size() - 1;
+	}
+}
+
+void Value::timelineInsert() {
+	if ((*value).size() && index < 0 || index > (*value).size() || (*value)[index].type() == typeid(std::nullptr_t)) {
+		throw std::runtime_error("Variable is void, timeline index " + std::to_string(index) + " isn't available");
+	}
+	if (reference) {
+		std::any_cast<Value*>((*value)[index])->timelineInsert();
+	}
+	else {
+		value->insert(value->begin() + index, getDefaultValue());
+	}
+}
+
+void Value::timelinePrune() {
+	if (isVoid()) {
+		throw std::runtime_error("Variable is void");
+	}
+	if (reference) {
+		std::any_cast<Value*>((*value)[index])->timelinePrune();
+	}
+	else {
+		value->erase(value->begin() + index);
+	}
+}
+
+int64_t Value::getIndex() const {
+	if (reference) {
+		return std::any_cast<Value*>((*value)[index])->getIndex();
+	}
+	else {
+		return index;
+	}
+}
+
 std::any Value::getCurrent() const {
 	if (reference) {
 		auto val = std::any_cast<Value*>((*value)[index]);
-		return std::any_cast<Value*>((*value)[index])->value;
+		return std::any_cast<Value*>((*value)[index])->getCurrent();
 	}
 	return (*value)[index];
 }
-Value* Value::getReferenceObject() const {
+Value* Value::getReferenceObject() {
 	if (reference) {
 		return std::any_cast<Value*>((*value)[index]);
 	}
-	return nullptr;
+	return this;
 }
 
 std::shared_ptr<Value> Value::copy() const {
-	for (auto& n : *value) {
-		if (n.type() != typeid(int64_t)) {
-			break;
-		}
-		int val = std::any_cast<int64_t>(n);
-	}
 	auto ret = std::make_shared<Value>(*this);
 	ret->value = std::make_shared<std::vector<std::any>>(*ret->value);
+	return ret;
+}
+
+std::shared_ptr<Value> Value::shallowCopy() const {
+	auto ret = std::make_shared<Value>(*this);
 	return ret;
 }
 
@@ -138,5 +183,20 @@ void Value::setDefaultValue() {
 	}
 	else if (type == L"string") {
 		set(static_cast<std::wstring>(L""));
+	}
+}
+
+std::any Value::getDefaultValue() {
+	if (type == L"int") {
+		return static_cast<int64_t>(0);
+	}
+	else if (type == L"float") {
+		return static_cast<double>(0);
+	}
+	else if (type == L"bool") {
+		return static_cast<bool>(0);
+	}
+	else if (type == L"string") {
+		return static_cast<std::wstring>(L"");
 	}
 }

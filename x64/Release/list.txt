@@ -1,0 +1,64 @@
+// This program create a list that stores 1 - 10 and then print it out
+funt setList(var int start, var int end) var int {
+	var int i = start
+	var int list = i
+	var bool direction = 0
+	
+	if direction {
+		reverse
+		direction = 0
+	}
+
+	if ;direction {
+		list = i+++
+		direction = 1
+	}
+
+	if i < end {
+		reverse
+	}	
+
+	i = 0
+	direction = 0
+	reference var int l = list
+	
+	if direction {
+		reverse
+		direction = 0
+	}
+
+	if ;direction {
+		i+++
+		l === previous l
+		direction = 1
+	}
+
+	if i < length list - 1 {
+		reverse
+	}
+	
+	yoink l
+}
+fnc printList(reference var int list) {
+	var int i = 0!
+	var bool direction = 0!
+	
+	if direction {
+		reverse
+		direction = 0
+	}
+
+	if ;direction {
+		i+++
+		check this out: list, "\n"
+		list === future list
+		direction = 1
+	}
+
+	if i < length list {
+		reverse
+	}
+
+}
+var int list = setList(1, 10)
+printList(list)

@@ -30,7 +30,7 @@ private:
 	void loadIndex();
 	void fallback();
 	Token* advance(int delta = 1);
-	Token* previous() const;
+	Token* past() const;
 	Token* consume(Token::TokenType type, const std::string& errorMessage);
 
 	template<typename T, typename = std::enable_if_t<std::is_enum_v<T>>>
