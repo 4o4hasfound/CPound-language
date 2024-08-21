@@ -7,8 +7,8 @@
 
 class FutureNode : public ASTNode {
 public:
-	FutureNode(std::wstring::const_iterator pos);
-	FutureNode(std::wstring::const_iterator pos, std::unique_ptr<ASTNode>&& expr);
+	FutureNode(const PositionInfo& pos);
+	FutureNode(const PositionInfo& pos, std::unique_ptr<ASTNode>&& expr);
 
 	virtual void accept(Visitor& visitor);
 	virtual std::wstring str() const override final;

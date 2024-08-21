@@ -1,11 +1,11 @@
 #include "ASTNodes/TimelineEndNode.hpp"
 
-TimelineEndNode::TimelineEndNode(std::wstring::const_iterator pos)
+TimelineEndNode::TimelineEndNode(const PositionInfo& pos)
 	: ASTNode(ASTNode::TimelineEnd, pos) {
 
 }
 
-TimelineEndNode::TimelineEndNode(std::wstring::const_iterator pos, std::unique_ptr<ASTNode>&& expr)
+TimelineEndNode::TimelineEndNode(const PositionInfo& pos, std::unique_ptr<ASTNode>&& expr)
 	: ASTNode(ASTNode::TimelineEnd, pos)
 	, expression(std::forward<std::unique_ptr<ASTNode>>(expr)) {
 

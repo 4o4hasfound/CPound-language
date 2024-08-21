@@ -1,6 +1,6 @@
 #include "ASTNodes/VariableDeclarationNode.hpp"
 
-VariableDeclarationNode::VariableDeclarationNode(std::wstring::const_iterator pos)
+VariableDeclarationNode::VariableDeclarationNode(const PositionInfo& pos)
 	: ASTNode(ASTNode::VariableDeclaration, pos) {
 
 }

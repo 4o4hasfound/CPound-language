@@ -11,7 +11,7 @@
 
 #include "Error.hpp"
 
-#include "Utils/getTokenPositionInfo.hpp"
+#include "PositionInfo.hpp"
 
 class Lexer {
 public:

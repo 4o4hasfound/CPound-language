@@ -7,8 +7,8 @@
 
 class CallExpressionNode : public ASTNode {
 public:
-	CallExpressionNode(std::wstring::const_iterator pos);
-	CallExpressionNode(std::wstring::const_iterator pos, const std::wstring& functionSymbol);
+	CallExpressionNode(const PositionInfo& pos);
+	CallExpressionNode(const PositionInfo& pos, const std::wstring& functionSymbol);
 
 	virtual void accept(Visitor& visitor);
 	virtual std::wstring str() const override final;

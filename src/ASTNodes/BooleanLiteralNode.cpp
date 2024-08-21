@@ -1,11 +1,11 @@
 #include "ASTNodes/BooleanLiteralNode.hpp"
 
-BooleanLiteralNode::BooleanLiteralNode(std::wstring::const_iterator pos)
+BooleanLiteralNode::BooleanLiteralNode(const PositionInfo& pos)
 	: ASTNode(ASTNode::BooleanLiteral, pos) {
 
 }
 
-BooleanLiteralNode::BooleanLiteralNode(std::wstring::const_iterator pos, BooleanType _value)
+BooleanLiteralNode::BooleanLiteralNode(const PositionInfo& pos, BooleanType _value)
 	: ASTNode(ASTNode::BooleanLiteral, pos)
 	, value(_value) {
 

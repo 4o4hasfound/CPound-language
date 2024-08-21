@@ -6,12 +6,12 @@
 
 #include "Tokens/TokenBase.hpp"
 
-#include "Utils/getTokenPositionInfo.hpp"
+#include "PositionInfo.hpp"
 
 class Error {
 public:
 	[[ noreturn ]] static void Log(const std::wstring& errorMessage);
-	[[ noreturn ]] static void Log(std::wstring::const_iterator itr, const std::wstring& errorMessage, const std::wstring& string);
+	[[ noreturn ]] static void Log(const PositionInfo& info, const std::wstring& errorMessage, const std::wstring& string);
 	[[ noreturn ]] static void Log(Token* token, const std::wstring& errorMessage, const std::wstring& string);
 	
 	static std::wstring logFile;

@@ -8,7 +8,7 @@
 
 class ProgramNode : public ASTNode {
 public:
-	ProgramNode(std::wstring::const_iterator pos);
+	ProgramNode(const PositionInfo& pos);
 
 	virtual void accept(Visitor& visitor);
 	virtual std::wstring str() const override final;

@@ -5,7 +5,7 @@
 
 class ReverseStatementNode : public ASTNode {
 public:
-	ReverseStatementNode(std::wstring::const_iterator pos);
+	ReverseStatementNode(const PositionInfo& pos);
 
 	virtual void accept(Visitor& visitor);
 	virtual std::wstring str() const override final;

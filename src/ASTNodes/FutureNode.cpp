@@ -1,11 +1,11 @@
 #include "ASTNodes/FutureNode.hpp"
 
-FutureNode::FutureNode(std::wstring::const_iterator pos)
+FutureNode::FutureNode(const PositionInfo& pos)
 	: ASTNode(ASTNode::Future, pos) {
 
 }
 
-FutureNode::FutureNode(std::wstring::const_iterator pos, std::unique_ptr<ASTNode>&& expr)
+FutureNode::FutureNode(const PositionInfo& pos, std::unique_ptr<ASTNode>&& expr)
 	: ASTNode(ASTNode::Future, pos)
 	, expression(std::forward<std::unique_ptr<ASTNode>>(expr)) {
 

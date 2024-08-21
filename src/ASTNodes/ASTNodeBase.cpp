@@ -1,6 +1,6 @@
 #include "ASTNodes/ASTNodeBase.hpp"
 
-ASTNode::ASTNode(ASTNodeType nodeType, std::wstring::const_iterator pos)
+ASTNode::ASTNode(ASTNodeType nodeType, const PositionInfo& pos)
 	: type(nodeType), position(pos) {
 
 }

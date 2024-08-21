@@ -7,7 +7,7 @@
 
 class PrintStatementNode : public ASTNode {
 public:
-	PrintStatementNode(std::wstring::const_iterator pos);
+	PrintStatementNode(const PositionInfo& pos);
 
 	virtual void accept(Visitor& visitor);
 	virtual std::wstring str() const override final;

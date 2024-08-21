@@ -5,8 +5,8 @@ std::vector<std::pair<std::wregex, NumericLiteralType>> NumericLiteralToken::reg
 	{generateRegex({LR"(([-+]?[0-9]+))"}, 0, L"a-zA-Z"), NumericLiteralType::Integer}
 } };
 
-NumericLiteralToken::NumericLiteralToken(NumericLiteralType literalType, double value, std::wstring::const_iterator pos)
-	: Token(TokenType::NumericLiteral, static_cast<int>(literalType), pos)
+NumericLiteralToken::NumericLiteralToken(NumericLiteralType literalType, double value, std::wstring::const_iterator pos, const std::wstring& string)
+	: Token(TokenType::NumericLiteral, static_cast<int>(literalType), pos, string)
 	, literalValue(value) {
 
 }
@@ -21,7 +21,7 @@ std::wstring NumericLiteralToken::str() const {
 	return L"";
 }
 
-std::unique_ptr<Token> NumericLiteralToken::getToken(std::wstring::const_iterator& start, std::wstring::const_iterator& end, Token* previousToken) {
+std::unique_ptr<Token> NumericLiteralToken::getToken(std::wstring::const_iterator& start, std::wstring::const_iterator& end, const std::wstring& string, Token* previousToken) {
 	std::wsmatch match;
 	for (const auto& [regex, tokenType] : regexTokenList) {
 		if (std::regex_search(start, end, match, regex)) {
@@ -36,7 +36,7 @@ std::unique_ptr<Token> NumericLiteralToken::getToken(std::wstring::const_iterato
 					return nullptr;
 				}
 			}
-			auto ptr = std::make_unique<NumericLiteralToken>(tokenType, std::stod(match[0]), start);
+			auto ptr = std::make_unique<NumericLiteralToken>(tokenType, std::stod(match[0]), start, string);
 			start = match.suffix().first;
 			return ptr;
 		}

@@ -5,8 +5,8 @@
 
 class FloatLiteralNode : public ASTNode {
 public:
-	FloatLiteralNode(std::wstring::const_iterator pos);
-	FloatLiteralNode(std::wstring::const_iterator pos, double _value);
+	FloatLiteralNode(const PositionInfo& pos);
+	FloatLiteralNode(const PositionInfo& pos, double _value);
 
 	virtual void accept(Visitor& visitor);
 	virtual std::wstring str() const override final;

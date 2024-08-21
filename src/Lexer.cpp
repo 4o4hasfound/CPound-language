@@ -14,35 +14,35 @@ void Lexer::tokenize(const std::wstring& input) {
 	while (start != end) {
 		std::unique_ptr<Token> ptr = nullptr;
 
-		if ((ptr = TerminatorToken::getToken(start, end, lastToken))) {
+		if ((ptr = TerminatorToken::getToken(start, end, input, lastToken))) {
 			m_tokens.push_back(std::move(ptr));
 		}
-		else if ((ptr = StringLiteralToken::getToken(start, end, lastToken))) {
+		else if ((ptr = StringLiteralToken::getToken(start, end, input, lastToken))) {
 			m_tokens.push_back(std::move(ptr));
 		}
-		else if ((ptr = NumericLiteralToken::getToken(start, end, lastToken))) {
+		else if ((ptr = NumericLiteralToken::getToken(start, end, input, lastToken))) {
 			m_tokens.push_back(std::move(ptr));
 		}
-		else if ((ptr = BooleanLiteralToken::getToken(start, end, lastToken))) {
+		else if ((ptr = BooleanLiteralToken::getToken(start, end, input, lastToken))) {
 			m_tokens.push_back(std::move(ptr));
 		}
-		else if ((ptr = LifetimeToken::getToken(start, end, lastToken))) {
+		else if ((ptr = LifetimeToken::getToken(start, end, input, lastToken))) {
 			m_tokens.push_back(std::move(ptr));
 		}
-		else if ((ptr = OperatorToken::getToken(start, end, lastToken))) {
+		else if ((ptr = OperatorToken::getToken(start, end, input, lastToken))) {
 			m_tokens.push_back(std::move(ptr));
 		}
-		else if ((ptr = DelimiterToken::getToken(start, end, lastToken))) {
+		else if ((ptr = DelimiterToken::getToken(start, end, input, lastToken))) {
 			m_tokens.push_back(std::move(ptr));
 		}
-		else if ((ptr = KeywordToken::getToken(start, end, lastToken))) {
+		else if ((ptr = KeywordToken::getToken(start, end, input, lastToken))) {
 			m_tokens.push_back(std::move(ptr));
 		}
-		else if ((ptr = IdentifierToken::getToken(start, end, lastToken))) {
+		else if ((ptr = IdentifierToken::getToken(start, end, input, lastToken))) {
 			m_tokens.push_back(std::move(ptr));
 		}
 		else {
-			Error::Log(start, L"Invalid character", input);
+			Error::Log(PositionInfo(start, input), L"Invalid character", input);
 		}
 		lastToken = m_tokens.back().get();
 		WhiteSpace::eat(start, end);

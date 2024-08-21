@@ -6,8 +6,8 @@
 
 class IfStatementNode : public ASTNode {
 public:
-	IfStatementNode(std::wstring::const_iterator pos);
-	IfStatementNode(std::wstring::const_iterator pos, std::unique_ptr<ASTNode>&& _condition, std::unique_ptr<ASTNode>&& _mainBody, std::unique_ptr<ASTNode>&& _elseBody);
+	IfStatementNode(const PositionInfo& pos);
+	IfStatementNode(const PositionInfo& pos, std::unique_ptr<ASTNode>&& _condition, std::unique_ptr<ASTNode>&& _mainBody, std::unique_ptr<ASTNode>&& _elseBody);
 
 	virtual void accept(Visitor& visitor);
 	virtual std::wstring str() const override final;

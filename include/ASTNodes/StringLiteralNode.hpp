@@ -5,8 +5,8 @@
 
 class StringLiteralNode : public ASTNode {
 public:
-	StringLiteralNode(std::wstring::const_iterator pos);
-	StringLiteralNode(std::wstring::const_iterator pos, const std::wstring& string);
+	StringLiteralNode(const PositionInfo& pos);
+	StringLiteralNode(const PositionInfo& pos, const std::wstring& string);
 
 	virtual void accept(Visitor& visitor);
 	virtual std::wstring str() const override final;

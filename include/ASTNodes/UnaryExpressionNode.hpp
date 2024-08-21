@@ -8,9 +8,9 @@
 
 class UnaryExpressionNode : public ASTNode {
 public:
-	UnaryExpressionNode(std::wstring::const_iterator pos);
-	UnaryExpressionNode(std::wstring::const_iterator pos, BinaryOperatorType _operatorType);
-	UnaryExpressionNode(std::wstring::const_iterator pos, std::unique_ptr<ASTNode>&& expr, BinaryOperatorType _operatorType);
+	UnaryExpressionNode(const PositionInfo& pos);
+	UnaryExpressionNode(const PositionInfo& pos, BinaryOperatorType _operatorType);
+	UnaryExpressionNode(const PositionInfo& pos, std::unique_ptr<ASTNode>&& expr, BinaryOperatorType _operatorType);
 
 	virtual void accept(Visitor& visitor);
 	virtual std::wstring str() const override final;

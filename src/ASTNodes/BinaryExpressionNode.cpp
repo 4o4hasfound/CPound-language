@@ -1,17 +1,17 @@
 #include "ASTNodes/BinaryExpressionNode.hpp"
 
-BinaryExpressionNode::BinaryExpressionNode(std::wstring::const_iterator pos)
+BinaryExpressionNode::BinaryExpressionNode(const PositionInfo& pos)
 	: ASTNode(ASTNode::BinaryExpression, pos) {
 
 }
 
-BinaryExpressionNode::BinaryExpressionNode(std::wstring::const_iterator pos, BinaryOperatorType _type)
+BinaryExpressionNode::BinaryExpressionNode(const PositionInfo& pos, BinaryOperatorType _type)
 	: ASTNode(ASTNode::BinaryExpression, pos)
 	, operatorType(_type) {
 
 }
 
-BinaryExpressionNode::BinaryExpressionNode(std::wstring::const_iterator pos, std::unique_ptr<ASTNode>&& lexpr, std::unique_ptr<ASTNode>&& rexpr, BinaryOperatorType _type)
+BinaryExpressionNode::BinaryExpressionNode(const PositionInfo& pos, std::unique_ptr<ASTNode>&& lexpr, std::unique_ptr<ASTNode>&& rexpr, BinaryOperatorType _type)
 	: ASTNode(ASTNode::BinaryExpression, pos)
 	, operatorType(_type)
 	, LExpression(std::forward<std::unique_ptr<ASTNode>>(lexpr))

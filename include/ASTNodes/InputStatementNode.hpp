@@ -7,7 +7,7 @@
 
 class InputStatementNode : public ASTNode {
 public:
-	InputStatementNode(std::wstring::const_iterator pos);
+	InputStatementNode(const PositionInfo& pos);
 
 	virtual void accept(Visitor& visitor);
 	virtual std::wstring str() const override final;

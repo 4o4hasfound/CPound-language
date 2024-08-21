@@ -15,6 +15,10 @@ public:
 
 	void parseFile(const std::wstring& filename);
 	void parseString(const std::wstring& input);
+
+	void run();
+
+	void debugAST() const;
 private:
 	std::wstring m_input;
 	std::vector<std::unique_ptr<Token>> m_tokens;

@@ -2,18 +2,15 @@
 #include <any>
 #include <string>
 #include <memory>
+#include <chrono>
 
 #include "Types.hpp"
 
 class Value {
 public:
-	Value() = default;
+	Value();
 	Value(Value* ref);
 	Value(const std::wstring& _type, const std::any& _value);
-
-	using ArrayType = std::vector<std::shared_ptr<Value>>;
-
-	bool setDeclType(VariableDeclarationType _type);
 
 	std::shared_ptr<std::vector<std::any>> value;
 	std::wstring type;
@@ -28,12 +25,22 @@ public:
 	int priority = 0;
 	int index = -1;
 
+	int createLineIndex = 0;
+	std::chrono::high_resolution_clock::time_point createTimePoint;
+
 	template<typename T>
 	T get() const;
 	template<typename T>
 	void set(const T& t);
-	bool isVoid() const;
 
+	bool setDeclType(VariableDeclarationType _type);
+
+	bool isVoid() const;
+	bool isValid(ASTNode* node) const;
+	bool isValidTime(ASTNode* node) const;
+	bool isValidLine(ASTNode* node) const;
+
+	// timeline operation
 	void past();
 	void future();
 	void begin();
@@ -46,7 +53,6 @@ public:
 	Value* getReferenceObject();
 
 	std::shared_ptr<Value> copy() const;
-	std::shared_ptr<Value> shallowCopy() const;
 	void setDefaultValue();
 	std::any getDefaultValue();
 };

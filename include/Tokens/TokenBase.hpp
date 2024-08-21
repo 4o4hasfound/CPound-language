@@ -2,6 +2,7 @@
 #include <string>
 
 #include "Types.hpp"
+#include "PositionInfo.hpp"
 
 class Token {
 public:
@@ -20,10 +21,10 @@ public:
 	TokenType type;
 	int valueType;
 
-	std::wstring::const_iterator position;
+	PositionInfo position;
 
-	Token(TokenType tokenType, std::wstring::const_iterator pos);
-	Token(TokenType tokenType, int underLyingValueType, std::wstring::const_iterator pos);
+	Token(TokenType tokenType, std::wstring::const_iterator pos, const std::wstring& string);
+	Token(TokenType tokenType, int underLyingValueType, std::wstring::const_iterator pos, const std::wstring& string);
 
 	bool isType(TokenType targetTokenType) const;
 

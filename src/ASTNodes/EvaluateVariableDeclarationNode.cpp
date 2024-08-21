@@ -1,17 +1,17 @@
 #include "ASTNodes/EvaluateVariableDeclarationNode.hpp"
 
-EvaluateVariableDeclarationNode::EvaluateVariableDeclarationNode(std::wstring::const_iterator pos)
+EvaluateVariableDeclarationNode::EvaluateVariableDeclarationNode(const PositionInfo& pos)
 	: ASTNode(ASTNode::EvaluateVariableDeclaration, pos) {
 
 }
 
-EvaluateVariableDeclarationNode::EvaluateVariableDeclarationNode(std::wstring::const_iterator pos, std::wstring type, std::wstring symbol)
+EvaluateVariableDeclarationNode::EvaluateVariableDeclarationNode(const PositionInfo& pos, std::wstring type, std::wstring symbol)
 	: ASTNode(ASTNode::EvaluateVariableDeclaration, pos)
 	, declaration(type, symbol) {
 
 }
 
-EvaluateVariableDeclarationNode::EvaluateVariableDeclarationNode(std::wstring::const_iterator pos, std::wstring type, std::wstring symbol, std::unique_ptr<ASTNode>&& value)
+EvaluateVariableDeclarationNode::EvaluateVariableDeclarationNode(const PositionInfo& pos, std::wstring type, std::wstring symbol, std::unique_ptr<ASTNode>&& value)
 	: ASTNode(ASTNode::EvaluateVariableDeclaration, pos)
 	, declaration(type, symbol, std::forward<std::unique_ptr<ASTNode>>(value)) {
 

@@ -106,8 +106,9 @@ BiUnorderedMap<std::wstring, DelimiterType, lowerCaseCompare> delimiterTypeStrin
 	{L",", DelimiterType::Comma},
 } };
 BiUnorderedMap<std::wstring, LifetimeType, lowerCaseCompare> lifetimeTypeStringMap{ {
-	{L"line"		,	LifetimeType::Line},
-	{L"second"	,	LifetimeType::Second},
+	{L"forward line"		,	LifetimeType::ForwardLine},
+	{L"backward line"		,	LifetimeType::ForwardLine},
+	{L"second"	,	LifetimeType::Time},
 	{L"scope"	,	LifetimeType::Scope}
 } };
 BiUnorderedMap<std::wstring, NumericLiteralType, lowerCaseCompare> numericLiteralTypeStringMap{ {

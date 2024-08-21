@@ -1,6 +1,6 @@
 #include "ASTNodes/ReverseStatementNode.hpp"
 
-ReverseStatementNode::ReverseStatementNode(std::wstring::const_iterator pos)
+ReverseStatementNode::ReverseStatementNode(const PositionInfo& pos)
 	: ASTNode(ASTNode::ReverseStatement, pos) {
 
 }

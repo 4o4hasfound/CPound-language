@@ -61,7 +61,10 @@ AST::AST(const std::vector<std::unique_ptr<Token>>& tokens)
 void AST::build(const std::wstring* string) {
 	m_string = string;
 	program = parseProgram();
-	//debug(program.get());
+}
+
+void AST::debug() const {
+	debug(program.get());
 }
 
 void AST::debug(ASTNode* node, int depth) const {
@@ -205,7 +208,7 @@ void AST::debug(const VariableDeclarationInfo& declInfo, int depth) const {
 	}
 	std::wcout << "variable: ";
 	std::wcout << declInfo.symbol << ", " << KeywordTypeStringMap[static_cast<KeywordType>(declInfo.declType)];
-	std::wcout << ", " << declInfo.type << ", lifetime: " << declInfo.lifetime.value << lifetimeTypeStringMap[declInfo.lifetime.type];
+	std::wcout << ", " << declInfo.type << ", lifetime: " << declInfo.lifetime.scope << " scopes, " << declInfo.lifetime.forwardLine << " forward lines, " << declInfo.lifetime.backwardLine << " backward lines, " << declInfo.lifetime.second << " seconds";
 	std::wcout << "\n";
 	debug(declInfo.defaultValue.get(), depth + 1);
 }
@@ -346,14 +349,25 @@ Token* AST::parseIdentifier() {
 }
 
 LifetimeInfo AST::parseLifeTime() {
-	Token* lifetime = peek();
+	LifetimeToken* lifetime;
 	LifetimeInfo ret;
-	if (!lifetime->isType(Token::Lifetime)) {
-		return ret;
+	while (match(Token::Lifetime)) {
+		lifetime = dynamic_cast<LifetimeToken*>(advance());
+		switch (static_cast<LifetimeType>(lifetime->valueType)) {
+		case LifetimeType::Scope:
+			ret.scope = lifetime->lifetimeValue;
+			break;
+		case LifetimeType::ForwardLine:
+			ret.forwardLine = std::abs(lifetime->lifetimeValue);
+			break;
+		case LifetimeType::BackwardLine:
+			ret.backwardLine = std::abs(lifetime->lifetimeValue);
+			break;
+		case LifetimeType::Time:
+			ret.second = lifetime->lifetimeValue;
+			break;
+		}
 	}
-	advance();
-	ret.type = static_cast<LifetimeType>(lifetime->valueType);
-	ret.value = dynamic_cast<LifetimeToken*>(lifetime)->lifetimeValue;
 	return ret;
 }
 
@@ -408,10 +422,10 @@ std::unique_ptr<StatementNode> AST::parseFunctionDeclaration() {
 		}
 
 		LifetimeInfo varLifeTime = parseLifeTime();
-		if (varLifeTime.type == LifetimeType::Line && varLifeTime.value <= 0) {
+		if (varLifeTime.backwardLine > 0) {
 			Error::Log(peek(), L"Parameter lifetime cannot be negative lines", *m_string);
 		}
-		else if (varLifeTime.type == LifetimeType::Scope && varLifeTime.value > 1) {
+		if (varLifeTime.scope > 1) {
 			Error::Log(peek(), L"Parameter lifetime cannot has scope lifetime greater than 1", *m_string);
 		}
 
@@ -568,7 +582,7 @@ std::unique_ptr<StatementNode> AST::parseVariableDeclaration() {
 	}
 	else {
 		priority = 0;
-		statement = std::make_unique<NormalStatementNode>(peek()->position);
+		statement = std::make_unique<NormalStatementNode>(peek(-1)->position);
 	}
 
 	for (auto& node : var->declarations) {

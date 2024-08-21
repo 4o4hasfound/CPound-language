@@ -5,7 +5,7 @@
 
 class BreakStatementNode : public ASTNode {
 public:
-	BreakStatementNode(std::wstring::const_iterator pos);
+	BreakStatementNode(const PositionInfo& pos);
 
 	virtual void accept(Visitor& visitor);
 	virtual std::wstring str() const override final;

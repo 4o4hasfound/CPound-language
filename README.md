@@ -106,6 +106,66 @@ var int a! // var var var int a!
 var const int a! // var const const int a!
 ```
 
+## Variable Lifetime
+In most of the language, a variable is usually destroy when it goes out of scope, but this is not flexible  
+CPound offers flexibility by letting users customize a variable's lifetime, using these factors
++ Line
++ Time
++ Scope
+
+**Line** defines how many line a variable can exist  
+(negative value will be auto convert to positive value)  
+Default to **1.7976931348623158e+308**, but CPound don't encourage anything more than **10^17**
+```java
+func reversedOrNot() const bool {
+	yoink false
+	yoink true
+}
+
+if reversedOrNot() {
+	check this out: "reversed 3: ", a, "\n" // Error
+	check this out: "reversed 2: ", a, "\n" // OK
+	check this out: "reversed 1: ", a, "\n" // OK
+}
+var int a<1f><3b> = 1
+check this out: "1: ", a, "\n" // OK
+check this out: "2: ", a, "\n" // Error
+reverse
+```
+**Time** defines how many **second** a variable can exist  
+Default to **1.7976931348623158e+308**, but CPound don't encourage anything more or less than **10^17**
+```java
+var int a<1s> = 1
+check this out: "1: ", a, "\n" // OK
+// Do something that takes more than 1 second
+check this out: "2: ", a, "\n" // Error
+```
+**Scope** defines how many scope can a variable exist, which is default to 1
+```java
+func createVariable() {
+	if true {
+		var int oneScope = 1
+		var int twoScope<2sc> = 2
+		var int threeScope<3sc> = 3
+	}
+	check this out: oneScope // Error
+	check this out: twoScope, threeScope // OK
+}
+createVariable()
+
+check this out: twoScope // Error
+check this out: threeScope // OK
+```
+You can chain these labels, creating something like this
+```java
+var int a<2f><1b><2s><3sc> = 1
+// A variable that can last:
+//     2 lines forward
+//     1 line backward
+//     2 second
+//     3 scope
+```
+
 ## Function Declaration
 
 Write at least two letters from the keyword **function** *in order*  to declare a function

@@ -2,8 +2,8 @@
 
 std::wregex StringLiteralToken::s_regex = compileRegex();
 
-StringLiteralToken::StringLiteralToken(const std::wstring& value, std::wstring::const_iterator pos)
-	: Token(TokenType::StringLiteral, pos)
+StringLiteralToken::StringLiteralToken(const std::wstring& value, std::wstring::const_iterator pos, const std::wstring& string)
+	: Token(TokenType::StringLiteral, pos, string)
 	, literalValue(std::regex_replace(value, std::wregex(L"\\\\n"), L"\n")) {
 }
 
@@ -11,19 +11,19 @@ std::wstring StringLiteralToken::str() const {
 	return literalValue;
 }
 
-std::unique_ptr<Token> StringLiteralToken::getToken(std::wstring::const_iterator& start, std::wstring::const_iterator& end, Token* previousToken) {
+std::unique_ptr<Token> StringLiteralToken::getToken(std::wstring::const_iterator& start, std::wstring::const_iterator& end, const std::wstring& string, Token* previousToken) {
 	std::wsmatch match;
 	if (std::regex_search(start, end, match, s_regex)) {
 		if (start != match.prefix().second) {
 			return nullptr;
 		}
 		if (match.size() > 2) {
-			auto ptr = std::make_unique<StringLiteralToken>(match[2], start);
+			auto ptr = std::make_unique<StringLiteralToken>(match[2], start, string);
 			start = match.suffix().first;
 			return ptr;
 		}
 		else {
-			auto ptr = std::make_unique<StringLiteralToken>(L"", start);
+			auto ptr = std::make_unique<StringLiteralToken>(L"", start, string);
 			start = match.suffix().first;
 			return ptr;
 		}

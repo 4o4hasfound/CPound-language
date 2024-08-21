@@ -2,6 +2,7 @@
 #include <string>
 
 #include "Visitor.hpp"
+#include "PositionInfo.hpp"
 
 class ASTNode {
 public:
@@ -42,12 +43,12 @@ public:
 		TimelineIndex
 	};
 
-	ASTNode(ASTNodeType nodeType, std::wstring::const_iterator pos);
+	ASTNode(ASTNodeType nodeType, const PositionInfo& pos);
 	virtual ~ASTNode() = default;
 
 	virtual void accept(Visitor& visitor) = 0;
 	virtual std::wstring str() const = 0;
 
 	ASTNodeType type;
-	std::wstring::const_iterator position;
+	PositionInfo position;
 };

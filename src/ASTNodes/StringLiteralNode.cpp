@@ -1,11 +1,11 @@
 #include "ASTNodes/StringLiteralNode.hpp"
 
-StringLiteralNode::StringLiteralNode(std::wstring::const_iterator pos)
+StringLiteralNode::StringLiteralNode(const PositionInfo& pos)
 	: ASTNode(ASTNode::StringLiteral, pos) {
 
 }
 
-StringLiteralNode::StringLiteralNode(std::wstring::const_iterator pos, const std::wstring& string)
+StringLiteralNode::StringLiteralNode(const PositionInfo& pos, const std::wstring& string)
 	: ASTNode(ASTNode::StringLiteral, pos) 
 	, value(string) {
 

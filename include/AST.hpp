@@ -3,21 +3,23 @@
 #include <memory>
 #include <unordered_map>
 
-#include "ASTNodes.hpp"
 #include "Types.hpp"
 #include "Tokens.hpp"
 #include "Error.hpp"
+#include "ASTNodes.hpp"
+#include "PositionInfo.hpp"
 
 class AST {
 public:
 	AST(const std::vector<std::unique_ptr<Token>>& tokens);
 
 	void build(const std::wstring* string);
-	void debug(ASTNode* node, int depth = 0) const;
-	void debug(const VariableDeclarationInfo& declInfo, int depth) const;
+	void debug() const;
 
 	std::unique_ptr<ProgramNode> program;
 private:
+	void debug(ASTNode* node, int depth = 0) const;
+	void debug(const VariableDeclarationInfo& declInfo, int depth) const;
 
 	int m_index, m_fallbackIndex;
 	const std::vector<std::unique_ptr<Token>>& m_tokens;

@@ -1,11 +1,11 @@
 #include "ASTNodes/TimelineLengthNode.hpp"
 
-TimelineLengthNode::TimelineLengthNode(std::wstring::const_iterator pos)
+TimelineLengthNode::TimelineLengthNode(const PositionInfo& pos)
 	: ASTNode(ASTNode::TimelineLength, pos) {
 
 }
 
-TimelineLengthNode::TimelineLengthNode(std::wstring::const_iterator pos, std::unique_ptr<ASTNode>&& expr)
+TimelineLengthNode::TimelineLengthNode(const PositionInfo& pos, std::unique_ptr<ASTNode>&& expr)
 	: ASTNode(ASTNode::TimelineLength, pos)
 	, expression(std::forward<std::unique_ptr<ASTNode>>(expr)) {
 

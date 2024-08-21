@@ -6,7 +6,7 @@
 
 class VariableDeclarationNode : public ASTNode {
 public:
-	VariableDeclarationNode(std::wstring::const_iterator pos);
+	VariableDeclarationNode(const PositionInfo& pos);
 
 	virtual void accept(Visitor& visitor);
 	virtual std::wstring str() const override final;

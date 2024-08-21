@@ -1,11 +1,11 @@
 #include "ASTNodes/IfStatementNode.hpp"
 
-IfStatementNode::IfStatementNode(std::wstring::const_iterator pos)
+IfStatementNode::IfStatementNode(const PositionInfo& pos)
 	: ASTNode(ASTNode::IfStatement, pos) {
 
 }
 
-IfStatementNode::IfStatementNode(std::wstring::const_iterator pos, std::unique_ptr<ASTNode>&& _condition, std::unique_ptr<ASTNode>&& _mainBody, std::unique_ptr<ASTNode>&& _elseBody)
+IfStatementNode::IfStatementNode(const PositionInfo& pos, std::unique_ptr<ASTNode>&& _condition, std::unique_ptr<ASTNode>&& _mainBody, std::unique_ptr<ASTNode>&& _elseBody)
 	: ASTNode(ASTNode::IfStatement, pos)
 	, condition(std::forward<std::unique_ptr<ASTNode>>(_condition))
 	, mainBody(std::forward<std::unique_ptr<ASTNode>>(_mainBody))

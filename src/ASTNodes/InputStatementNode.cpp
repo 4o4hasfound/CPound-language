@@ -1,6 +1,6 @@
 #include "ASTNodes/InputStatementNode.hpp"
 
-InputStatementNode::InputStatementNode(std::wstring::const_iterator pos)
+InputStatementNode::InputStatementNode(const PositionInfo& pos)
 	: ASTNode(ASTNode::InputStatement, pos) {
 
 }

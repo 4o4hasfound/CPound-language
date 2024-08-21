@@ -102,9 +102,6 @@
     <ClCompile Include="include\ASTNodes\ReturnStatementNode.hpp">
       <Filter>標頭檔\ASTNodes</Filter>
     </ClCompile>
-    <ClCompile Include="src\Utils\getTokenPositionInfo.cpp">
-      <Filter>來源檔案\Utils</Filter>
-    </ClCompile>
     <ClCompile Include="src\Error.cpp">
       <Filter>來源檔案</Filter>
     </ClCompile>
@@ -242,6 +239,9 @@
     </ClCompile>
     <ClCompile Include="src\ASTNodes\TimelineEndNode.cpp">
       <Filter>來源檔案\ASTNodes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PositionInfo.cpp">
+      <Filter>來源檔案</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -386,9 +386,6 @@
     <ClInclude Include="include\Error.hpp">
       <Filter>標頭檔</Filter>
     </ClInclude>
-    <ClInclude Include="include\Utils\getTokenPositionInfo.hpp">
-      <Filter>標頭檔\Utils</Filter>
-    </ClInclude>
     <ClInclude Include="include\ASTNodes\StatementNode.hpp">
       <Filter>標頭檔\ASTNodes</Filter>
     </ClInclude>
@@ -414,9 +411,6 @@
       <Filter>標頭檔\Types</Filter>
     </ClInclude>
     <ClInclude Include="include\Types\Boolean.hpp">
-      <Filter>標頭檔\Types</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Types\String.hpp">
       <Filter>標頭檔\Types</Filter>
     </ClInclude>
     <ClInclude Include="include\Interpreter.hpp">
@@ -451,6 +445,12 @@
     </ClInclude>
     <ClInclude Include="include\ASTNodes\TimelineEndNode.hpp">
       <Filter>標頭檔\ASTNodes</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Types\String.hpp">
+      <Filter>標頭檔\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="include\PositionInfo.hpp">
+      <Filter>標頭檔</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

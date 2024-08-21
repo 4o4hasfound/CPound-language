@@ -108,8 +108,9 @@ enum class DelimiterType {
 	Comma
 };
 enum class LifetimeType{
-	Line,
-	Second,
+	ForwardLine,
+	BackwardLine,
+	Time,
 	Scope
 };
 enum class NumericLiteralType {
@@ -187,8 +188,10 @@ enum class VariableDeclarationType {
 };
 
 struct LifetimeInfo {
-	LifetimeType type = LifetimeType::Scope;
-	double value = 1;
+	double second = std::numeric_limits<double>::max();
+	int scope = 1;
+	double forwardLine = std::numeric_limits<double>::max();
+	double backwardLine = 0;
 };
 
 struct EvaluateVariableDeclarationInfo {

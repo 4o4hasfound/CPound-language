@@ -1,10 +1,10 @@
 #include "ASTNodes/FloatLiteralNode.hpp"
 
-FloatLiteralNode::FloatLiteralNode(std::wstring::const_iterator pos)
+FloatLiteralNode::FloatLiteralNode(const PositionInfo& pos)
 	: ASTNode(ASTNode::FloatLiteral, pos), value(0.0) {
 }
 
-FloatLiteralNode::FloatLiteralNode(std::wstring::const_iterator pos, double _value)
+FloatLiteralNode::FloatLiteralNode(const PositionInfo& pos, double _value)
 	: ASTNode(ASTNode::FloatLiteral, pos), value(_value) {
 }
 

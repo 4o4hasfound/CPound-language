@@ -1,11 +1,11 @@
 #include "ASTNodes/IdentifierNode.hpp"
 
-IdentifierNode::IdentifierNode(std::wstring::const_iterator pos)
+IdentifierNode::IdentifierNode(const PositionInfo& pos)
 	: ASTNode(ASTNode::Identifier, pos)
 	, symbol(L"") {
 }
 
-IdentifierNode::IdentifierNode(std::wstring::const_iterator pos, const std::wstring& _symbol)
+IdentifierNode::IdentifierNode(const PositionInfo& pos, const std::wstring& _symbol)
 	: ASTNode(ASTNode::Identifier, pos)
 	, symbol(_symbol) {
 

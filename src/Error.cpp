@@ -8,12 +8,11 @@ void Error::Log(const std::wstring& errorMessage) {
 	LogToFile(errorMessage);
 	exit(1);
 }
-void Error::Log(std::wstring::const_iterator itr, const std::wstring& errorMessage, const std::wstring& string) {
+void Error::Log(const PositionInfo& info, const std::wstring& errorMessage, const std::wstring& string) {
 	std::wstringstream output;
-	PositionInfo info = getTokenPositionInfo(itr, string);
 	output << "\nError at line " << info.lineIndex <<":"<<info.tokenIndexInLine<<" -> ";
 	output << errorMessage << "\n";
-	output << getOutputLine(itr, info.lineStartItr, info.lineEndItr) << "\n";
+	output << getOutputLine(info.position, info.lineStartItr, info.lineEndItr) << "\n";
 
 	std::wstring message = output.str();
 	std::wcerr << message;

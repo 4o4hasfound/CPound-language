@@ -1,7 +1,8 @@
 // This program create a list that stores 1 - 10 and then print it out, then modifies it
 
-fnc printList(reference var int list) {
-	var int i = 0!
+fnc printList(reference var int list) {	
+	timeline begin list
+	var int i = timeline index list!
 	var bool direction = 0!
 	
 	if direction {
@@ -19,7 +20,6 @@ fnc printList(reference var int list) {
 	if i < timeline length list {
 		reverse
 	}
-
 }
 funt setList(var int start, var int end) var int {
 	var int i = start

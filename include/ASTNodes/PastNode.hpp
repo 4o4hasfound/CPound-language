@@ -7,8 +7,8 @@
 
 class PastNode : public ASTNode {
 public:
-	PastNode(std::wstring::const_iterator pos);
-	PastNode(std::wstring::const_iterator pos, std::unique_ptr<ASTNode>&& expr);
+	PastNode(const PositionInfo& pos);
+	PastNode(const PositionInfo& pos, std::unique_ptr<ASTNode>&& expr);
 
 	virtual void accept(Visitor& visitor);
 	virtual std::wstring str() const override final;

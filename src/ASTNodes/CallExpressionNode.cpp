@@ -1,11 +1,11 @@
 #include "ASTNodes/CallExpressionNode.hpp"
 
-CallExpressionNode::CallExpressionNode(std::wstring::const_iterator pos)
+CallExpressionNode::CallExpressionNode(const PositionInfo& pos)
 	: ASTNode(ASTNode::CallExpression, pos) {
 
 }
 
-CallExpressionNode::CallExpressionNode(std::wstring::const_iterator pos, const std::wstring& functionSymbol)
+CallExpressionNode::CallExpressionNode(const PositionInfo& pos, const std::wstring& functionSymbol)
 	: ASTNode(ASTNode::CallExpression, pos)
 	, symbol(functionSymbol) {
 

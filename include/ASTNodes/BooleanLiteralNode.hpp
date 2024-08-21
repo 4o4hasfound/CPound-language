@@ -7,8 +7,8 @@
 
 class BooleanLiteralNode : public ASTNode {
 public:
-	BooleanLiteralNode(std::wstring::const_iterator pos);
-	BooleanLiteralNode(std::wstring::const_iterator pos, BooleanType _value);
+	BooleanLiteralNode(const PositionInfo& pos);
+	BooleanLiteralNode(const PositionInfo& pos, BooleanType _value);
 
 	virtual void accept(Visitor& visitor);
 	virtual std::wstring str() const override final;

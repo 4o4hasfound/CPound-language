@@ -183,6 +183,7 @@
     <ClCompile Include="src\Lexer.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Parser.cpp" />
+    <ClCompile Include="src\PositionInfo.cpp" />
     <ClCompile Include="src\Random.cpp" />
     <ClCompile Include="src\Scope.cpp" />
     <ClCompile Include="src\Tokens\BooleanLiteralToken.cpp" />
@@ -202,7 +203,6 @@
     <ClCompile Include="src\Types\Integer.cpp" />
     <ClCompile Include="src\Types\String.cpp" />
     <ClCompile Include="src\Utils\generateRegex.cpp" />
-    <ClCompile Include="src\Utils\getTokenPositionInfo.cpp" />
     <ClCompile Include="src\Utils\lowerCaseString.cpp" />
     <ClCompile Include="src\Utils\nameMangling.cpp" />
     <ClCompile Include="src\Utils\toString.cpp" />
@@ -252,6 +252,7 @@
     <ClInclude Include="include\Interpreter.hpp" />
     <ClInclude Include="include\Lexer.hpp" />
     <ClInclude Include="include\Parser.hpp" />
+    <ClInclude Include="include\PositionInfo.hpp" />
     <ClInclude Include="include\Random.hpp" />
     <ClInclude Include="include\Scope.hpp" />
     <ClInclude Include="include\Tokens.hpp" />
@@ -272,7 +273,6 @@
     <ClInclude Include="include\Types\Integer.hpp" />
     <ClInclude Include="include\Types\String.hpp" />
     <ClInclude Include="include\Utils\generateRegex.hpp" />
-    <ClInclude Include="include\Utils\getTokenPositionInfo.hpp" />
     <ClInclude Include="include\Utils\lowerCaseString.hpp" />
     <ClInclude Include="include\Utils\nameMangling.hpp" />
     <ClInclude Include="include\Utils\toString.hpp" />

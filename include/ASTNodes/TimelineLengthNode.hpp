@@ -7,8 +7,8 @@
 
 class TimelineLengthNode : public ASTNode {
 public:
-	TimelineLengthNode(std::wstring::const_iterator pos);
-	TimelineLengthNode(std::wstring::const_iterator pos, std::unique_ptr<ASTNode>&& expr);
+	TimelineLengthNode(const PositionInfo& pos);
+	TimelineLengthNode(const PositionInfo& pos, std::unique_ptr<ASTNode>&& expr);
 
 	virtual void accept(Visitor& visitor);
 	virtual std::wstring str() const override final;

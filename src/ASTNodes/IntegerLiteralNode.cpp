@@ -1,10 +1,10 @@
 #include "ASTNodes/IntegerLiteralNode.hpp"
 
-IntegerLiteralNode::IntegerLiteralNode(std::wstring::const_iterator pos)
+IntegerLiteralNode::IntegerLiteralNode(const PositionInfo& pos)
 	: ASTNode(ASTNode::IntegerLiteral, pos) {
 }
 
-IntegerLiteralNode::IntegerLiteralNode(std::wstring::const_iterator pos, int64_t _value)
+IntegerLiteralNode::IntegerLiteralNode(const PositionInfo& pos, int64_t _value)
 	: ASTNode(ASTNode::IntegerLiteral, pos)
 	, value(_value) {
 

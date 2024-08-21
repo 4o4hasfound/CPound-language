@@ -1,6 +1,6 @@
 #include "ASTNodes/ProgramNode.hpp"
 
-ProgramNode::ProgramNode(std::wstring::const_iterator pos)
+ProgramNode::ProgramNode(const PositionInfo& pos)
 	: ASTNode(ASTNode::Program, pos) {
 
 }

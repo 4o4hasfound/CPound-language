@@ -2,8 +2,8 @@
 
 std::vector<std::pair<std::wregex, TerminatorType>> TerminatorToken::regexTokenList = compileRegex();
 
-TerminatorToken::TerminatorToken(TerminatorType terminatorType, int terminatorCount, std::wstring::const_iterator pos)
-	: Token(Token::Terminator, static_cast<int>(terminatorType), pos)
+TerminatorToken::TerminatorToken(TerminatorType terminatorType, int terminatorCount, std::wstring::const_iterator pos, const std::wstring& string)
+	: Token(Token::Terminator, static_cast<int>(terminatorType), pos, string)
 	, count(terminatorCount) {
 
 }
@@ -25,14 +25,14 @@ std::wstring TerminatorToken::str() const {
 	return L"";
 }
 
-std::unique_ptr<Token> TerminatorToken::getToken(std::wstring::const_iterator& start, std::wstring::const_iterator& end, Token* previousToken) {
+std::unique_ptr<Token> TerminatorToken::getToken(std::wstring::const_iterator& start, std::wstring::const_iterator& end, const std::wstring& string, Token* previousToken) {
 	std::wsmatch match;
 	for (const auto& [regex, tokenType]: regexTokenList) {
 		if (std::regex_search(start, end, match, regex)) {
 			if (start != match.prefix().second) {
 				return nullptr;
 			}
-			auto ptr = std::make_unique<TerminatorToken>(tokenType, match[0].length(), start);
+			auto ptr = std::make_unique<TerminatorToken>(tokenType, match[0].length(), start, string);
 			start = match.suffix().first;
 			return ptr;
 		}

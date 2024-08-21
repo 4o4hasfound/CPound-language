@@ -1,11 +1,11 @@
 #include "ASTNodes/MemberVariableExpressionNode.hpp"
 
-MemberVariableExpressionNode::MemberVariableExpressionNode(std::wstring::const_iterator pos)
+MemberVariableExpressionNode::MemberVariableExpressionNode(const PositionInfo& pos)
 	: ASTNode(ASTNode::MemberVariableExpression, pos) {
 
 }
 
-MemberVariableExpressionNode::MemberVariableExpressionNode(std::wstring::const_iterator pos, const std::wstring& _symbol, const std::wstring& _variableSymbol)
+MemberVariableExpressionNode::MemberVariableExpressionNode(const PositionInfo& pos, const std::wstring& _symbol, const std::wstring& _variableSymbol)
 	: ASTNode(ASTNode::MemberVariableExpression, pos)
 	, symbol(_symbol)
 	, variableSymbol(_variableSymbol) {

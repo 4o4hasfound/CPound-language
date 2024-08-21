@@ -1,5 +1,10 @@
 #include "Value.hpp"
 
+Value::Value()
+	: createTimePoint(std::chrono::high_resolution_clock::now()) {
+
+}
+
 Value::Value(Value* ref)
 	: reference(true)
 	, type(ref->type)
@@ -8,7 +13,8 @@ Value::Value(Value* ref)
 	, overridable(ref->overridable)
 	, lifetime(ref->lifetime)
 	, priority(ref->priority)
-	, index(0) {
+	, index(0)
+	, createTimePoint(std::chrono::high_resolution_clock::now()) {
 	if (ref->reference) {
 		value = std::make_shared<std::vector<std::any>>(1, ref->getReferenceObject());
 	}
@@ -20,7 +26,8 @@ Value::Value(Value* ref)
 Value::Value(const std::wstring& _type, const std::any& _value)
 	: type(_type)
 	, value(std::make_shared<std::vector<std::any>>(1, _value))
-	, index(0) {
+	, index(0)
+	, createTimePoint(std::chrono::high_resolution_clock::now()) {
 
 }
 
@@ -78,6 +85,37 @@ bool Value::isVoid() const {
 	}
 	return true;
 }
+
+bool Value::isValid(ASTNode* node) const {
+	return isValidTime(node) && isValidLine(node);
+}
+
+bool Value::isValidTime(ASTNode* node) const {
+	auto time = (std::chrono::high_resolution_clock::now() - createTimePoint);
+	auto elapse = std::chrono::duration_cast<std::chrono::milliseconds>(time).count();
+
+	if (static_cast<double>(elapse) * 0.001 > lifetime.second) {
+		return false;
+	}
+	return true;
+}
+
+bool Value::isValidLine(ASTNode* node) const {
+	int delta = node->position.lineIndex - createLineIndex;
+	if (delta > 0) {
+		if ((delta > lifetime.forwardLine)) {
+			return false;
+		}
+		return true;
+	}
+	else {
+		if ((std::abs(delta) > lifetime.backwardLine)) {
+			return false;
+		}
+		return true;
+	}
+}
+
 void Value::past() {
 	if (reference) {
 		std::any_cast<Value*>((*value)[index])->past();
@@ -163,11 +201,6 @@ Value* Value::getReferenceObject() {
 std::shared_ptr<Value> Value::copy() const {
 	auto ret = std::make_shared<Value>(*this);
 	ret->value = std::make_shared<std::vector<std::any>>(*ret->value);
-	return ret;
-}
-
-std::shared_ptr<Value> Value::shallowCopy() const {
-	auto ret = std::make_shared<Value>(*this);
 	return ret;
 }
 

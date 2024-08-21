@@ -1,17 +1,17 @@
 #include "ASTNodes/UnaryExpressionNode.hpp"
 
-UnaryExpressionNode::UnaryExpressionNode(std::wstring::const_iterator pos)
+UnaryExpressionNode::UnaryExpressionNode(const PositionInfo& pos)
 	: ASTNode(ASTNode::UnaryExpression, pos) {
 
 }
 
-UnaryExpressionNode::UnaryExpressionNode(std::wstring::const_iterator pos, BinaryOperatorType _operatorType)
+UnaryExpressionNode::UnaryExpressionNode(const PositionInfo& pos, BinaryOperatorType _operatorType)
 	: ASTNode(ASTNode::UnaryExpression, pos)
 	, operatorType(_operatorType) {
 
 }
 
-UnaryExpressionNode::UnaryExpressionNode(std::wstring::const_iterator pos, std::unique_ptr<ASTNode>&& expr, BinaryOperatorType _operatorType)
+UnaryExpressionNode::UnaryExpressionNode(const PositionInfo& pos, std::unique_ptr<ASTNode>&& expr, BinaryOperatorType _operatorType)
 	: ASTNode(ASTNode::UnaryExpression, pos)
 	, expression(std::forward<std::unique_ptr<ASTNode>>(expr))
 	, operatorType(_operatorType) {

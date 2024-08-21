@@ -1,17 +1,17 @@
 #include "ASTNodes/ClassDeclarationNode.hpp"
 
-ClassDeclarationNode::ClassDeclarationNode(std::wstring::const_iterator pos)
+ClassDeclarationNode::ClassDeclarationNode(const PositionInfo& pos)
 	: ASTNode(ASTNode::ClassDeclaration, pos) {
 
 }
 
-ClassDeclarationNode::ClassDeclarationNode(std::wstring::const_iterator pos, const std::wstring& symbol)
+ClassDeclarationNode::ClassDeclarationNode(const PositionInfo& pos, const std::wstring& symbol)
 	: ASTNode(ASTNode::ClassDeclaration, pos)
 	, declaration(symbol) {
 
 }
 
-ClassDeclarationNode::ClassDeclarationNode(std::wstring::const_iterator pos, const std::wstring& symbol, const std::wstring& parentSymbol)
+ClassDeclarationNode::ClassDeclarationNode(const PositionInfo& pos, const std::wstring& symbol, const std::wstring& parentSymbol)
 	: ASTNode(ASTNode::ClassDeclaration, pos)
 	, declaration(symbol, parentSymbol) {
 

@@ -8,10 +8,10 @@
 
 class FunctionDeclarationNode : public ASTNode {
 public:
-	FunctionDeclarationNode(std::wstring::const_iterator pos);
-	FunctionDeclarationNode(std::wstring::const_iterator pos, const std::wstring& _symbol);
-	FunctionDeclarationNode(std::wstring::const_iterator pos, const std::wstring& _symbol, VariableDeclarationType retDeclType, const std::wstring& retType);
-	FunctionDeclarationNode(std::wstring::const_iterator pos, const std::wstring& _symbol, VariableDeclarationType retDeclType, const std::wstring& retType, std::unique_ptr<ASTNode>&& _block);
+	FunctionDeclarationNode(const PositionInfo& pos);
+	FunctionDeclarationNode(const PositionInfo& pos, const std::wstring& _symbol);
+	FunctionDeclarationNode(const PositionInfo& pos, const std::wstring& _symbol, VariableDeclarationType retDeclType, const std::wstring& retType);
+	FunctionDeclarationNode(const PositionInfo& pos, const std::wstring& _symbol, VariableDeclarationType retDeclType, const std::wstring& retType, std::unique_ptr<ASTNode>&& _block);
 
 	virtual void accept(Visitor& visitor);
 	virtual std::wstring str() const override final;

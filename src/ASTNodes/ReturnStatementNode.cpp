@@ -1,11 +1,11 @@
 #include "ASTNodes/ReturnStatementNode.hpp"
 
-ReturnStatementNode::ReturnStatementNode(std::wstring::const_iterator pos)
+ReturnStatementNode::ReturnStatementNode(const PositionInfo& pos)
 	: ASTNode(ASTNode::ReturnStatement, pos) {
 
 }
 
-ReturnStatementNode::ReturnStatementNode(std::wstring::const_iterator pos, std::unique_ptr<ASTNode>&& expr)
+ReturnStatementNode::ReturnStatementNode(const PositionInfo& pos, std::unique_ptr<ASTNode>&& expr)
 	: ASTNode(ASTNode::ReturnStatement, pos)
 	, expression(std::forward<std::unique_ptr<ASTNode>>(expr)) {
 

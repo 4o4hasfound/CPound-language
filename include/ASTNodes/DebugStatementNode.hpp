@@ -7,8 +7,8 @@
 
 class DebugStatementNode : public StatementNode {
 public:
-	DebugStatementNode(std::wstring::const_iterator pos);
-	DebugStatementNode(std::wstring::const_iterator pos, std::unique_ptr<ASTNode>&& _statement);
+	DebugStatementNode(const PositionInfo& pos);
+	DebugStatementNode(const PositionInfo& pos, std::unique_ptr<ASTNode>&& _statement);
 
 	virtual void accept(Visitor& visitor);
 	virtual std::wstring str() const override final;

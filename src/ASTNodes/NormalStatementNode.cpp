@@ -1,11 +1,11 @@
 #include "ASTNodes/NormalStatementNode.hpp"
 
-NormalStatementNode::NormalStatementNode(std::wstring::const_iterator pos)
+NormalStatementNode::NormalStatementNode(const PositionInfo& pos)
 	: StatementNode(ASTNode::NormalStatement, pos) {
 
 }
 
-NormalStatementNode::NormalStatementNode(std::wstring::const_iterator pos, std::unique_ptr<ASTNode>&& _node)
+NormalStatementNode::NormalStatementNode(const PositionInfo& pos, std::unique_ptr<ASTNode>&& _node)
 	: StatementNode(ASTNode::NormalStatement, std::forward<std::unique_ptr<ASTNode>>(_node), pos){
 
 }

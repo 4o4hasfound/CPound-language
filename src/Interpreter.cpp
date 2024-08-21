@@ -127,18 +127,22 @@ void Interpreter::visitCallExpressionNode(ASTNode* node) {
 					Error::Log(node->position, L"Cannot convert declaration type", *m_string);
 				}
 				value->lifetime = parameter.lifetime;
+				value->createLineIndex = func->position.lineIndex;
 				m_scope.addVariable(parameter.symbol, value);
 			}
 			else {
+				std::shared_ptr<Value> value = convertValue(arguments[i], parameter.type);
+				value->createLineIndex = func->position.lineIndex;
 				m_scope.addVariable(
 					parameter.symbol,
-					convertValue(arguments[i], parameter.type)
+					value
 				);
 			}
 		}
 		else {
 			std::shared_ptr<Value> value = getExpressionValue(parameter.defaultValue.get()
 			);
+			value->createLineIndex = func->position.lineIndex;
 			m_scope.addVariable(
 				parameter.symbol,
 				convertValue(value, parameter.type)
@@ -210,10 +214,30 @@ void Interpreter::visitFutureNode(ASTNode* node) {
 
 void Interpreter::visitIdentifierNode(ASTNode* node) {
 	auto id = dynamic_cast<IdentifierNode*>(node);
-	m_tmpValue = m_scope.getVariable(id->symbol);
+	m_tmpValue = m_scope.getVariable(id->symbol, 0);
 
 	if (m_tmpValue) {
-		return;
+		if (!m_tmpValue->reference) {
+			if (m_tmpValue->isValid(node)) {
+				return;
+			}
+		}
+		else if (m_tmpValue->getReferenceObject()->isValid(node)) {
+			return;
+		}
+	}
+
+	m_tmpValue = m_scope.getVariable(id->symbol, 1);
+
+	if (m_tmpValue) {
+		if (!m_tmpValue->reference) {
+			if (m_tmpValue->isValidTime(node)) {
+				return;
+			}
+		}
+		else if (m_tmpValue->getReferenceObject()->isValidTime(node)) {
+			return;
+		}
 	}
 
 	EvaluateVariableDeclarationNode* evalVar = m_scope.getEvaluateVariable(id->symbol);
@@ -334,6 +358,7 @@ void Interpreter::visitProgramNode(ASTNode* node) {
 void Interpreter::visitReturnStatementNode(ASTNode* node) {
 	auto ret = dynamic_cast<ReturnStatementNode*>(node);
 	if (!ret->expression) {
+		m_return = 1;
 		updateValue();
 		return;
 	}
@@ -341,8 +366,8 @@ void Interpreter::visitReturnStatementNode(ASTNode* node) {
 	if (value->reference) {
 		value = value->getReferenceObject()->copy();
 	}
-	updateValue(value);
 	m_return = 1;
+	updateValue(value);
 }
 
 void Interpreter::visitReverseStatementNode(ASTNode* node) {
@@ -474,6 +499,7 @@ void Interpreter::visitVariableDeclarationNode(ASTNode* node) {
 				value->priority = variable.priority;
 				m_scope.addVariable(variable.symbol, value);
 			}
+			value->createLineIndex = node->position.lineIndex;
 		}
 	}
 }

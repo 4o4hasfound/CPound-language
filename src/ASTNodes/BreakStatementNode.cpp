@@ -1,6 +1,6 @@
 #include "ASTNodes/BreakStatementNode.hpp"
 
-BreakStatementNode::BreakStatementNode(std::wstring::const_iterator pos)
+BreakStatementNode::BreakStatementNode(const PositionInfo& pos)
 	: ASTNode(ASTNode::BreakStatement, pos) {
 	
 }

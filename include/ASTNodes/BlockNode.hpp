@@ -8,7 +8,7 @@
 
 class BlockNode : public ASTNode {
 public:
-	BlockNode(std::wstring::const_iterator pos);
+	BlockNode(const PositionInfo& pos);
 
 	virtual void accept(Visitor& visitor);
 	virtual std::wstring str() const override final;

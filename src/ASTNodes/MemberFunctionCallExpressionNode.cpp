@@ -1,11 +1,11 @@
 #include "ASTNodes/MemberFunctionCallExpressionNode.hpp"
 
-MemberFunctionCallExpressionNode::MemberFunctionCallExpressionNode(std::wstring::const_iterator pos)
+MemberFunctionCallExpressionNode::MemberFunctionCallExpressionNode(const PositionInfo& pos)
 	: ASTNode(ASTNode::MemberFunctionCallExpression, pos) {
 
 }
 
-MemberFunctionCallExpressionNode::MemberFunctionCallExpressionNode(std::wstring::const_iterator pos, const std::wstring& _symbol, std::unique_ptr<CallExpressionNode>&& expr)
+MemberFunctionCallExpressionNode::MemberFunctionCallExpressionNode(const PositionInfo& pos, const std::wstring& _symbol, std::unique_ptr<CallExpressionNode>&& expr)
 	: ASTNode(ASTNode::MemberFunctionCallExpression, pos)
 	, symbol(_symbol)
 	, callExpr(std::forward<std::unique_ptr<CallExpressionNode>>(expr)) {

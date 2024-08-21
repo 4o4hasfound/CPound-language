@@ -12,11 +12,11 @@
 
 class DelimiterToken : public Token {
 public:
-	DelimiterToken(DelimiterType delimiterType, std::wstring::const_iterator pos);
+	DelimiterToken(DelimiterType delimiterType, std::wstring::const_iterator pos, const std::wstring& string);
 
 	virtual std::wstring str() const override;
 
-	static std::unique_ptr<Token> getToken(std::wstring::const_iterator& start, std::wstring::const_iterator& end, Token* previousToken);
+	static std::unique_ptr<Token> getToken(std::wstring::const_iterator& start, std::wstring::const_iterator& end, const std::wstring& string, Token* previousToken);
 private:
 	static std::wregex s_regex;
 	static std::vector<std::wstring> s_delimiterList;

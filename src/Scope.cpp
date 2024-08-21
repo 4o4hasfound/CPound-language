@@ -94,6 +94,15 @@ void Scope::addScope() {
 }
 
 void Scope::popScope() {
+	if (m_variables.size() >= 2) {
+		Scope::VariableScope& nextScope = m_variables[m_variables.size() - 2];
+		for (auto& [symbol, var] : m_variables.back()) {
+			if (var->lifetime.scope > 1) {
+				--var->lifetime.scope;
+				nextScope[symbol] = std::move(var);
+			}
+		}
+	}
 	m_variables.pop_back();
 	m_evalVariables.pop_back();
 }

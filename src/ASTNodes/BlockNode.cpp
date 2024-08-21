@@ -1,6 +1,6 @@
 #include "ASTNodes/BlockNode.hpp"
 
-BlockNode::BlockNode(std::wstring::const_iterator pos)
+BlockNode::BlockNode(const PositionInfo& pos)
 	: ASTNode(ASTNode::Block, pos) {
 
 }

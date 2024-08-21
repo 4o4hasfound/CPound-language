@@ -1,6 +1,6 @@
 #include "ASTNodes/PrintStatementNode.hpp"
 
-PrintStatementNode::PrintStatementNode(std::wstring::const_iterator pos)
+PrintStatementNode::PrintStatementNode(const PositionInfo& pos)
 	: ASTNode(ASTNode::PrintStatement, pos) {
 
 }

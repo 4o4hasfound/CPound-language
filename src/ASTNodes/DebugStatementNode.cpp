@@ -1,11 +1,11 @@
 #include "ASTNodes/DebugStatementNode.hpp"
 
-DebugStatementNode::DebugStatementNode(std::wstring::const_iterator pos)
+DebugStatementNode::DebugStatementNode(const PositionInfo& pos)
 	: StatementNode(ASTNode::DebugStatement, pos) {
 
 }
 
-DebugStatementNode::DebugStatementNode(std::wstring::const_iterator pos, std::unique_ptr<ASTNode>&& _statement)
+DebugStatementNode::DebugStatementNode(const PositionInfo& pos, std::unique_ptr<ASTNode>&& _statement)
 	: StatementNode(ASTNode::DebugStatement, std::forward<std::unique_ptr<ASTNode>>(_statement), pos) {
 
 }

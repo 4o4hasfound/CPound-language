@@ -7,8 +7,8 @@
 
 class MemberVariableExpressionNode : public ASTNode {
 public:
-	MemberVariableExpressionNode(std::wstring::const_iterator pos);
-	MemberVariableExpressionNode(std::wstring::const_iterator pos, const std::wstring& _symbol, const std::wstring& _variableSymbol);
+	MemberVariableExpressionNode(const PositionInfo& pos);
+	MemberVariableExpressionNode(const PositionInfo& pos, const std::wstring& _symbol, const std::wstring& _variableSymbol);
 
 	virtual void accept(Visitor& visitor);
 	virtual std::wstring str() const override final;
