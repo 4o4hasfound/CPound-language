@@ -128,8 +128,6 @@ if reversedOrNot() {
 	check this out: "reversed 2: ", a, "\n" // OK
 	check this out: "reversed 1: ", a, "\n" // OK
 }
-var int forwardLine<1f> // 1 forward line
-var int backwardLine<1b> // 1 backward line
 var int a<2f><3b> = 1 // 1 forward line, 3 backward line
 
 check this out: "1: ", a, "\n" // OK
