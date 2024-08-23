@@ -122,6 +122,9 @@ void Scope::popScope() {
 
 void Scope::cleanVariable(ASTNode* node) {
 	for (auto& [symbol, variable] : m_variables.back()) {
+		if (m_toDestroy[variable.get()]) {
+			continue;
+		}
 		if (variable->reference) {
 			if (!m_variableExistsInScope.back().count(variable.get())) {
 				if (!variable->getReferenceObject()->isValidTime()) {
