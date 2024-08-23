@@ -306,6 +306,17 @@ if i < 10 {
 The reverse keyword reverse the running direction of the program  
 The effect is global, so reverse inside a function also reverse the whole program
 
+```java
+function hasReversed() const bool {
+	yoink false
+	yoink true
+}
+check this out: hasReversed()
+reverse
+
+// Output: 01
+```
+
 ## Evaluate Variable
 
 To avoid the hassle of single line functions, CPound introduce the keyword **evaluate**  
