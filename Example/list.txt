@@ -46,7 +46,13 @@ funt setList(var int start, var int end) var int {
 	yoink list
 }
 
-var int list = setList(1, 5)
+var int start, end
+check this out: "Enter a number to start: "
+what is start
+check this out: "Enter a number to end: "
+what is end
+
+var int list = setList(start,end)
 
 // Push back a value
 timeline begin list = 2

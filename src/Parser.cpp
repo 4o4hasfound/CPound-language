@@ -11,9 +11,10 @@ Parser::~Parser() {
 
 void Parser::parseFile(const std::wstring& filename) {
 	std::wifstream file;
-	file.exceptions(std::ifstream::failbit);
 	file.open(filename);
-
+	if (file.fail()) {
+		Error::Log(L"Invalid filename!");
+	}
 	std::wstringstream wss;
 	wss << file.rdbuf();
 	m_input = wss.str();

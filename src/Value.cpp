@@ -5,7 +5,7 @@ Value::Value()
 
 }
 
-Value::Value(Value* ref)
+Value::Value(const std::shared_ptr<Value>& ref)
 	: reference(true)
 	, type(ref->type)
 	, editable(ref->editable)
@@ -16,10 +16,10 @@ Value::Value(Value* ref)
 	, index(0)
 	, createTimePoint(std::chrono::high_resolution_clock::now()) {
 	if (ref->reference) {
-		value = std::make_shared<std::vector<std::any>>(1, ref->getReferenceObject());
+		referenceObject = std::weak_ptr<Value>(ref->getReferenceObject());
 	}
 	else {
-		value = std::make_shared<std::vector<std::any>>(1, ref);
+		referenceObject = std::weak_ptr<Value>(ref);
 	}
 }
 
@@ -80,17 +80,23 @@ bool Value::setDeclType(VariableDeclarationType _type) {
 }
 
 bool Value::isVoid() const {
-	if ((*value).size() && index >= 0 && index < (*value).size()) {
+	if (reference) {
+		if (auto itr = referenceObject.lock()) {
+			return false;
+		}
+		return true;
+	}
+	else if ((*value).size() && index >= 0 && index < (*value).size()) {
 		return false;
 	}
 	return true;
 }
 
 bool Value::isValid(ASTNode* node) const {
-	return isValidTime(node) && isValidLine(node);
+	return isValidTime() && isValidLine(node);
 }
 
-bool Value::isValidTime(ASTNode* node) const {
+bool Value::isValidTime() const {
 	auto time = (std::chrono::high_resolution_clock::now() - createTimePoint);
 	auto elapse = std::chrono::duration_cast<std::chrono::milliseconds>(time).count();
 
@@ -118,7 +124,12 @@ bool Value::isValidLine(ASTNode* node) const {
 
 void Value::past() {
 	if (reference) {
-		std::any_cast<Value*>((*value)[index])->past();
+		if (std::shared_ptr<Value> spt = referenceObject.lock()) {
+			spt->past();
+		}
+		else {
+			throw std::runtime_error("Variable references a void variable");
+		}
 	}
 	else {
 		--index;
@@ -126,7 +137,12 @@ void Value::past() {
 }
 void Value::future() {
 	if (reference) {
-		std::any_cast<Value*>((*value)[index])->future();
+		if (std::shared_ptr<Value> spt = referenceObject.lock()) {
+			spt->future();
+		}
+		else {
+			throw std::runtime_error("Variable references a void variable");
+		}
 	}
 	else {
 		++index;
@@ -135,7 +151,12 @@ void Value::future() {
 
 void Value::begin() {
 	if (reference) {
-		std::any_cast<Value*>((*value)[index])->begin();
+		if (std::shared_ptr<Value> spt = referenceObject.lock()) {
+			spt->begin();
+		}
+		else {
+			throw std::runtime_error("Variable references a void variable");
+		}
 	}
 	else {
 		index = 0;
@@ -144,7 +165,12 @@ void Value::begin() {
 
 void Value::end() {
 	if (reference) {
-		std::any_cast<Value*>((*value)[index])->end();
+		if (std::shared_ptr<Value> spt = referenceObject.lock()) {
+			spt->end();
+		}
+		else {
+			throw std::runtime_error("Variable references a void variable");
+		}
 	}
 	else {
 		index = value->size() - 1;
@@ -156,7 +182,12 @@ void Value::timelineInsert() {
 		throw std::runtime_error("Variable is void, timeline index " + std::to_string(index) + " isn't available");
 	}
 	if (reference) {
-		std::any_cast<Value*>((*value)[index])->timelineInsert();
+		if (std::shared_ptr<Value> spt = referenceObject.lock()) {
+			spt->timelineInsert();
+		}
+		else {
+			throw std::runtime_error("Variable references a void variable");
+		}
 	}
 	else {
 		value->insert(value->begin() + index, getDefaultValue());
@@ -168,7 +199,12 @@ void Value::timelinePrune() {
 		throw std::runtime_error("Variable is void");
 	}
 	if (reference) {
-		std::any_cast<Value*>((*value)[index])->timelinePrune();
+		if (std::shared_ptr<Value> spt = referenceObject.lock()) {
+			spt->timelinePrune();
+		}
+		else {
+			throw std::runtime_error("Variable references a void variable");
+		}
 	}
 	else {
 		value->erase(value->begin() + index);
@@ -177,7 +213,12 @@ void Value::timelinePrune() {
 
 int64_t Value::getIndex() const {
 	if (reference) {
-		return std::any_cast<Value*>((*value)[index])->getIndex();
+		if (std::shared_ptr<Value> spt = referenceObject.lock()) {
+			return spt->getIndex();
+		}
+		else {
+			throw std::runtime_error("Variable references a void variable");
+		}
 	}
 	else {
 		return index;
@@ -186,16 +227,25 @@ int64_t Value::getIndex() const {
 
 std::any Value::getCurrent() const {
 	if (reference) {
-		auto val = std::any_cast<Value*>((*value)[index]);
-		return std::any_cast<Value*>((*value)[index])->getCurrent();
+		if (std::shared_ptr<Value> spt = referenceObject.lock()) {
+			return spt->getCurrent();
+		}
+		else {
+			throw std::runtime_error("Variable references a void variable");
+		}
 	}
 	return (*value)[index];
 }
-Value* Value::getReferenceObject() {
+std::shared_ptr<Value> Value::getReferenceObject() {
 	if (reference) {
-		return std::any_cast<Value*>((*value)[index]);
+		if (std::shared_ptr<Value> spt = referenceObject.lock()) {
+			return spt;
+		}
+		else {
+			throw std::runtime_error("Variable references a void variable");
+		}
 	}
-	return this;
+	return std::shared_ptr<Value>(this);
 }
 
 std::shared_ptr<Value> Value::copy() const {

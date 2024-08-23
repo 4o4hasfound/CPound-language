@@ -9,10 +9,11 @@
 class Value {
 public:
 	Value();
-	Value(Value* ref);
+	Value(const std::shared_ptr<Value>& ref);
 	Value(const std::wstring& _type, const std::any& _value);
 
 	std::shared_ptr<std::vector<std::any>> value;
+	std::weak_ptr<Value> referenceObject;
 	std::wstring type;
 
 	bool overridable = true;
@@ -37,7 +38,7 @@ public:
 
 	bool isVoid() const;
 	bool isValid(ASTNode* node) const;
-	bool isValidTime(ASTNode* node) const;
+	bool isValidTime() const;
 	bool isValidLine(ASTNode* node) const;
 
 	// timeline operation
@@ -50,7 +51,7 @@ public:
 	int64_t getIndex() const;
 	
 	std::any getCurrent() const;
-	Value* getReferenceObject();
+	std::shared_ptr<Value> getReferenceObject();
 
 	std::shared_ptr<Value> copy() const;
 	void setDefaultValue();
@@ -90,7 +91,12 @@ T Value::get() const {
 		throw std::runtime_error("Variable is void, timeline index " + std::to_string(index) + " isn't available");
 	}
 	if (reference) {
-		return std::any_cast<Value*>((*value)[index])->get<T>();
+		if (std::shared_ptr<Value> spt = referenceObject.lock()) {
+			return spt->get<T>();
+		}
+		else {
+			throw std::runtime_error("Variable references a void variable");
+		}
 	}
 	return std::any_cast<T>((*value)[index]);
 }
@@ -101,7 +107,12 @@ void Value::set(const T& t) {
 		if (isVoid()) {
 			throw std::runtime_error("Variable is void, timeline index " + std::to_string(index) + " isn't available");
 		}
-		std::any_cast<Value*>((*value)[index])->set<T>(t);
+		if (std::shared_ptr<Value> spt = referenceObject.lock()) {
+			spt->set<T>(t);
+		}
+		else {
+			throw std::runtime_error("Variable references a void variable");
+		}
 	}
 	else {
 		++index;

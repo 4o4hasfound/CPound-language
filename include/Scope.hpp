@@ -20,12 +20,14 @@ public:
 	EvaluateVariableDeclarationNode* getEvaluateVariable(const std::wstring& symbol, int recursiveSearch = 1);
 	FunctionDeclarationNode* getFunction(const std::wstring& symbol, const std::vector<std::shared_ptr<Value>>& parameters);
 
-	void addVariable(const std::wstring& symbol, std::shared_ptr<Value> value);
+	void addVariable(const std::wstring& symbol, const std::shared_ptr<Value>& value);
 	void addEvalVariable(const std::wstring& symbol, ASTNode* value);
 	void addFunction(FunctionDeclarationNode* info);
 
 	void addScope();
 	void popScope();
+
+	void cleanVariable(ASTNode* node);
 private:
 
 	// unmangled -> map of mangled name
@@ -38,4 +40,6 @@ private:
 	std::vector<VariableScope> m_variables;
 
 	std::vector<std::unordered_map<std::wstring, EvaluateVariableDeclarationNode*>> m_evalVariables;
+	std::vector<std::unordered_map<Value*, bool>> m_variableExistsInScope;
+	std::unordered_map<Value*, bool> m_toDestroy;
 };

@@ -8,6 +8,7 @@ funcT returnReference(reference var const const int a) reference var const int {
 	yoink a
 }
 
+check this out: "Enter a number: "
 var int a
 what is a
 

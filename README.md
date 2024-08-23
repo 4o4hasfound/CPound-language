@@ -6,7 +6,7 @@ CPound is an interpreted language heavily inspired by [Dreamberd](https://github
 
 ## Interpreter usage
 
-Usage: cpound [filename] ([log file])  
+Usage: cpound [filename] ([log file]) (--debug) 
 You should end your files with .cp, but CPound will interpret it as long as it's a text file  
 
 ## Types
@@ -114,6 +114,7 @@ CPound offers flexibility by letting users customize a variable's lifetime, usin
 + Scope
 
 **Line** defines how many line a variable can exist  
+You can custom both forward and backward line count   
 (negative value will be auto convert to positive value)  
 Default to **1.7976931348623158e+308**, but CPound don't encourage anything more than **10^17**
 ```java
@@ -127,7 +128,10 @@ if reversedOrNot() {
 	check this out: "reversed 2: ", a, "\n" // OK
 	check this out: "reversed 1: ", a, "\n" // OK
 }
-var int a<1f><3b> = 1
+var int forwardLine<1f> // 1 forward line
+var int backwardLine<1b> // 1 backward line
+var int a<2f><3b> = 1 // 1 forward line, 3 backward line
+
 check this out: "1: ", a, "\n" // OK
 check this out: "2: ", a, "\n" // Error
 reverse

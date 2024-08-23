@@ -46,10 +46,10 @@ void Interpreter::visitBinaryExpressionNode(ASTNode* node) {
 		return;
 	}
 
+	doBinaryOperation(
+		lexpr, rexpr, static_cast<OperatorType>(expr->operatorType)
+	);
 	try {
-		doBinaryOperation(
-			lexpr, rexpr, static_cast<OperatorType>(expr->operatorType)
-		);
 	}
 	catch (const std::exception& e) {
 		std::wstringstream errorMessage;
@@ -117,7 +117,12 @@ void Interpreter::visitCallExpressionNode(ASTNode* node) {
 				std::shared_ptr<Value> value;
 
 				if (parameter.reference) {
-					value = std::make_shared<Value>(arguments[i]->getReferenceObject());
+					if (arguments[i]->reference) {
+						value = std::make_shared<Value>(arguments[i]->getReferenceObject());
+					}
+					else {
+						value = std::make_shared<Value>(arguments[i]);
+					}
 				}
 				else {
 					value = arguments[i]->copy();
@@ -207,37 +212,18 @@ void Interpreter::visitFutureNode(ASTNode* node) {
 		Error::Log(node->position, L"Expect expression after future keyword", *m_string);
 	}
 	std::shared_ptr<Value> value = getExpressionValue(prev->expression.get());
-	auto newValue = std::make_shared<Value>(value.get());
+	auto newValue = std::make_shared<Value>(value);
 	newValue->future();
 	updateValue(newValue);
 }
 
 void Interpreter::visitIdentifierNode(ASTNode* node) {
 	auto id = dynamic_cast<IdentifierNode*>(node);
-	m_tmpValue = m_scope.getVariable(id->symbol, 0);
+	m_scope.cleanVariable(node);
+	m_tmpValue = m_scope.getVariable(id->symbol);
 
 	if (m_tmpValue) {
-		if (!m_tmpValue->reference) {
-			if (m_tmpValue->isValid(node)) {
-				return;
-			}
-		}
-		else if (m_tmpValue->getReferenceObject()->isValid(node)) {
-			return;
-		}
-	}
-
-	m_tmpValue = m_scope.getVariable(id->symbol, 1);
-
-	if (m_tmpValue) {
-		if (!m_tmpValue->reference) {
-			if (m_tmpValue->isValidTime(node)) {
-				return;
-			}
-		}
-		else if (m_tmpValue->getReferenceObject()->isValidTime(node)) {
-			return;
-		}
+		return;
 	}
 
 	EvaluateVariableDeclarationNode* evalVar = m_scope.getEvaluateVariable(id->symbol);
@@ -324,7 +310,7 @@ void Interpreter::visitPastNode(ASTNode* node) {
 		Error::Log(node->position, L"Expect expression after past keyword", *m_string);
 	}
 	std::shared_ptr<Value> value = getExpressionValue(prev->expression.get());
-	auto newValue = std::make_shared<Value>(value.get());
+	auto newValue = std::make_shared<Value>(value);
 	newValue->past();
 	updateValue(newValue);
 }
@@ -386,7 +372,7 @@ void Interpreter::visitTimelineBeginNode(ASTNode* node) {
 		Error::Log(node->position, L"Expect expression after timeline begin keyword", *m_string);
 	}
 	std::shared_ptr<Value> value = getExpressionValue(beg->expression.get());
-	auto newValue = std::make_shared<Value>(value.get());
+	auto newValue = std::make_shared<Value>(value);
 	newValue->begin();
 	auto sfada = newValue->getReferenceObject();
 	updateValue(newValue);
@@ -399,7 +385,7 @@ void Interpreter::visitTimelineEndNode(ASTNode* node) {
 		Error::Log(node->position, L"Expect expression after timeline end keyword", *m_string);
 	}
 	std::shared_ptr<Value> value = getExpressionValue(end->expression.get());
-	auto newValue = std::make_shared<Value>(value.get());
+	auto newValue = std::make_shared<Value>(value);
 	newValue->end();
 	updateValue(newValue);
 }
@@ -411,7 +397,7 @@ void Interpreter::visitTimelinePruneNode(ASTNode* node) {
 		Error::Log(node->position, L"Expect expression after timeline prune keyword", *m_string);
 	}
 	std::shared_ptr<Value> value = getExpressionValue(prune->expression.get());
-	auto newValue = std::make_shared<Value>(value.get());
+	auto newValue = std::make_shared<Value>(value);
 	newValue->timelinePrune();
 	updateValue(newValue);
 }
@@ -464,7 +450,7 @@ void Interpreter::visitVariableDeclarationNode(ASTNode* node) {
 					if (variable.type != expr->type) {
 						Error::Log(node->position, L"Cannot reference a variable with different type", *m_string);
 					}
-					value = std::make_shared<Value>(expr.get());
+					value = std::make_shared<Value>(expr);
 					if (!value->setDeclType(variable.declType)) {
 						Error::Log(node->position, L"Cannot convert declaration type", *m_string);
 					}

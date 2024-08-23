@@ -14,7 +14,7 @@ fUctIOn isPrime(const int target) var bool {
 
 	if ;direction {
 		if ;(target % i+++) {
-			yoink faLse
+			yoink false
 		}
 	}
 
@@ -25,7 +25,7 @@ fUctIOn isPrime(const int target) var bool {
 
 	yoink true	
 }
-
+check this out: "Enter a number: "
 var int input
 what is input
 check this out isPrime(input)

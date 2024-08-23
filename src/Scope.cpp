@@ -9,19 +9,25 @@ Scope::~Scope() {
 }
 
 std::shared_ptr<Value> Scope::getVariable(const std::wstring& symbol, int recursiveSearch) {
+	std::shared_ptr<Value> value = nullptr;
+	auto itr = m_variables.rbegin();
 	if (recursiveSearch) {
-		for (auto itr = m_variables.rbegin(), end = m_variables.rend(); itr != end; ++itr) {
+		for (auto end = m_variables.rend(); itr != end; ++itr) {
 			if (itr->count(symbol)) {
-				return (*itr)[symbol];
+				value = (*itr)[symbol];
+				break;
 			}
 		}
 	}
 	else if (!m_variables.empty()) {
 		if (m_variables.back().count(symbol)) {
-			return m_variables.back()[symbol];
+			value = m_variables.back()[symbol];
 		}
 	}
-	return nullptr;
+	if (m_toDestroy[value.get()]) {
+		return nullptr;
+	}
+	return value;
 }
 
 EvaluateVariableDeclarationNode* Scope::getEvaluateVariable(const std::wstring& symbol, int recursiveSearch) {
@@ -72,9 +78,10 @@ FunctionDeclarationNode* Scope::getFunction(const std::wstring& symbol, const st
 	}
 	return nullptr;
 }
-
-void Scope::addVariable(const std::wstring& symbol, std::shared_ptr<Value> value) {
+ 
+void Scope::addVariable(const std::wstring& symbol, const std::shared_ptr<Value>& value) {
 	m_variables.back()[symbol] = value;
+	m_variableExistsInScope.back()[value.get()] = true;
 }
 
 void Scope::addEvalVariable(const std::wstring& symbol, ASTNode* value) {
@@ -90,19 +97,47 @@ void Scope::addFunction(FunctionDeclarationNode* info) {
 
 void Scope::addScope() {
 	m_variables.emplace_back();
+	m_variableExistsInScope.emplace_back();
 	m_evalVariables.emplace_back();
 }
 
 void Scope::popScope() {
+	m_variableExistsInScope.pop_back();
 	if (m_variables.size() >= 2) {
 		Scope::VariableScope& nextScope = m_variables[m_variables.size() - 2];
 		for (auto& [symbol, var] : m_variables.back()) {
-			if (var->lifetime.scope > 1) {
+			if (!m_toDestroy[var.get()] && var->lifetime.scope > 1) {
 				--var->lifetime.scope;
+				m_toDestroy.erase(var.get());
 				nextScope[symbol] = std::move(var);
+				if (!m_variableExistsInScope.empty()) {
+					m_variableExistsInScope.back()[var.get()] = 1;
+				}
 			}
 		}
 	}
 	m_variables.pop_back();
 	m_evalVariables.pop_back();
+}
+
+void Scope::cleanVariable(ASTNode* node) {
+	for (auto& [symbol, variable] : m_variables.back()) {
+		if (variable->reference) {
+			if (!m_variableExistsInScope.back().count(variable.get())) {
+				if (!variable->getReferenceObject()->isValidTime()) {
+					std::shared_ptr<Value> value = variable->getReferenceObject();
+					m_variableExistsInScope.back().erase(value.get());
+					m_toDestroy[value.get()] = 1;
+				}
+			}
+			if (!variable->isValid(node)) {
+				m_variableExistsInScope.back().erase(variable.get());
+				m_toDestroy[variable.get()] = 1;
+			}
+		}
+		else if (!variable->isValid(node)) {
+			m_variableExistsInScope.back().erase(variable.get());
+			m_toDestroy[variable.get()] = 1;
+		}
+	}
 }
