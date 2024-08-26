@@ -14,7 +14,7 @@ int main(int argc, char* argv[]) {
 
 	bool debug = false;
 	if (argc == 3) {
-		if (strcmp(argv[2], "--debug")) {
+		if (!strcmp(argv[2], "--debug")) {
 			debug = true;
 		}
 		else {
@@ -24,7 +24,7 @@ int main(int argc, char* argv[]) {
 		}
 	}
 	else if (argc == 4){
-		if (!strcmp(argv[3], "--debug")) {
+		if (strcmp(argv[3], "--debug")) {
 			Error::Log(L"Usage: cpound [input file] ([log file]) (--debug)");
 		}
 		debug = true;
